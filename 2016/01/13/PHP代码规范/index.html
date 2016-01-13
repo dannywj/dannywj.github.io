@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>PHP代码规范 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="php代码规范2014/8/27 
+
+排版
+缩进使用tab（4个空格）
+
+if，else即使条件只有一行，也要加上花括号。不允许写成一行。
+1if(true)&amp;#123;&amp;#10;&amp;#9;$val=1;&amp;#10;&amp;#125;else&amp;#123;&amp;#10;&amp;#9;$val=2;&amp;#10;&amp;#125;
+
+初始化array如果采用多行结构时，数据项部分需要缩进，且最后一个数据项后面的逗号不可省略。说明：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP代码规范">
+<meta property="og:url" content="http://yoursite.com/2016/01/13/PHP代码规范/index.html">
+<meta property="og:site_name" content="DannyWang's blog">
+<meta property="og:description" content="php代码规范2014/8/27 
+
+排版
+缩进使用tab（4个空格）
+
+if，else即使条件只有一行，也要加上花括号。不允许写成一行。
+1if(true)&amp;#123;&amp;#10;&amp;#9;$val=1;&amp;#10;&amp;#125;else&amp;#123;&amp;#10;&amp;#9;$val=2;&amp;#10;&amp;#125;
+
+初始化array如果采用多行结构时，数据项部分需要缩进，且最后一个数据项后面的逗号不可省略。说明：">
+<meta property="og:updated_time" content="2016-01-13T07:44:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP代码规范">
+<meta name="twitter:description" content="php代码规范2014/8/27 
+
+排版
+缩进使用tab（4个空格）
+
+if，else即使条件只有一行，也要加上花括号。不允许写成一行。
+1if(true)&amp;#123;&amp;#10;&amp;#9;$val=1;&amp;#10;&amp;#125;else&amp;#123;&amp;#10;&amp;#9;$val=2;&amp;#10;&amp;#125;
+
+初始化array如果采用多行结构时，数据项部分需要缩进，且最后一个数据项后面的逗号不可省略。说明：">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://avatar.tower.im/8ecc7e5df4c344349066e2032ac240e7" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">我的影集</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 20px;">DHB</a> <a href="/tags/develop/" style="font-size: 10px;">develop</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://avatar.tower.im/8ecc7e5df4c344349066e2032ac240e7" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">我的影集</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-PHP代码规范" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/13/PHP代码规范/" class="article-date">
+  	<time datetime="2016-01-13T07:43:49.000Z" itemprop="datePublished">2016-01-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP代码规范
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="php_u4EE3_u7801_u89C4_u8303"><a href="#php_u4EE3_u7801_u89C4_u8303" class="headerlink" title="php代码规范"></a>php代码规范</h1><p>2014/8/27 </p>
+<hr>
+<h2 id="u6392_u7248"><a href="#u6392_u7248" class="headerlink" title="排版"></a>排版</h2><ul>
+<li><p>缩进使用tab（4个空格）</p>
+</li>
+<li><p>if，else即使条件只有一行，也要加上花括号。不允许写成一行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(true)&#123;&#10;&#9;$val=1;&#10;&#125;else&#123;&#10;&#9;$val=2;&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化array如果采用多行结构时，数据项部分需要缩进，且最后一个数据项后面的逗号不可省略。<br><em>说明：这样做在修改代码增加数据项的时候不容易出现语法错误。</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$a = array(&#10;&#9;&#39;a&#39; =&#62; &#39;b&#39;,&#10;&#9;&#39;b&#39; =&#62; &#39;c&#39;,&#10;&#9;&#39;c&#39; =&#62; &#39;d&#39;,&#10;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="u547D_u540D"><a href="#u547D_u540D" class="headerlink" title="命名"></a>命名</h2><ul>
+<li><p>普通变量以小写加下划线方式命名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$name=&#39;danny&#39;;&#10;$unique_id=123;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局变量以g_开头。<br><em>说明:全局变量对代码影响很大，以 g_开头变能在代码中一眼看出是全局变量。</em></p>
+</li>
+</ul>
+<ul>
+<li>常量命名使用全部大写字符，单词之间以’_’连接。<br><em>如:PAGE_NUM</em></li>
+</ul>
+<ul>
+<li><p>对于代码中的常量，必须用常量或define表示，不允许直接写在代码中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">define(&#39;PAGE_NUM&#39;, 3);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>私有函数命名需加上’_’前缀。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private function _myPrivateFunc() &#123;&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类方法命名采用驼峰式命名, 普通方法采用过程函数风格（小写下划线）命名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#31867;method:&#10;public function getName() &#123;&#10;&#125;&#10;//&#26222;&#36890;function:&#10;function show_me_the_money() &#123;&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件(除了类)命名使用小写字母，单词之间以’_’连接。<br><em>如:show_lemma.php</em></p>
+</li>
+<li><p>配置文件的名称为 配置文件名 + .config.php, 不涉及类的都小写通过”_”连接。<br>如:dianhua_version.config.php</p>
+</li>
+</ul>
+<h2 id="u7F16_u7801"><a href="#u7F16_u7801" class="headerlink" title="编码"></a>编码</h2><ul>
+<li><p>对于函数返回值的判断，特别是true/false, 用===/!== 而不是==/!=。</p>
+</li>
+<li><p>除非特殊情况，否则不允许使用require和include,而使用对应的require_once/include_once。</p>
+</li>
+<li><p>每个类单独为一个文件, 文件名为 原类名 + .class.php。<br><em>说明: 利于管理，逻辑清楚，方便autoload等。<br>例如:<br>apis/o2o/buycar/Filter.class.php</em></p>
+</li>
+</ul>
+<ul>
+<li><p>函数允许使用默认参数,但是默认参数需要放到参数列表最后面。</p>
+</li>
+<li><p>调用第三方的链接地址，apikey，用户名密码等配置信息不要写死在程序中，要写到配置文件中。</p>
+</li>
+<li><p>用户的相关输入涉及数据库操作、文件操作等敏感操作时需要对输入做专门的转换。<br><em>例如:<br>数据库操作中数字型的需要做intval转换，字符串类型的需要通过mysql_real_escape_string过滤。</em></p>
+</li>
+<li><p>将php配置中的 register_globals 设置为 Off。<br><em>register_globals允许php将$_GET，$_POST，$_COOKIE等变量里的内容自动注册为全局变量，如果程序里的某些变量没有经过初<br>始化而直接使用将导致安全问题。</em></p>
+</li>
+<li><p>所有sql关键词全部大写，比如SELECT,UPDATE,FROM,ORDER,BY等。</p>
+</li>
+</ul>
+<h1 id="u524D_u7AEFJS_u4EE3_u7801_u89C4_u8303"><a href="#u524D_u7AEFJS_u4EE3_u7801_u89C4_u8303" class="headerlink" title="前端JS代码规范"></a>前端JS代码规范</h1><ul>
+<li>省略ur地址中的 http: 或 https: 的部分<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;link href=&#34;//s.dianhua.cn/wap/css/webapps.css&#34; type=&#34;text/css&#34; rel=&#34;stylesheet&#34; /&#62;&#10;&#60;script type=&#34;text/javascript&#34; src=&#34;//s.dianhua.cn/wap/js/jquery.js&#34;&#62;&#60;/script&#62;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>html页面使用Html5的文件头声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;!DOCTYPE html&#62;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>声明变量必须加上 var 关键字.</li>
+<li>常量的命名: NAMES_LIKE_THIS, 即使用大写字符, 并用下划线分隔</li>
+<li>变量，方法，函数采用驼峰式命名</li>
+</ul>
+<ul>
+<li>functionNamesLikeThis, variableNamesLikeThis, ClassNamesLikeThis, EnumNamesLikeThis, methodNamesLikeThis*</li>
+</ul>
+<ul>
+<li><p>全局变量使用g前缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var gPageFlag=true;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>语句结束后总是使用分号</p>
+</li>
+<li>对于值的判断，特别是true/false, 用===/!== 而不是==/!=。</li>
+<li><p>eval()方法不要轻易使用<br><em>获取ajaxJSON对象的时候 使用JSON.parse()方法来代替。</em></p>
+</li>
+<li><p>在全局作用域上, 使用一个唯一的, 与工程/库相关的名字作为前缀标识.<br>比如, 你的工程是 “Project Buycar”, 那么命名空间前缀可取为 Buycar.*.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Buycar = &#123;&#125;;&#10;Buycar.buy = function() &#123;&#10;  //...&#10;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>即使条件只有一行，也要加上花括号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (something) &#123;&#10;  // ...&#10;&#125; else &#123;&#10;  // ...&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="u5176_u4ED6_u76F8_u5173_u89C4_u8303"><a href="#u5176_u4ED6_u76F8_u5173_u89C4_u8303" class="headerlink" title="其他相关规范"></a>其他相关规范</h1><ul>
+<li>代码提交到SVN时需要填写注释，说明一下本次修改的内容。<br><em>可以方便他人了解代码修改的历史，已经帮助自己回忆之前所做的修改</em></li>
+<li>提交代码应该删除自己调试时打印变量的相关代码。</li>
+<li>对于复杂逻辑要有注释标记，说明整段代码或方法实现的功能。</li>
+<li>对于页面中多次出现的标记变量，如果逻辑复杂，要在声明时注释说明标记变量各种取值的含义。</li>
+<li>页面代码统一采用utf-8方式编码。</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/13/DHB-Yulorepages-PUSH平台设计/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">DHB-Yulorepages-PUSH平台设计</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
