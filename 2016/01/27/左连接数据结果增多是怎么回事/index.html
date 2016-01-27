@@ -4,18 +4,39 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>相册 | DannyWang&#39;s blog</title>
+  <title>左连接数据结果增多是怎么回事 | DannyWang&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="图片来自instagram，加载中…">
-<meta property="og:type" content="website">
-<meta property="og:title" content="相册">
-<meta property="og:url" content="http://yoursite.com/instagram/index.html">
+  <meta name="description" content="背景描述两张数据表，一张是我们自己的业务订单，另一个是第三方服务商的订单流水。两个数据表有一个对应的序列号sn列（关联列）。
+需求： 以第三方服务商的订单流水为基准，查询出对应我们自己订单的厂商类型等信息。
+问题SQL第一次解决方法：使用左连接+like 方式查询结果：
+
+耗时严重，几千条数据查询了好几分钟。
+结果有误，结果比第三方原始表多出了一些数据。（使用左连接）
+
+SQL：1234SELEC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="左连接数据结果增多是怎么回事">
+<meta property="og:url" content="http://yoursite.com/2016/01/27/左连接数据结果增多是怎么回事/index.html">
 <meta property="og:site_name" content="DannyWang's blog">
-<meta property="og:description" content="图片来自instagram，加载中…">
-<meta property="og:updated_time" content="2016-01-13T06:48:26.000Z">
+<meta property="og:description" content="背景描述两张数据表，一张是我们自己的业务订单，另一个是第三方服务商的订单流水。两个数据表有一个对应的序列号sn列（关联列）。
+需求： 以第三方服务商的订单流水为基准，查询出对应我们自己订单的厂商类型等信息。
+问题SQL第一次解决方法：使用左连接+like 方式查询结果：
+
+耗时严重，几千条数据查询了好几分钟。
+结果有误，结果比第三方原始表多出了一些数据。（使用左连接）
+
+SQL：1234SELEC">
+<meta property="og:updated_time" content="2016-01-27T09:11:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="相册">
-<meta name="twitter:description" content="图片来自instagram，加载中…">
+<meta name="twitter:title" content="左连接数据结果增多是怎么回事">
+<meta name="twitter:description" content="背景描述两张数据表，一张是我们自己的业务订单，另一个是第三方服务商的订单流水。两个数据表有一个对应的序列号sn列（关联列）。
+需求： 以第三方服务商的订单流水为基准，查询出对应我们自己订单的厂商类型等信息。
+问题SQL第一次解决方法：使用左连接+like 方式查询结果：
+
+耗时严重，几千条数据查询了好几分钟。
+结果有误，结果比第三方原始表多出了一些数据。（使用左连接）
+
+SQL：1234SELEC">
   
     <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
   
@@ -189,7 +210,13 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-instagram" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-左连接数据结果增多是怎么回事" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/27/左连接数据结果增多是怎么回事/" class="article-date">
+  	<time datetime="2016-01-27T08:35:47.000Z" itemprop="datePublished">2016-01-27</time>
+</a>
+    </div>
   
   <div class="article-inner">
     
@@ -200,7 +227,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      相册
+      左连接数据结果增多是怎么回事
     </h1>
   
 
@@ -208,6 +235,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -216,10 +247,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class="instagram" data-client-id="4f5494bc5c614f188fa657427ae78b48" data-user-id="2003826149"><br>    <a href="https://www.instagram.com/dannywjwj" target="_blank" class="open-ins">图片来自instagram，加载中…</a><br></div></p>
-<script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
-<script src="/js/jquery.lazyload.js"></script>
-<script src="/js/instagram.js"></script>
+        <h1 id="u80CC_u666F_u63CF_u8FF0"><a href="#u80CC_u666F_u63CF_u8FF0" class="headerlink" title="背景描述"></a>背景描述</h1><p>两张数据表，一张是我们自己的业务订单，另一个是第三方服务商的订单流水。两个数据表有一个对应的序列号sn列（关联列）。</p>
+<p><strong>需求：</strong> 以第三方服务商的订单流水为基准，查询出对应我们自己订单的厂商类型等信息。</p>
+<h1 id="u95EE_u9898SQL"><a href="#u95EE_u9898SQL" class="headerlink" title="问题SQL"></a>问题SQL</h1><p><strong>第一次解决方法：</strong>使用左连接+like 方式查询<br><strong>结果：</strong></p>
+<ol>
+<li>耗时严重，几千条数据查询了好几分钟。</li>
+<li>结果有误，结果比第三方原始表多出了一些数据。（使用左连接）</li>
+</ol>
+<p>SQL：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span>  *</span><br><span class="line"><span class="keyword">FROM</span> third_party_order b </span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> dict_transaction a</span><br><span class="line"><span class="keyword">on</span> a.<span class="keyword">data</span> <span class="keyword">like</span> <span class="keyword">CONCAT</span>( <span class="string">'%'</span> , b.sn , <span class="string">'%'</span>)</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="u539F_u7406_u5206_u6790"><a href="#u539F_u7406_u5206_u6790" class="headerlink" title="原理分析"></a>原理分析</h1><p><strong>问题原因：</strong><br>a表中的某些记录在b表中有1对多的关系，就会出现left join后记录数多于原始的情况。</p>
+<p><strong>改进建议：</strong><br>使用left join的两个表，最好是1:1 或 1:0的关系，这样可以保证A表的记录全部显示，B表显示符合条件的记录。<br>如果B表符合条件的记录不唯一，因此这种情况<strong>需要保证B表的符合条件的记录是空或唯一</strong>，我们可以使用<code>group by</code>来实现。</p>
+<h1 id="u6539_u8FDB_u65B9_u6848"><a href="#u6539_u8FDB_u65B9_u6848" class="headerlink" title="改进方案"></a>改进方案</h1><ol>
+<li><p>使用程序将data（JSON）数据进行匹配，将关联列单独拆分出来，更新到新的一列中。（明显增加查询速度）</p>
+</li>
+<li><p>对left join的右表进行<code>去重</code>后再进行左连接查询，即可保证查询的结果数和原始表相同。</p>
+</li>
+</ol>
+<p>SQL:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span>  *</span><br><span class="line"><span class="keyword">FROM</span> third_party_order b </span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> (<span class="keyword">select</span> sn, <span class="keyword">max</span>(apikeyid) <span class="keyword">as</span> apikeyid ,<span class="keyword">max</span>(<span class="keyword">id</span>) <span class="keyword">as</span> dhb_transaction_id <span class="keyword">from</span> dict_transaction <span class="keyword">group</span> <span class="keyword">by</span> sn ) a</span><br><span class="line"><span class="keyword">on</span> a.sn=b.sn</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="u601D_u8003"><a href="#u601D_u8003" class="headerlink" title="思考"></a>思考</h1><p>SQL不是万能的，有时候需要用程序结合SQL的方式处理日常小任务。简单！高效！</p>
 
       
     </div>
@@ -227,6 +272,16 @@
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2016/01/13/HEXO-Github静态博客搭建小试牛刀/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HEXO+Github静态博客搭建小试牛刀</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
   
 </article>
 
@@ -280,7 +335,7 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

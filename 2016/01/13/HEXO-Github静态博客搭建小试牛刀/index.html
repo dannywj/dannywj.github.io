@@ -16,7 +16,7 @@
 <meta property="og:description" content="缘起最近无意间看到了nodejs的火爆已经成为前后端通吃的一个技术了，之前也小研究过一些，今天想从另一个方面使用一下它的“功能”，玩一玩这个神奇的技术。
 查了一些资料，github支持了用户发布一些静态资源在上面，用于自己的博客啊或者个人主页之类的。参考了一些前人的作品，发现了基于nodejs的一个框架 HEXO 于是开始了一些尝试，准备用此框架来生成一个自己的技术博客。
 准备工作本着简单实用，所">
-<meta property="og:updated_time" content="2016-01-13T10:14:12.000Z">
+<meta property="og:updated_time" content="2016-01-27T08:46:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HEXO+Github静态博客搭建小试牛刀">
 <meta name="twitter:description" content="缘起最近无意间看到了nodejs的火爆已经成为前后端通吃的一个技术了，之前也小研究过一些，今天想从另一个方面使用一下它的“功能”，玩一玩这个神奇的技术。
@@ -121,7 +121,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/DHB/" style="font-size: 10px;">DHB</a> <a href="/tags/develop/" style="font-size: 10px;">develop</a>
+						<a href="/tags/DHB/" style="font-size: 10px;">DHB</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a>
 					</div>
 				</section>
 				
@@ -250,7 +250,7 @@
 <h1 id="u4E3B_u9898_u914D_u7F6E_26amp_3B_u4FEE_u6539"><a href="#u4E3B_u9898_u914D_u7F6E_26amp_3B_u4FEE_u6539" class="headerlink" title="主题配置&amp;修改"></a>主题配置&amp;修改</h1><p>主题的配置只需要将喜欢的主题clone到根目录下面的theme文件夹下，然后修改一下配置文件的theme属性，指定成clone的文件夹名称，重新生成，server一下即可。</p>
 <p>关于这个主题，主题内的配置需要在主题文件夹里面的_config.yml文件中修改。如修改头像，分类，个人描述，分享链接等等。</p>
 <p>另外，如果主题包里有多个语言，需要在网站的总配置文件里配置语言，即language目录的文件名字 如：zh-CN</p>
-<h1 id="HEXO_u5E38_u7528_u547D_u4EE4"><a href="#HEXO_u5E38_u7528_u547D_u4EE4" class="headerlink" title="HEXO常用命令"></a>HEXO常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g #&#29983;&#25104;&#10;$ hexo s -p xxxx #&#26412;&#22320;&#37096;&#32626;&#10;$ hexo d #&#21457;&#24067;&#21040;github</span><br></pre></td></tr></table></figure>
+<h1 id="HEXO_u5E38_u7528_u547D_u4EE4"><a href="#HEXO_u5E38_u7528_u547D_u4EE4" class="headerlink" title="HEXO常用命令"></a>HEXO常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &#34;&#26032;&#24314;&#25991;&#31456;&#34; #&#26032;&#24314;&#25991;&#31456;&#10;$ hexo g #&#29983;&#25104;&#10;$ hexo s -p xxxx #&#26412;&#22320;&#37096;&#32626;&#10;$ hexo d #&#21457;&#24067;&#21040;github</span><br></pre></td></tr></table></figure>
 <h1 id="github_u90E8_u7F72"><a href="#github_u90E8_u7F72" class="headerlink" title="github部署"></a>github部署</h1><p>部署这块也踩了不少坑，首先是配置，网上的教程可能过时了，还是得以官网的说明为准：<br>有以下几个配置项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deploy:&#10;  type: git&#10;  repo: &#60;git path&#62;&#10;  #branch: master &#21487;&#36873;&#10;  message: add blog #&#25552;&#20132;&#27880;&#37322;</span><br></pre></td></tr></table></figure></p>
 <p>其中的repo的格式弄了半天 应该是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://&#60;username&#62;:&#60;password&#62;@github.com/&#60;username&#62;/&#60;repository-name&#62;</span><br></pre></td></tr></table></figure>
@@ -268,6 +268,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/01/27/左连接数据结果增多是怎么回事/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          左连接数据结果增多是怎么回事
+        
+      </div>
+    </a>
   
   
     <a href="/2016/01/13/PHP代码规范/" id="article-nav-older" class="article-nav-link-wrap">

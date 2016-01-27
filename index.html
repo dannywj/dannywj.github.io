@@ -114,7 +114,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/DHB/" style="font-size: 10px;">DHB</a> <a href="/tags/develop/" style="font-size: 10px;">develop</a>
+						<a href="/tags/DHB/" style="font-size: 10px;">DHB</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a>
 					</div>
 				</section>
 				
@@ -190,6 +190,80 @@
 
       <div class="body-wrap">
   
+    <article id="post-左连接数据结果增多是怎么回事" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/27/左连接数据结果增多是怎么回事/" class="article-date">
+  	<time datetime="2016-01-27T08:35:47.000Z" itemprop="datePublished">2016-01-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/27/左连接数据结果增多是怎么回事/">左连接数据结果增多是怎么回事</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="u80CC_u666F_u63CF_u8FF0"><a href="#u80CC_u666F_u63CF_u8FF0" class="headerlink" title="背景描述"></a>背景描述</h1><p>两张数据表，一张是我们自己的业务订单，另一个是第三方服务商的订单流水。两个数据表有一个对应的序列号sn列（关联列）。</p>
+<p><strong>需求：</strong> 以第三方服务商的订单流水为基准，查询出对应我们自己订单的厂商类型等信息。</p>
+<h1 id="u95EE_u9898SQL"><a href="#u95EE_u9898SQL" class="headerlink" title="问题SQL"></a>问题SQL</h1><p><strong>第一次解决方法：</strong>使用左连接+like 方式查询<br><strong>结果：</strong></p>
+<ol>
+<li>耗时严重，几千条数据查询了好几分钟。</li>
+<li>结果有误，结果比第三方原始表多出了一些数据。（使用左连接）</li>
+</ol>
+<p>SQL：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span>  *</span><br><span class="line"><span class="keyword">FROM</span> third_party_order b </span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> dict_transaction a</span><br><span class="line"><span class="keyword">on</span> a.<span class="keyword">data</span> <span class="keyword">like</span> <span class="keyword">CONCAT</span>( <span class="string">'%'</span> , b.sn , <span class="string">'%'</span>)</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="u539F_u7406_u5206_u6790"><a href="#u539F_u7406_u5206_u6790" class="headerlink" title="原理分析"></a>原理分析</h1><p><strong>问题原因：</strong><br>a表中的某些记录在b表中有1对多的关系，就会出现left join后记录数多于原始的情况。</p>
+<p><strong>改进建议：</strong><br>使用left join的两个表，最好是1:1 或 1:0的关系，这样可以保证A表的记录全部显示，B表显示符合条件的记录。<br>如果B表符合条件的记录不唯一，因此这种情况<strong>需要保证B表的符合条件的记录是空或唯一</strong>，我们可以使用<code>group by</code>来实现。</p>
+<h1 id="u6539_u8FDB_u65B9_u6848"><a href="#u6539_u8FDB_u65B9_u6848" class="headerlink" title="改进方案"></a>改进方案</h1><ol>
+<li><p>使用程序将data（JSON）数据进行匹配，将关联列单独拆分出来，更新到新的一列中。（明显增加查询速度）</p>
+</li>
+<li><p>对left join的右表进行<code>去重</code>后再进行左连接查询，即可保证查询的结果数和原始表相同。</p>
+</li>
+</ol>
+<p>SQL:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">SELECT</span>  *</span><br><span class="line"><span class="keyword">FROM</span> third_party_order b </span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> (<span class="keyword">select</span> sn, <span class="keyword">max</span>(apikeyid) <span class="keyword">as</span> apikeyid ,<span class="keyword">max</span>(<span class="keyword">id</span>) <span class="keyword">as</span> dhb_transaction_id <span class="keyword">from</span> dict_transaction <span class="keyword">group</span> <span class="keyword">by</span> sn ) a</span><br><span class="line"><span class="keyword">on</span> a.sn=b.sn</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="u601D_u8003"><a href="#u601D_u8003" class="headerlink" title="思考"></a>思考</h1><p>SQL不是万能的，有时候需要用程序结合SQL的方式处理日常小任务。简单！高效！</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-HEXO-Github静态博客搭建小试牛刀" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -234,7 +308,7 @@
 <h1 id="u4E3B_u9898_u914D_u7F6E_26amp_3B_u4FEE_u6539"><a href="#u4E3B_u9898_u914D_u7F6E_26amp_3B_u4FEE_u6539" class="headerlink" title="主题配置&amp;修改"></a>主题配置&amp;修改</h1><p>主题的配置只需要将喜欢的主题clone到根目录下面的theme文件夹下，然后修改一下配置文件的theme属性，指定成clone的文件夹名称，重新生成，server一下即可。</p>
 <p>关于这个主题，主题内的配置需要在主题文件夹里面的_config.yml文件中修改。如修改头像，分类，个人描述，分享链接等等。</p>
 <p>另外，如果主题包里有多个语言，需要在网站的总配置文件里配置语言，即language目录的文件名字 如：zh-CN</p>
-<h1 id="HEXO_u5E38_u7528_u547D_u4EE4"><a href="#HEXO_u5E38_u7528_u547D_u4EE4" class="headerlink" title="HEXO常用命令"></a>HEXO常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g #&#29983;&#25104;&#10;$ hexo s -p xxxx #&#26412;&#22320;&#37096;&#32626;&#10;$ hexo d #&#21457;&#24067;&#21040;github</span><br></pre></td></tr></table></figure>
+<h1 id="HEXO_u5E38_u7528_u547D_u4EE4"><a href="#HEXO_u5E38_u7528_u547D_u4EE4" class="headerlink" title="HEXO常用命令"></a>HEXO常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &#34;&#26032;&#24314;&#25991;&#31456;&#34; #&#26032;&#24314;&#25991;&#31456;&#10;$ hexo g #&#29983;&#25104;&#10;$ hexo s -p xxxx #&#26412;&#22320;&#37096;&#32626;&#10;$ hexo d #&#21457;&#24067;&#21040;github</span><br></pre></td></tr></table></figure>
 <h1 id="github_u90E8_u7F72"><a href="#github_u90E8_u7F72" class="headerlink" title="github部署"></a>github部署</h1><p>部署这块也踩了不少坑，首先是配置，网上的教程可能过时了，还是得以官网的说明为准：<br>有以下几个配置项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deploy:&#10;  type: git&#10;  repo: &#60;git path&#62;&#10;  #branch: master &#21487;&#36873;&#10;  message: add blog #&#25552;&#20132;&#27880;&#37322;</span><br></pre></td></tr></table></figure></p>
 <p>其中的repo的格式弄了半天 应该是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://&#60;username&#62;:&#60;password&#62;@github.com/&#60;username&#62;/&#60;repository-name&#62;</span><br></pre></td></tr></table></figure>
