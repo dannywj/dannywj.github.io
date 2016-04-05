@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/04/05/API开发最佳实践/index.html">
 <meta property="og:site_name" content="DannyWang's blog">
 <meta property="og:description" content="业务逻辑部分业务分层优化明确各个层的任务：Model(DAO):数据持久层的工作，对数据库的操作都封装在这。Service ： 业务逻辑层，负责业务模块的逻辑应用设计，controller中就可以调用service的接口实现业务逻辑处理，提高了通用的业务逻辑的复用性，设计到具体业务实现会调用Model的接口。Controller ：控制层，负责具体业务流程控制，这里调用service层，将数据返回">
-<meta property="og:updated_time" content="2016-04-05T04:04:57.954Z">
+<meta property="og:updated_time" content="2016-04-05T09:25:14.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="API开发最佳实践">
 <meta name="twitter:description" content="业务逻辑部分业务分层优化明确各个层的任务：Model(DAO):数据持久层的工作，对数据库的操作都封装在这。Service ： 业务逻辑层，负责业务模块的逻辑应用设计，controller中就可以调用service的接口实现业务逻辑处理，提高了通用的业务逻辑的复用性，设计到具体业务实现会调用Model的接口。Controller ：控制层，负责具体业务流程控制，这里调用service层，将数据返回">
@@ -230,6 +230,7 @@
 <h1 id="u4EE3_u7801_u7EC6_u8282_u90E8_u5206"><a href="#u4EE3_u7801_u7EC6_u8282_u90E8_u5206" class="headerlink" title="代码细节部分"></a>代码细节部分</h1><p>mc的键值各个业务模块应该区分，且带上必要的渠道参数，方便管理。</p>
 <p>判断尽量简洁，配置文件可以采用键值对的形式进行配置，判断使用isset方式。</p>
 <p>本地redis清除缓存方式：flushall：删除所有数据库中的所有key</p>
+<h1 id="u6D41_u7A0B_u89C4_u8303_u90E8_u5206"><a href="#u6D41_u7A0B_u89C4_u8303_u90E8_u5206" class="headerlink" title="流程规范部分"></a>流程规范部分</h1><p>1.feature分支要基于master分支开出，为的是保证新开发的分分支是基于稳定的。（错误案例是从release分支开出）<br>2.每个分支只做一件事情<br>3.冲突最理想的情况是在发生冲突前用一些手段规避和扼杀掉。如：公共的需要修改的方法，可以考虑再开出一个新分支来处理（抽象），解决公共的功能。也就是说的解耦，让程序模块化，彼此的依赖降低到最低。<br>思想：如何长远的采用非人工的，优雅的方式解决问题。<br>P.S. 来自于一次不符合规范的提交分享会</p>
 
       
     </div>
