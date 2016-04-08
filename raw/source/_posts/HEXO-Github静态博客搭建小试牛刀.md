@@ -125,8 +125,36 @@ https://api.instagram.com/v1/users/2003826149/media/recent/?access_token=2003826
 
 而且，这个系统用来写博客，可以方便的跟踪每个版本的变化。
 
+# 日常发布&环境重现
+1. git clone项目
+2. 切换分支到raw
+3. 在raw中执行hexo -g
+4. 根据报错内容，安装缺失的hexo组件
+5. raw为发布分支，master为显示分支
+
+npm install hexo --save （可能导致报错）
+
+安装Hexo缺失插件（批量复制粘贴）
+```
+npm install hexo-generator-index --save
+npm install hexo-generator-archive --save
+npm install hexo-generator-category --save
+npm install hexo-generator-tag --save
+npm install hexo-deployer-git --save
+npm install hexo-deployer-heroku --save
+npm install hexo-deployer-rsync --save
+npm install hexo-deployer-openshift --save
+
+npm install hexo-server --save
+npm install hexo-renderer-stylus@0.2 --save
+npm install hexo-generator-feed@1 --save
+npm install hexo-generator-sitemap@1 --save
+npm install hexo-renderer-marked@0.2 --save
+http://www.chinaz.com/web/2015/1016/458004.shtml
+```
 # 参考链接
 [http://ijiaober.github.io/categories/hexo/](http://ijiaober.github.io/categories/hexo/)
 [http://www.zhihu.com/question/24422335](http://www.zhihu.com/question/24422335)
 [https://github.com/litten/hexo-theme-yilia](https://github.com/litten/hexo-theme-yilia)
 [http://stackoverflow.com/questions/20871549/error-when-push-commits-with-github-fatal-could-not-read-username](http://stackoverflow.com/questions/20871549/error-when-push-commits-with-github-fatal-could-not-read-username)
+http://www.chinaz.com/web/2015/1016/458004.shtml
