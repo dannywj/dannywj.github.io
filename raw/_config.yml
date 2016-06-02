@@ -72,4 +72,4 @@ deploy:
   type: git
   repo: https://dannywj:juewang!#7@github.com/dannywj/dannywj.github.io.git
   #branch: master
-  message: 添加新文章samsung
+  message: add new article
