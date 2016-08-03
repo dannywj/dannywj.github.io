@@ -143,6 +143,8 @@ AllowOverride All
 </VirtualHost>
 
 ```
+# GitBash修改默认路径
+![配置方式 修改快捷方式起始位置](https://raw.githubusercontent.com/dannywj/dannywj.github.io/raw/raw/source/statics/git_init.png)
 
 # 参考资料
 xampp: 
