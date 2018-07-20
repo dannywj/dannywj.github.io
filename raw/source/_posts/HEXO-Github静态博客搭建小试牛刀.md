@@ -152,9 +152,27 @@ npm install hexo-generator-sitemap@1 --save
 npm install hexo-renderer-marked@0.2 --save
 http://www.chinaz.com/web/2015/1016/458004.shtml
 ```
+
+如果显示的是正常网页，则说明没有错误，但是如果是这样的：
+
+<%- partial('_partial/head') %>
+<%- partial('_partial/header') %>
+<%- body %>
+<% if (theme.sidebar && theme.sidebar !== 'bottom'){ %> <%- partial('_partial/sidebar') %> <% } %>
+<%- partial('_partial/footer') %>
+<%- partial('_partial/mobile-nav') %> <%- partial('_partial/after-footer') %>
+
+这说明服务器解析错误，解决方案：
+```
+npm install hexo-renderer-ejs --save
+npm install hexo-renderer-stylus --save
+npm install hexo-renderer-marked --save
+```
+
 # 参考链接
 [http://ijiaober.github.io/categories/hexo/](http://ijiaober.github.io/categories/hexo/)
 [http://www.zhihu.com/question/24422335](http://www.zhihu.com/question/24422335)
 [https://github.com/litten/hexo-theme-yilia](https://github.com/litten/hexo-theme-yilia)
 [http://stackoverflow.com/questions/20871549/error-when-push-commits-with-github-fatal-could-not-read-username](http://stackoverflow.com/questions/20871549/error-when-push-commits-with-github-fatal-could-not-read-username)
 http://www.chinaz.com/web/2015/1016/458004.shtml
+[https://blog.csdn.net/u012366161/article/details/42059813](https://blog.csdn.net/u012366161/article/details/42059813)
