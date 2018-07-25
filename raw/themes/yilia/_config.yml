@@ -2,7 +2,7 @@
 menu:
   主页: /
   所有文章: /archives
-  我的影集: /instagram
+  # 我的影集: /instagram
   # 随笔: /tags/随笔
 
 # SubNav
