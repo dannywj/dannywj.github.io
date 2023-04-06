@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>RabbitMQ初探 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="队列那点儿事儿提高程序的性能很重要的一个思路就是将请求进行异步化处理，而在服务端异步处理的方式可以由消息队列来完成。 之前在处理消息推送等场景的时候曾经接触过“队列”的概念，当时是在DB中手工维护一张“业务队列表”，然后依靠定时任务来消耗表中的任务。这只是队列应用的其中一个简单的场景。 面对大型程序，这种自建队列的机制显然麻烦而缺乏通用性，于是诞生了基于AMQP协议的这种消息队列组件，如：Rabb">
+<meta name="keywords" content="develop,MQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RabbitMQ初探">
+<meta property="og:url" content="http://yoursite.com/2016/05/13/RabbitMQ初探/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="队列那点儿事儿提高程序的性能很重要的一个思路就是将请求进行异步化处理，而在服务端异步处理的方式可以由消息队列来完成。 之前在处理消息推送等场景的时候曾经接触过“队列”的概念，当时是在DB中手工维护一张“业务队列表”，然后依靠定时任务来消耗表中的任务。这只是队列应用的其中一个简单的场景。 面对大型程序，这种自建队列的机制显然麻烦而缺乏通用性，于是诞生了基于AMQP协议的这种消息队列组件，如：Rabb">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RabbitMQ初探">
+<meta name="twitter:description" content="队列那点儿事儿提高程序的性能很重要的一个思路就是将请求进行异步化处理，而在服务端异步处理的方式可以由消息队列来完成。 之前在处理消息推送等场景的时候曾经接触过“队列”的概念，当时是在DB中手工维护一张“业务队列表”，然后依靠定时任务来消耗表中的任务。这只是队列应用的其中一个简单的场景。 面对大型程序，这种自建队列的机制显然麻烦而缺乏通用性，于是诞生了基于AMQP协议的这种消息队列组件，如：Rabb">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-RabbitMQ初探" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/13/RabbitMQ初探/" class="article-date">
+  	<time datetime="2016-05-13T08:08:25.000Z" itemprop="datePublished">2016-05-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RabbitMQ初探
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MQ/">MQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="队列那点儿事儿"><a href="#队列那点儿事儿" class="headerlink" title="队列那点儿事儿"></a>队列那点儿事儿</h1><p>提高程序的性能很重要的一个思路就是将请求进行<strong>异步化</strong>处理，而在服务端异步处理的方式可以由<strong>消息队列</strong>来完成。</p>
+<p>之前在处理消息推送等场景的时候曾经接触过“队列”的概念，当时是在DB中手工维护一张“业务队列表”，然后依靠定时任务来消耗表中的任务。这只是队列应用的其中一个简单的场景。</p>
+<p>面对大型程序，这种自建队列的机制显然麻烦而缺乏通用性，于是诞生了基于AMQP协议的这种消息队列组件，如：<strong>RabbitMQ</strong></p>
+<h1 id="使用队列的原因"><a href="#使用队列的原因" class="headerlink" title="使用队列的原因"></a>使用队列的原因</h1><p>在DB集中访问的时候，压力会很大，为了缓解这种情况，将insert的操作放入队列中，即时返回客户端操作成功，由消费者处理队列，将insert的操作异步化。</p>
+<p>总结来说，就是：</p>
+<ol>
+<li>异步</li>
+<li>解耦（生产和消费分离，多系统解耦，即便跨语言，amqp协议都可以进行完美通信）</li>
+<li>高并发的缓冲器</li>
+</ol>
+<h1 id="一些需要理解的概念"><a href="#一些需要理解的概念" class="headerlink" title="一些需要理解的概念"></a>一些需要理解的概念</h1><p>当消费者为空的时候，消息是不会消失的</p>
+<p>多个消费者订阅到同一个队列，任务只会被一个拿走</p>
+<p>如果同一个消息，两个系统都想要这份数据，请开两条队列分别订阅，否则会导致数据不完整。</p>
+<p>队列中的消息是“有序”的（先进先出嘛）<br>消息发送是有序的，所以，如果你的业务逻辑需要支持有序操作，那么，请不要开多个进程，这样多进程消费消息会打乱消息的顺序。（在设计上尽量杜绝有序业务）</p>
+<p>消息有确认机制（ack命令），每条消息必须确认后才能读取下一条。所以当程序异常退出后，只要没有确认过，是可以重新处理的。（不建议开启自动确认）</p>
+<p>交换器常用的类型有：direct交换器，fanout交换器，topic交换器<br>其中fanout交换器为广播模式，会把消息给到所有绑定到他上面的队列上</p>
+<p>服务器重启，交换器和队列会丢失</p>
+<p>交换器，队列，消息可以做持久化，但是性能很低（需要写入文件），不建议使用</p>
+<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><h2 id="服务端搭建（windows）"><a href="#服务端搭建（windows）" class="headerlink" title="服务端搭建（windows）"></a>服务端搭建（windows）</h2><p><strong>RabbitMQ Server下载</strong><br><a href="http://www.rabbitmq.com/download.html" target="_blank" rel="noopener">http://www.rabbitmq.com/download.html</a><br>安装的时候提示需要安装erlang，否则web页面没有办法访问。</p>
+<p>erlang下载地址：<br><a href="http://www.erlang.org/download.html" target="_blank" rel="noopener">http://www.erlang.org/download.html</a></p>
+<p>使用exe进行安装即可。</p>
+<h2 id="php客户端搭建"><a href="#php客户端搭建" class="headerlink" title="php客户端搭建"></a>php客户端搭建</h2><p>下载php扩展包：<br><a href="http://pecl.php.net/package/amqp/1.4.0/windows" target="_blank" rel="noopener">http://pecl.php.net/package/amqp/1.4.0/windows</a></p>
+<p>将php_amqp.dll放在php的ext目录里，然后修改php.ini文件，在文件的最后面添加两行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[amqp]</span><br><span class="line">extension=php_amqp.dll</span><br></pre></td></tr></table></figure>
+<p>将rabbitmq.1.dll文件放在php的根目录里(也就是ext目录的父级目录)，然后修改apache的httpd.con文件，文件尾部添加一行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadFile  &quot;D:/xampp/php/rabbitmq.1.dll&quot;</span><br></pre></td></tr></table></figure>
+<p>重启apache，并查看phpinfo信息。只要看到amqp 字样即可。</p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>php调用示例<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$data=<span class="keyword">array</span>(</span><br><span class="line">    <span class="string">'device_platform'</span>=&gt;$type,</span><br><span class="line">    <span class="string">'activation_params'</span>=&gt;$arr_activation_params,</span><br><span class="line">);</span><br><span class="line"><span class="keyword">$this</span>-&gt;load-&gt;library(<span class="string">'amqp/publisher'</span>, <span class="keyword">array</span>(<span class="string">'connect_key'</span> =&gt; <span class="string">'index_activation'</span>));</span><br><span class="line"><span class="keyword">$this</span>-&gt;config-&gt;load(<span class="string">"amqp"</span>);</span><br><span class="line">$amqpConf = <span class="keyword">$this</span>-&gt;config-&gt;item(<span class="string">"amqp_index_activation"</span>);</span><br><span class="line">$re=<span class="keyword">$this</span>-&gt;publisher-&gt;inint($amqpConf[<span class="string">'exchange'</span>], $amqpConf[<span class="string">'exchange_type'</span>], $amqpConf[<span class="string">'durable'</span>]);</span><br><span class="line">$str_activation_info = json_encode($data);</span><br><span class="line">$result = <span class="keyword">$this</span>-&gt;publisher-&gt;send($str_activation_info, $amqpConf[<span class="string">'routing_key'</span>]);</span><br><span class="line"><span class="keyword">$this</span>-&gt;load-&gt;library(<span class="string">'monolog_client'</span>);</span><br><span class="line"><span class="keyword">if</span> (!$result) &#123;<span class="comment">//写入队列失败</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;monolog_client-&gt;error(<span class="string">'error: code=501 info=写入队列失败 str_activation_info='</span>.$str_activation_info, <span class="string">'api_error'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>发送后会出现在<strong>exchanges</strong>标签中，消费后会出现在<strong>queues</strong>标签中。</p>
+<h1 id="数据监控"><a href="#数据监控" class="headerlink" title="数据监控"></a>数据监控</h1><p>RabbitMQ 有个很和谐的web管理插件叫 rabbitmq_management<br>启动方式：<br>打开命令行模式cmd：<br>依次输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">D:\RabbitMQ Server\rabbitmq_server-3.6.1\sbin&gt;rabbitmq-plugins.bat enable rabbitmq_management</span><br><span class="line">The following plugins have been enabled:</span><br><span class="line">  mochiweb</span><br><span class="line">  webmachine</span><br><span class="line">  rabbitmq_web_dispatch</span><br><span class="line">  amqp_client</span><br><span class="line">  rabbitmq_management_agent</span><br><span class="line">  rabbitmq_management</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\RabbitMQ Server\rabbitmq_server-3.6.1\sbin&gt;rabbitmq-service.bat stop</span><br><span class="line">D:\erl7.3\erts-7.3\bin\erlsrv: Service RabbitMQ stopped.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\RabbitMQ Server\rabbitmq_server-3.6.1\sbin&gt;rabbitmq-service.bat install</span><br><span class="line">RabbitMQ service is already present - only updating service parameters</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\RabbitMQ Server\rabbitmq_server-3.6.1\sbin&gt;rabbitmq-service.bat start</span><br><span class="line">D:\erl7.3\erts-7.3\bin\erlsrv: Service RabbitMQ started.</span><br></pre></td></tr></table></figure>
+<p>登录 <a href="http://127.0.0.1:15672" target="_blank" rel="noopener">http://127.0.0.1:15672</a><br>账号密码都是 guest</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://www.360doc.com/content/14/0911/17/15077656_408714488.shtml" target="_blank" rel="noopener">http://www.360doc.com/content/14/0911/17/15077656_408714488.shtml</a><br><a href="https://www.kakata.com/archives/1187" target="_blank" rel="noopener">https://www.kakata.com/archives/1187</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/02/python学起来/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          python学起来
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/06/Group-By-按日期统计脚本/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Group By 按日期统计脚本</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

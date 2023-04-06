@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>会员体系那点事 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="思想与感受需求分析该想啥 版本需求中是否有重大改动，包括数据计算机制，规则等，是否会对旧版有影响。 是否需要强制升级？不强制升级的话，如何做兼容处理，工作量多大？ 重大改动造成版本不一致的情况，需要产品文字说明（邮件），防止后期出现问题无法追溯。 需求中需要的数据，前期应该考虑一下计算方式，是否容易获取，是否满足性能要求。如超越xx%的用户。 分页及排序的可能性考虑（第三方接口中也要考虑分页和排序">
+<meta name="keywords" content="develop,work">
+<meta property="og:type" content="article">
+<meta property="og:title" content="会员体系那点事">
+<meta property="og:url" content="http://yoursite.com/2016/08/26/会员体系那点事/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="思想与感受需求分析该想啥 版本需求中是否有重大改动，包括数据计算机制，规则等，是否会对旧版有影响。 是否需要强制升级？不强制升级的话，如何做兼容处理，工作量多大？ 重大改动造成版本不一致的情况，需要产品文字说明（邮件），防止后期出现问题无法追溯。 需求中需要的数据，前期应该考虑一下计算方式，是否容易获取，是否满足性能要求。如超越xx%的用户。 分页及排序的可能性考虑（第三方接口中也要考虑分页和排序">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.513Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="会员体系那点事">
+<meta name="twitter:description" content="思想与感受需求分析该想啥 版本需求中是否有重大改动，包括数据计算机制，规则等，是否会对旧版有影响。 是否需要强制升级？不强制升级的话，如何做兼容处理，工作量多大？ 重大改动造成版本不一致的情况，需要产品文字说明（邮件），防止后期出现问题无法追溯。 需求中需要的数据，前期应该考虑一下计算方式，是否容易获取，是否满足性能要求。如超越xx%的用户。 分页及排序的可能性考虑（第三方接口中也要考虑分页和排序">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-会员体系那点事" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/26/会员体系那点事/" class="article-date">
+  	<time datetime="2016-08-26T09:10:46.000Z" itemprop="datePublished">2016-08-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      会员体系那点事
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/work/">work</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="思想与感受"><a href="#思想与感受" class="headerlink" title="思想与感受"></a>思想与感受</h1><h2 id="需求分析该想啥"><a href="#需求分析该想啥" class="headerlink" title="需求分析该想啥"></a>需求分析该想啥</h2><ol>
+<li>版本需求中是否有重大改动，包括数据计算机制，规则等，是否会对旧版有影响。</li>
+<li>是否需要强制升级？不强制升级的话，如何做兼容处理，工作量多大？</li>
+<li>重大改动造成版本不一致的情况，需要产品文字说明（邮件），防止后期出现问题无法追溯。</li>
+<li>需求中需要的数据，前期应该考虑一下计算方式，是否容易获取，是否满足性能要求。如超越xx%的用户。</li>
+<li>分页及排序的可能性考虑（第三方接口中也要考虑分页和排序的支持）</li>
+<li>缓存及非实时数据提前告知。非核心数据允许一段时间的数据不同步，但是需要提前告知产品和测试。调用方不用做缓存清除机制。</li>
+</ol>
+<h2 id="行动起来怎么做"><a href="#行动起来怎么做" class="headerlink" title="行动起来怎么做"></a>行动起来怎么做</h2><h3 id="对接提前"><a href="#对接提前" class="headerlink" title="对接提前"></a>对接提前</h3><p>涉及和第三方对接的地方要提前考虑，必须先行。包括但不限于：需求告知，协议制定，分页及排序要求，demo规范等，不能让排期让不可控制的因素占据。</p>
+<h3 id="适当冗余"><a href="#适当冗余" class="headerlink" title="适当冗余"></a>适当冗余</h3><p>优惠券兑换表为防止查询API获取优惠券信息，可以在存储的时候进行适当的冗余字段存储，方便查询。（需提前约定好优惠券信息创建后不可改变）</p>
+<h3 id="服务化封装原则"><a href="#服务化封装原则" class="headerlink" title="服务化封装原则"></a>服务化封装原则</h3><p>第三方封装的接口，使用者不要直接读表，进行关联查询和排序等，如有需求，需要让接口提供方提供此类查询接口，保证服务化的封装性。</p>
+<h3 id="本地封装API"><a href="#本地封装API" class="headerlink" title="本地封装API"></a>本地封装API</h3><p>第三方API提供到位后，本地应该进行适当的封装和简化。</p>
+<h3 id="向前兼容"><a href="#向前兼容" class="headerlink" title="向前兼容"></a>向前兼容</h3><p>谨慎修改原接口字段的返回值，如用户信息。</p>
+<h1 id="代码怎么写"><a href="#代码怎么写" class="headerlink" title="代码怎么写"></a>代码怎么写</h1><h2 id="代码结构设计"><a href="#代码结构设计" class="headerlink" title="代码结构设计"></a>代码结构设计</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">├─application</span><br><span class="line">│  ├─config</span><br><span class="line">│  │  ├─member_config.php                   会员体系配置文件</span><br><span class="line">│  │  └─mirsrv.php                          服务化API配置文件</span><br><span class="line">│  ├─controller</span><br><span class="line">│  │  ├─android</span><br><span class="line">│  │  │  └─member.php                       安卓控制器</span><br><span class="line">│  │  └─ios</span><br><span class="line">│  │     └─member.php                       IOS控制器</span><br><span class="line">│  ├─library</span><br><span class="line">│  │  ├─member                              会员体系核心类库</span><br><span class="line">│  │  │  ├─service_sdk                      蜜豆，蜜粉API类库</span><br><span class="line">│  │  │  ├─Business.php                     会员体系业务逻辑处理类</span><br><span class="line">│  │  │  ├─ContextBlock.php                 内容模块类</span><br><span class="line">│  │  │  ├─CouponItem.php                   优惠券单品类</span><br><span class="line">│  │  │  ├─DiaryTemplate.php                日记模板类</span><br><span class="line">│  │  │  ├─IContextBlock.php                内容模块接口</span><br><span class="line">│  │  │  ├─IntroductionTemplate.php         简介模板类</span><br><span class="line">│  │  │  ├─LevelToast.php                   等级弹层类</span><br><span class="line">│  │  │  ├─MemberDayTemplate.php            会员日模板类</span><br><span class="line">│  │  │  ├─MibeanCoupon.php                 蜜豆优惠券类</span><br><span class="line">│  │  │  ├─MiBeanService.php                蜜豆服务API封装</span><br><span class="line">│  │  │  ├─MiScoreService.php               蜜粉服务API封装</span><br><span class="line">│  │  │  ├─TargetUrl.php                    目标链接类</span><br><span class="line">│  │  │  ├─TaskTemplate.php                 任务模板类</span><br><span class="line">│  │  │  ├─Template.php                     会员模板基类</span><br><span class="line">│  │  │  └─Toast.php                        会员弹层基类</span><br><span class="line">│  │  └─coupon_service.php                  优惠券API封装</span><br><span class="line">│  └─models</span><br><span class="line">│     └─member_model.php                    数据访问层model</span><br></pre></td></tr></table></figure>
+<h2 id="匿名对象"><a href="#匿名对象" class="headerlink" title="匿名对象"></a>匿名对象</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$diary_template-&gt;setTitle(<span class="string">'蜜芽日记'</span>)</span><br><span class="line">            -&gt;setContextBlock([</span><br><span class="line">                    (<span class="keyword">new</span> ContextBlock())-&gt;setPic($template_config[<span class="string">'mia_diary'</span>])-&gt;setTargetUrl((<span class="keyword">new</span> TargetUrl($template_url_config[<span class="string">'mia_diary'</span>], TargetUrl::TYPE_NORMAL_URL)))-&gt;toArray(),</span><br><span class="line">                ]</span><br><span class="line">            );</span><br></pre></td></tr></table></figure>
+<h2 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$member_day_template-&gt;setTitle(<span class="string">'会员日'</span>)-&gt;setSubTitle(<span class="string">'专享大礼、会员特价'</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/24/抓包神器Fiddler之Https请求随心转/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          抓包神器Fiddler之Https请求随心转
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/04/PHP对象方法链式调用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP对象方法链式调用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>PHP计划任务知多少 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="代码设计计划任务方案设计 需要有中断后重新运行继续处理的能力。 大数据表数据处理时采用备份表+rename方式快速恢复。 集成在现有框架中，方便DB的配置和其他公共方法的调用。  分片处理思维 根据id划分分组，每次读取一组的数据到array中处理。 分组的id可写入到文件中，采用永久循环方式对id文件进行更新和读取。 多台服务器分别执行不同区块内的脚本。要求脚本需要支持输入参数 日志文件记录分大">
+<meta name="keywords" content="work">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP计划任务知多少">
+<meta property="og:url" content="http://yoursite.com/2016/05/04/PHP计划任务知多少/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="代码设计计划任务方案设计 需要有中断后重新运行继续处理的能力。 大数据表数据处理时采用备份表+rename方式快速恢复。 集成在现有框架中，方便DB的配置和其他公共方法的调用。  分片处理思维 根据id划分分组，每次读取一组的数据到array中处理。 分组的id可写入到文件中，采用永久循环方式对id文件进行更新和读取。 多台服务器分别执行不同区块内的脚本。要求脚本需要支持输入参数 日志文件记录分大">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHP计划任务知多少">
+<meta name="twitter:description" content="代码设计计划任务方案设计 需要有中断后重新运行继续处理的能力。 大数据表数据处理时采用备份表+rename方式快速恢复。 集成在现有框架中，方便DB的配置和其他公共方法的调用。  分片处理思维 根据id划分分组，每次读取一组的数据到array中处理。 分组的id可写入到文件中，采用永久循环方式对id文件进行更新和读取。 多台服务器分别执行不同区块内的脚本。要求脚本需要支持输入参数 日志文件记录分大">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-PHP计划任务知多少" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/04/PHP计划任务知多少/" class="article-date">
+  	<time datetime="2016-05-04T08:06:21.000Z" itemprop="datePublished">2016-05-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      PHP计划任务知多少
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/work/">work</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="代码设计"><a href="#代码设计" class="headerlink" title="代码设计"></a>代码设计</h1><h2 id="计划任务方案设计"><a href="#计划任务方案设计" class="headerlink" title="计划任务方案设计"></a>计划任务方案设计</h2><ol>
+<li>需要有中断后重新运行继续处理的能力。</li>
+<li>大数据表数据处理时采用备份表+rename方式快速恢复。</li>
+<li>集成在现有框架中，方便DB的配置和其他公共方法的调用。</li>
+</ol>
+<h2 id="分片处理思维"><a href="#分片处理思维" class="headerlink" title="分片处理思维"></a>分片处理思维</h2><ol>
+<li>根据id划分分组，每次读取一组的数据到array中处理。</li>
+<li>分组的id可写入到文件中，采用永久循环方式对id文件进行更新和读取。</li>
+<li>多台服务器分别执行不同区块内的脚本。要求脚本需要支持输入参数</li>
+<li>日志文件记录分大小分割成多个文件存储</li>
+<li>没有更新及其他操作时也可以使用<code>mysql_unbuffered_query</code>的方式获取数据<code>mysql_use_result</code></li>
+</ol>
+<h2 id="脚本的参数输入"><a href="#脚本的参数输入" class="headerlink" title="脚本的参数输入"></a>脚本的参数输入</h2><p><em>几种方式：</em><br><strong>A.argv变量方式</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print_r($argv);</span><br><span class="line">D:\&gt;\wamp\bin\php\php5.3.0\php.exe  \tools\index.php bac ddd</span><br><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [0] =&gt; \tools\index.php</span><br><span class="line">    [1] =&gt; bac</span><br><span class="line">    [2] =&gt; ddd</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p><strong>B.自定义参数方式</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 接收输入参数</span><br><span class="line">$args = getopt(&apos;&apos;, array(&apos;min_id:&apos;, &apos;max_id:&apos;));</span><br><span class="line">if (!isset($args[&apos;min_id&apos;], $args[&apos;max_id&apos;])) &#123;</span><br><span class="line">        echo &apos;invalid input params&apos;;</span><br><span class="line">        die;</span><br><span class="line">&#125;</span><br><span class="line">$min_id = intval($args[&apos;min_id&apos;]);</span><br><span class="line">$max_id = intval($args[&apos;max_id&apos;]);</span><br><span class="line"></span><br><span class="line">调用：D:\&gt;\wamp\bin\php\php5.3.0\php.exe  \tools\index.php --min_id &quot;111&quot; --max_id &quot;222&quot;</span><br></pre></td></tr></table></figure></p>
+<p><strong>C.使用CI框架通过脚本调用</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/php/bin/php /data/www/api/bin/sh.php /ios_activation_task/index/0/100</span><br></pre></td></tr></table></figure></p>
+<h1 id="服务器方面"><a href="#服务器方面" class="headerlink" title="服务器方面"></a>服务器方面</h1><ol>
+<li>关注任务运行时内存的消耗</li>
+<li>关注相关php进程是否在执行任务</li>
+<li>设置脚本最大执行时间及最大消耗内存<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set_time_limit(3600 * 24);</span><br><span class="line">ini_set(&apos;memory_limit&apos;,&apos;500M&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="扩展-amp-完善"><a href="#扩展-amp-完善" class="headerlink" title="扩展&amp;完善"></a>扩展&amp;完善</h1><p>执行一段时间后，停止，重新运行。防止长时间执行资源消耗过大，效率变慢。</p>
+<h1 id="示例脚本"><a href="#示例脚本" class="headerlink" title="示例脚本"></a>示例脚本</h1><p>A 单独执行的php脚本<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActivationTask</span></span><br><span class="line"><span class="comment"> * Created by DannyWang</span></span><br><span class="line"><span class="comment"> * wangjue<span class="doctag">@mia</span>.com</span></span><br><span class="line"><span class="comment"> * 2016-04-28</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">date_default_timezone_set(<span class="string">'Etc/GMT-8'</span>);</span><br><span class="line">header(<span class="string">'Content-Type: text/html; charset=utf-8'</span>);</span><br><span class="line">set_time_limit(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">$push_task = <span class="keyword">new</span> ActivationTask();</span><br><span class="line">$push_task-&gt;run();</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ActivationTask</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 全局配置</span></span><br><span class="line">    <span class="keyword">const</span> TABLE_IOS_ACTIVATION_LOG = <span class="string">'activation_logs_copy'</span>;</span><br><span class="line">    <span class="keyword">const</span> FILE_OPERATION_LOG = <span class="string">'activation_task'</span>;</span><br><span class="line">    <span class="keyword">const</span> FILE_LAST_ID = <span class="string">'last_id.txt'</span>;</span><br><span class="line">    <span class="keyword">const</span> LOG_SEPARATE_COUNT = <span class="number">500000</span>;</span><br><span class="line">    <span class="keyword">const</span> EVERY_PROCESS_COUNT = <span class="number">2000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> $mysqli = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">private</span> $counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化，连接DB</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        $db_config = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'host'</span> =&gt; <span class="string">'localhost'</span>,</span><br><span class="line">            <span class="string">'port'</span> =&gt; <span class="string">'3306'</span>,</span><br><span class="line">            <span class="string">'username'</span> =&gt; <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'passwd'</span> =&gt; <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'dbname'</span> =&gt; <span class="string">'mia'</span>,</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;mysqli = <span class="keyword">new</span> mysqli($db_config[<span class="string">'host'</span>], $db_config[<span class="string">'username'</span>], $db_config[<span class="string">'passwd'</span>], $db_config[<span class="string">'dbname'</span>], $db_config[<span class="string">'port'</span>]);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;mysqli-&gt;set_charset(<span class="string">"utf8"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//运行主程序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 接收输入参数</span></span><br><span class="line">        $args = getopt(<span class="string">''</span>, <span class="keyword">array</span>(<span class="string">'min_id:'</span>, <span class="string">'max_id:'</span>));</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">isset</span>($args[<span class="string">'min_id'</span>], $args[<span class="string">'max_id'</span>])) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'invalid input params'</span>;</span><br><span class="line">            <span class="keyword">die</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $min_id = intval($args[<span class="string">'min_id'</span>]);</span><br><span class="line">        $max_id = intval($args[<span class="string">'max_id'</span>]);</span><br><span class="line"></span><br><span class="line">        file_put_contents(<span class="keyword">__DIR__</span> . <span class="string">'/'</span> . <span class="keyword">self</span>::FILE_LAST_ID, $min_id);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'==============begin ActivationTask: ['</span> . date(<span class="string">'Y-m-d H:i:s'</span>) . <span class="string">']================'</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;log(<span class="string">'==============begin ActivationTask: ['</span> . date(<span class="string">'Y-m-d H:i:s'</span>) . <span class="string">']================'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;log(<span class="string">'==begin process=='</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            $last_id = file_get_contents(<span class="keyword">__DIR__</span> . <span class="string">'/'</span> . <span class="keyword">self</span>::FILE_LAST_ID);</span><br><span class="line">            <span class="keyword">if</span> (!$last_id) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">'last_id is null'</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $sql = <span class="string">"select * from "</span> . <span class="keyword">self</span>::TABLE_IOS_ACTIVATION_LOG . <span class="string">" where id&gt;&#123;$last_id&#125; and id&lt;&#123;$max_id&#125;</span></span><br><span class="line"><span class="string">                    ORDER BY id asc limit "</span> . <span class="keyword">self</span>::EVERY_PROCESS_COUNT;</span><br><span class="line"></span><br><span class="line">            $result = <span class="keyword">$this</span>-&gt;select($sql);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">empty</span>($result)) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">'==end process=='</span>);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">'==============finish ActivationTask================'</span>);</span><br><span class="line">                <span class="keyword">exit</span>(<span class="string">"\r\n"</span>.<span class="string">'task end.'</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $key = count($result) - <span class="number">1</span>;</span><br><span class="line">            file_put_contents(<span class="keyword">__DIR__</span> . <span class="string">'/'</span> . <span class="keyword">self</span>::FILE_LAST_ID, $result[$key][<span class="string">'id'</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">foreach</span> ($result <span class="keyword">as</span> $row) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;counter++;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">"current data [num:&#123;$this-&gt;counter&#125; id:&#123;$row['id']&#125;,idfa:&#123;$row['idfa']&#125;]"</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 当前扫描的数据行 A</span></span><br><span class="line">                $idfa = $row[<span class="string">'idfa'</span>];</span><br><span class="line">                $openudid = $row[<span class="string">'openudid'</span>];</span><br><span class="line">                $device_token = $row[<span class="string">'device_token'</span>];</span><br><span class="line">                <span class="comment">// 查找重复数据</span></span><br><span class="line">                $repeat_data = <span class="keyword">$this</span>-&gt;searchRepeatDataByOpenUDID($openudid);</span><br><span class="line">                <span class="keyword">if</span> (count($repeat_data) == <span class="number">1</span>) &#123;</span><br><span class="line">                    $repeat_data = <span class="keyword">$this</span>-&gt;searchRepeatDataByIDFA($idfa);</span><br><span class="line">                    <span class="keyword">if</span> (count($repeat_data) == <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">$this</span>-&gt;log(<span class="string">"not find repeat data"</span>);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 获取需要保留的数据</span></span><br><span class="line">                $true_data = array_shift($repeat_data);<span class="comment">//B</span></span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">"exists repeat data! saved:"</span>, $true_data);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 删除多余数据</span></span><br><span class="line">                <span class="keyword">foreach</span> ($repeat_data <span class="keyword">as</span> $val) &#123;<span class="comment">//C</span></span><br><span class="line">                    $delete_id = $val[<span class="string">'id'</span>];</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;deleteRepeatData($delete_id);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">"current process finish"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">searchRepeatDataByIDFA</span><span class="params">($idfa)</span> </span>&#123;</span><br><span class="line">        $sql = <span class="string">"SELECT * from "</span> . <span class="keyword">self</span>::TABLE_IOS_ACTIVATION_LOG . <span class="string">" where idfa='&#123;$idfa&#125;' ORDER BY user_id desc,created asc "</span>;</span><br><span class="line">        $result = <span class="keyword">$this</span>-&gt;select($sql);</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">searchRepeatDataByOpenUDID</span><span class="params">($openudid)</span> </span>&#123;</span><br><span class="line">        $sql = <span class="string">"SELECT * from "</span> . <span class="keyword">self</span>::TABLE_IOS_ACTIVATION_LOG . <span class="string">" where openudid='&#123;$openudid&#125;' ORDER BY user_id desc,created asc "</span>;</span><br><span class="line">        $result = <span class="keyword">$this</span>-&gt;select($sql);</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">deleteRepeatData</span><span class="params">($id)</span> </span>&#123;</span><br><span class="line">        $sql = <span class="string">"delete from "</span> . <span class="keyword">self</span>::TABLE_IOS_ACTIVATION_LOG . <span class="string">" where id=&#123;$id&#125;"</span>;</span><br><span class="line">        $result = <span class="keyword">$this</span>-&gt;mysqli-&gt;query($sql);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;log(<span class="string">'delete:'</span> . $sql);</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查询方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">select</span><span class="params">($sql, $key = <span class="string">''</span>)</span> </span>&#123;</span><br><span class="line">        $result = <span class="keyword">$this</span>-&gt;mysqli-&gt;query($sql);</span><br><span class="line">        $lists = [];</span><br><span class="line">        <span class="keyword">while</span> ($row = $result-&gt;fetch_array(MYSQLI_ASSOC)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">empty</span>($key)) &#123;</span><br><span class="line">                $lists[$row[$key]] = $row;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                $lists[] = $row;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $result-&gt;free();</span><br><span class="line">        <span class="keyword">return</span> $lists;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//写入日志</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">log</span><span class="params">($str, $arr = null)</span> </span>&#123;</span><br><span class="line">        $log_num = floor(<span class="keyword">$this</span>-&gt;counter / <span class="keyword">self</span>::LOG_SEPARATE_COUNT);</span><br><span class="line">        <span class="keyword">if</span> (is_array($arr)) &#123;</span><br><span class="line">            $arr = json_encode($arr);</span><br><span class="line">        &#125;</span><br><span class="line">        $data = <span class="string">"["</span> . date(<span class="string">'Y-m-d H:i:s'</span>) . <span class="string">"]"</span> . $str . <span class="string">' '</span> . $arr . <span class="string">"\r\n"</span>;</span><br><span class="line">        <span class="comment">//echo $str . ' ' . $arr . "\r\n&lt;br/&gt;&lt;br/&gt;";</span></span><br><span class="line">        file_put_contents(<span class="keyword">__DIR__</span> . <span class="string">'/'</span> . <span class="keyword">self</span>::FILE_OPERATION_LOG . <span class="string">'_'</span> . $log_num . <span class="string">'.log'</span>, $data, FILE_APPEND);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>B 基于CI框架的php脚本<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ActivationTask</span></span><br><span class="line"><span class="comment"> * Created by DannyWang</span></span><br><span class="line"><span class="comment"> * wangjue<span class="doctag">@mia</span>.com</span></span><br><span class="line"><span class="comment"> * 2016-04-28</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">if</span> (!defined(<span class="string">'BASEPATH'</span>)) <span class="keyword">exit</span>(<span class="string">'No direct script access allowed'</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ios_activation_task</span> <span class="keyword">extends</span> <span class="title">CI_Controller</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 全局配置</span></span><br><span class="line">    <span class="keyword">const</span> TABLE_IOS_ACTIVATION_LOG = <span class="string">'ios_activation_logs_copy'</span>;</span><br><span class="line">    <span class="keyword">const</span> FILE_OPERATION_LOG = <span class="string">'activation_task'</span>;</span><br><span class="line">    <span class="keyword">const</span> FILE_LAST_ID = <span class="string">'last_id.txt'</span>;</span><br><span class="line">    <span class="keyword">const</span> LOG_SEPARATE_COUNT = <span class="number">500000</span>;</span><br><span class="line">    <span class="keyword">const</span> EVERY_PROCESS_COUNT = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">const</span> BASE_PATH = <span class="string">'/tmp/'</span>;</span><br><span class="line">    <span class="keyword">private</span> $counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//初始化，连接DB</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        set_time_limit(<span class="number">3600</span> * <span class="number">24</span>);</span><br><span class="line">        ini_set(<span class="string">'memory_limit'</span>,<span class="string">'500M'</span>);</span><br><span class="line">        <span class="keyword">parent</span>::__construct();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db = <span class="keyword">$this</span>-&gt;load-&gt;database(<span class="string">'log_write'</span>, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//运行主程序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">($min_id, $max_id)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        file_put_contents(<span class="keyword">self</span>::BASE_PATH . <span class="keyword">self</span>::FILE_LAST_ID, $min_id);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="string">'==============begin ActivationTask: ['</span> . date(<span class="string">'Y-m-d H:i:s'</span>) . <span class="string">']================'</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;log(<span class="string">'==============begin ActivationTask: ['</span> . date(<span class="string">'Y-m-d H:i:s'</span>) . <span class="string">']================'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;log(<span class="string">'==begin process=='</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            $last_id = file_get_contents(<span class="keyword">self</span>::BASE_PATH . <span class="keyword">self</span>::FILE_LAST_ID);</span><br><span class="line">            <span class="keyword">if</span> (!$last_id) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">'last_id is null'</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $sql = <span class="string">"select * from "</span> . <span class="keyword">self</span>::TABLE_IOS_ACTIVATION_LOG . <span class="string">" where id&gt;&#123;$last_id&#125; and id&lt;&#123;$max_id&#125;</span></span><br><span class="line"><span class="string">                    ORDER BY id asc limit "</span> . <span class="keyword">self</span>::EVERY_PROCESS_COUNT;</span><br><span class="line"></span><br><span class="line">            $result = <span class="keyword">$this</span>-&gt;select($sql);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">empty</span>($result)) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">'==end process=='</span>);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">'==============finish ActivationTask================'</span>);</span><br><span class="line">                <span class="keyword">exit</span>(<span class="string">"\r\n"</span> . <span class="string">'task end.'</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $key = count($result) - <span class="number">1</span>;</span><br><span class="line">            file_put_contents(<span class="keyword">self</span>::BASE_PATH . <span class="keyword">self</span>::FILE_LAST_ID, $result[$key][<span class="string">'id'</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">foreach</span> ($result <span class="keyword">as</span> $row) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;counter++;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">"current data [num:&#123;$this-&gt;counter&#125; id:&#123;$row['id']&#125;,idfa:&#123;$row['idfa']&#125;]"</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 当前扫描的数据行 A</span></span><br><span class="line">                $idfa = $row[<span class="string">'idfa'</span>];</span><br><span class="line">                $openudid = $row[<span class="string">'openudid'</span>];</span><br><span class="line">                $device_token = $row[<span class="string">'device_token'</span>];</span><br><span class="line">                <span class="comment">// 查找重复数据</span></span><br><span class="line">                $repeat_data = <span class="keyword">$this</span>-&gt;searchRepeatDataByOpenUDID($openudid);</span><br><span class="line">                <span class="keyword">if</span> (count($repeat_data) == <span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="keyword">empty</span>($idfa)) &#123;</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    $repeat_data = <span class="keyword">$this</span>-&gt;searchRepeatDataByIDFA($idfa);</span><br><span class="line">                    <span class="keyword">if</span> (count($repeat_data) == <span class="number">1</span>) &#123;</span><br><span class="line">                        <span class="keyword">$this</span>-&gt;log(<span class="string">"not find repeat data"</span>);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 获取需要保留的数据</span></span><br><span class="line">                $true_data = array_shift($repeat_data);<span class="comment">//B</span></span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">"exists repeat data! saved:"</span>, $true_data);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 删除多余数据</span></span><br><span class="line">                <span class="keyword">foreach</span> ($repeat_data <span class="keyword">as</span> $val) &#123;<span class="comment">//C</span></span><br><span class="line">                    $delete_id = $val[<span class="string">'id'</span>];</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;deleteRepeatData($delete_id);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;log(<span class="string">"current process finish"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">searchRepeatDataByIDFA</span><span class="params">($idfa)</span> </span>&#123;</span><br><span class="line">        $sql = <span class="string">"SELECT * from "</span> . <span class="keyword">self</span>::TABLE_IOS_ACTIVATION_LOG . <span class="string">" where idfa='&#123;$idfa&#125;' ORDER BY user_id desc,created asc "</span>;</span><br><span class="line">        $result = <span class="keyword">$this</span>-&gt;select($sql);</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">searchRepeatDataByOpenUDID</span><span class="params">($openudid)</span> </span>&#123;</span><br><span class="line">        $sql = <span class="string">"SELECT * from "</span> . <span class="keyword">self</span>::TABLE_IOS_ACTIVATION_LOG . <span class="string">" where openudid='&#123;$openudid&#125;' ORDER BY user_id desc,created asc "</span>;</span><br><span class="line">        $result = <span class="keyword">$this</span>-&gt;select($sql);</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">deleteRepeatData</span><span class="params">($id)</span> </span>&#123;</span><br><span class="line">        $sql = <span class="string">"delete from "</span> . <span class="keyword">self</span>::TABLE_IOS_ACTIVATION_LOG . <span class="string">" where id=&#123;$id&#125;"</span>;</span><br><span class="line">        $result = <span class="keyword">$this</span>-&gt;db-&gt;query($sql);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;log(<span class="string">'delete:'</span> . $sql);</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查询方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">select</span><span class="params">($sql, $key = <span class="string">''</span>)</span> </span>&#123;</span><br><span class="line">        $lists = <span class="keyword">$this</span>-&gt;db-&gt;query($sql)-&gt;result_array();</span><br><span class="line">        <span class="keyword">return</span> $lists;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//写入日志</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">log</span><span class="params">($str, $arr = null)</span> </span>&#123;</span><br><span class="line">        $log_num = floor(<span class="keyword">$this</span>-&gt;counter / <span class="keyword">self</span>::LOG_SEPARATE_COUNT);</span><br><span class="line">        <span class="keyword">if</span> (is_array($arr)) &#123;</span><br><span class="line">            $arr = json_encode($arr);</span><br><span class="line">        &#125;</span><br><span class="line">        $data = <span class="string">"["</span> . date(<span class="string">'Y-m-d H:i:s'</span>) . <span class="string">"]"</span> . $str . <span class="string">' '</span> . $arr . <span class="string">"\r\n"</span>;</span><br><span class="line">        <span class="comment">//echo $str . ' ' . $arr . "\r\n&lt;br/&gt;&lt;br/&gt;";</span></span><br><span class="line">        file_put_contents(<span class="keyword">self</span>::BASE_PATH . <span class="keyword">self</span>::FILE_OPERATION_LOG . <span class="string">'_'</span> . $log_num . <span class="string">'.log'</span>, $data, FILE_APPEND);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>P.S. 测试环境修改分支</p>
+<ol>
+<li>vim exportApi.sh </li>
+<li>修改checkout 分支名称</li>
+<li>执行<code>sh exportApi.sh</code></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/06/Group-By-按日期统计脚本/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Group By 按日期统计脚本
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/11/GroupBy去重复数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">GroupBy去重复数据</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

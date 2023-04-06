@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>测试质量优化建议方案 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="测试质量优化建议方案 问题现状 涉及客户端开发的需求，后端逻辑的重视程度不够，导致部分逻辑验证遗漏 纯后端需求，需求内容理解不到位，验证的深度和覆盖面不全 测试用例及验证路径以开发人员为导向，容易产生偏差及遗漏 客户端需求测试完成的标准，未完全考虑后端逻辑（即客户端功能验证完毕即为测试完成且具备发版条件） 以非技术因素导致的问题为主，主要为理解偏差及覆盖不全导致出现问题  期望目标 意识上重视后端">
+<meta name="keywords" content="develop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="测试质量优化建议方案">
+<meta property="og:url" content="http://yoursite.com/2020/11/10/测试质量优化建议方案/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="测试质量优化建议方案 问题现状 涉及客户端开发的需求，后端逻辑的重视程度不够，导致部分逻辑验证遗漏 纯后端需求，需求内容理解不到位，验证的深度和覆盖面不全 测试用例及验证路径以开发人员为导向，容易产生偏差及遗漏 客户端需求测试完成的标准，未完全考虑后端逻辑（即客户端功能验证完毕即为测试完成且具备发版条件） 以非技术因素导致的问题为主，主要为理解偏差及覆盖不全导致出现问题  期望目标 意识上重视后端">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="测试质量优化建议方案">
+<meta name="twitter:description" content="测试质量优化建议方案 问题现状 涉及客户端开发的需求，后端逻辑的重视程度不够，导致部分逻辑验证遗漏 纯后端需求，需求内容理解不到位，验证的深度和覆盖面不全 测试用例及验证路径以开发人员为导向，容易产生偏差及遗漏 客户端需求测试完成的标准，未完全考虑后端逻辑（即客户端功能验证完毕即为测试完成且具备发版条件） 以非技术因素导致的问题为主，主要为理解偏差及覆盖不全导致出现问题  期望目标 意识上重视后端">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-测试质量优化建议方案" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/11/10/测试质量优化建议方案/" class="article-date">
+  	<time datetime="2020-11-10T08:35:34.000Z" itemprop="datePublished">2020-11-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      测试质量优化建议方案
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>测试质量优化建议方案</p>
+<h2 id="问题现状"><a href="#问题现状" class="headerlink" title="问题现状"></a>问题现状</h2><ul>
+<li>涉及客户端开发的需求，后端逻辑的重视程度不够，导致部分逻辑验证遗漏</li>
+<li>纯后端需求，需求内容理解不到位，验证的深度和覆盖面不全</li>
+<li>测试用例及验证路径以开发人员为导向，容易产生偏差及遗漏</li>
+<li>客户端需求测试完成的标准，未完全考虑后端逻辑（即客户端功能验证完毕即为测试完成且具备发版条件）</li>
+<li>以非技术因素导致的问题为主，主要为理解偏差及覆盖不全导致出现问题</li>
+</ul>
+<h2 id="期望目标"><a href="#期望目标" class="headerlink" title="期望目标"></a>期望目标</h2><ul>
+<li>意识上重视后端逻辑的验证，虽然无需客户端发版解决问题，但线上bug仍需耗费人力进行抢修，并容易引起不必要的争论及相关联的其他问题</li>
+<li>软件测试人员和开发人员要善于提问，作为一个需求的审视者。思路不能局限于所见的既有功能，不深入思考分析，测试过程中的风险就不能很好的规避，导致问题的出现。</li>
+</ul>
+<h2 id="现有工作流程"><a href="#现有工作流程" class="headerlink" title="现有工作流程"></a>现有工作流程</h2><h3 id="客户端排期需求流程："><a href="#客户端排期需求流程：" class="headerlink" title="客户端排期需求流程："></a>客户端排期需求流程：</h3><p>需求会-&gt;服务端出mock接口-&gt;细节会（UI讨论，功能说明，简单过一遍mock接口）-&gt;两端开发-&gt;提测-&gt;测试人员验证（使用mock或本地数据验证客户端功能）-&gt;测试完成，进入待发版列表-&gt;服务端接口上线-&gt;集测验证-&gt;客户端正式发版</p>
+<h3 id="纯后端需求流程："><a href="#纯后端需求流程：" class="headerlink" title="纯后端需求流程："></a>纯后端需求流程：</h3><p>需求方提需求（冷启动、推荐、统计）-&gt;与后端开发沟通（包括相关的系统，如ucms，推荐）-&gt;后端开发-&gt;后端提测-&gt;测试同学介入，向后端开发同学了解改动内容-&gt;功能验证-&gt;后端上线</p>
+<h2 id="建议工作流程"><a href="#建议工作流程" class="headerlink" title="建议工作流程"></a>建议工作流程</h2><p>以纯后端需求为例，给出一份建议的开发测试流程</p>
+<table>
+<thead>
+<tr>
+<th>流程编号</th>
+<th>流程名称</th>
+<th>工作内容</th>
+<th>参与人</th>
+<th>目的与收益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>需求调研</td>
+<td>产品或技术同学对现有功能的实现方式进行调研或确认，或对即将实现的功能进行可行性分析及实现方案预估</td>
+<td>需求方（产品或需求提出方技术同学）</td>
+<td>了解开发涉及的改动范围，对接的系统等，方便综合评估与提前准备</td>
+</tr>
+<tr>
+<td>2</td>
+<td>需求明确</td>
+<td>需求方明确最终的需求目的，需求内容，范围，实现的效果，版本兼容性处理，展示细节及详细业务逻辑，涉及参与的系统，期望上线时间等，并落实到文档wiki上</td>
+<td>需求方</td>
+<td>前期需求越明确，后期返工的概率越小。文档记录有利于开发及测试用例书写依据及后期功能回溯，防止细节遗漏</td>
+</tr>
+<tr>
+<td>3</td>
+<td>需求讨论会</td>
+<td>根据需求文档，为参与人讲解需求功能，实现细节，注意事项。开发及测试同学需要当场提出疑问，或给出自己的理解，由需求方答复保证需求理解的一致性和深入性</td>
+<td>需求方，开发同学，测试同学</td>
+<td>让测试同学介入，了解第一手的需求，防止后续的理解偏差</td>
+</tr>
+<tr>
+<td>4</td>
+<td>开发及测试准备</td>
+<td>开发：与涉及的第三方系统/接口沟通，联调，实现功能开发。测试：准备测试用例</td>
+<td>开发同学，测试同学</td>
+<td>进行开发与测试的初步准备工作</td>
+</tr>
+<tr>
+<td>5</td>
+<td>用例评审</td>
+<td>此阶段主要由测试同学给出详细完整的用例，由需求方为主进行核验，开发同学为辅进行补充。评审的形式不限于会议（可私下进行）</td>
+<td>测试同学，需求方，开发同学</td>
+<td>需求方对需求理解的最深入，因此评审可能更具有针对性。开发同学对系统实现最为了解，对细节及用例的补充更有发言权</td>
+</tr>
+<tr>
+<td>6</td>
+<td>测试环境确认</td>
+<td>由测试同学，开发同学一起确认，构建本次需求的测试环境。主要针对算法推荐，推荐位后台，或其他第三方对接系统的测试接口，或线上接口的指定数据。并明确相应系统的开发负责人。</td>
+<td>测试同学，开发同学</td>
+<td>测试环境的不同可能会导致上线结果的与预期不符。优先使用推荐的测试接口，其次使用线上接口推指定数据的模式</td>
+</tr>
+<tr>
+<td>7</td>
+<td>功能开发与提测</td>
+<td>开发人员进行完整的功能开发，开发完毕后，发邮件进行提测，提测需明确指出测试时注意的问题，测试接口的使用说明，修改范围等注意事项，可参考《建议的提测邮件模板》</td>
+<td>开发同学</td>
+<td>描述的清晰有利于指导测试同学进行验证</td>
+</tr>
+<tr>
+<td>8</td>
+<td>功能验证</td>
+<td>测试同学针对测试用例进行功能的验证，涉及第三方对接的，需要进入对应的后台系统、对接接口进行内部逻辑的验证</td>
+<td>测试同学</td>
+<td>验证时不仅要验证最终输出的效果，还要关注与其他系统对接的每一个环节的逻辑正确性</td>
+</tr>
+<tr>
+<td>9</td>
+<td>功能复审</td>
+<td>测试完成后，由测试同学给需求方进行功能演示，需求方需要复审功能的完整性和正确性</td>
+<td>测试同学，需求方</td>
+<td>需求方进行主导，检查测试是否全面准确</td>
+</tr>
+<tr>
+<td>10</td>
+<td>测试完成</td>
+<td>测试同学测试完毕后，回复测试完成邮件。邮件中需标明因条件限制或其他原因无法验证的地方或已知问题可以暂不修复的功能点</td>
+<td>测试同学</td>
+<td>增加说明有利于后期跟踪，回顾时进行查看</td>
+</tr>
+<tr>
+<td>11</td>
+<td>上线方案评估</td>
+<td>后端开发主导，与对接的系统开发人员沟通，明确其他系统的上线时间点及上线安排。有上线时序的功能需要提前明确上线的顺序</td>
+<td>后端开发，对接的系统开发同学</td>
+<td>复杂功能的上线需要特别关注，防止出现某一端提前上线导致出现线上问题再紧急回滚</td>
+</tr>
+<tr>
+<td>12</td>
+<td>后端上线</td>
+<td>在指定的上线时间点（如每周一下午）或紧急需求随时上线后，后端开发需要邮件告知上线完成</td>
+<td>后端开发同学</td>
+<td>上线通知后，有利于需求方跟进功能的变化及统计数据的变化</td>
+</tr>
+<tr>
+<td>13</td>
+<td>上线回归验证</td>
+<td>需求方为主，对线上的新功能进行验证，不具备展示该功能条件的，由需求方创造条件进行第一时间验证。测试及开发同学也要及时关注</td>
+<td>需求方</td>
+<td>需求方第一时间验证，有利于发现问题第一时间解决</td>
+</tr>
+<tr>
+<td>14</td>
+<td>上线确认</td>
+<td>功能验收后由需求方进行确认，并邮件回复</td>
+<td>需求方</td>
+<td>上线确认后，本需求即可以正常完结</td>
+</tr>
+</tbody>
+</table>
+<p>补充说明：</p>
+<p>在进入开发阶段后进行的功能调整，需要重新进行功能评审会议，由各方人员确认功能的调整是否需要调整开发及测试用例</p>
+<p>提测邮件范例</p>
+<h2 id="问题重现与优秀实践"><a href="#问题重现与优秀实践" class="headerlink" title="问题重现与优秀实践"></a>问题重现与优秀实践</h2><p>附提测邮件</p>
+<p>需求文档示例对比</p>
+<p>push通知的案例,返回标签的案例</p>
+<h2 id="困难与挑战"><a href="#困难与挑战" class="headerlink" title="困难与挑战"></a>困难与挑战</h2><ul>
+<li><p>需求方提出需求的紧迫性及随意性</p>
+</li>
+<li><p>流程增多，相应的时间线拉长</p>
+</li>
+<li><p>无文档需求或类似丹哥的一句话需求</p>
+</li>
+<li><p>没有过测试的需求</p>
+</li>
+</ul>
+<h2 id="美好的期待"><a href="#美好的期待" class="headerlink" title="美好的期待"></a>美好的期待</h2><p>流程的试行，流程环节的改进与优化 </p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/24/神奇的Docker/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">神奇的Docker</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

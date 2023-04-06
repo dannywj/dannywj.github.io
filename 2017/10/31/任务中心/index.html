@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>任务中心系统设计 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="业务说明APP中不同业务模块的功能整合到任务中心的统一入口中，方便新用户完成各项任务并获得奖励。每个任务完成的同时会获得自身的奖励，同时，累计的任务完成数达到目标后，还可以获得开启宝箱的资格，通过开启宝箱，还可以获得更多的奖励。 架构体系概述任务中心是各个业务模块完成自身任务后，汇总给任务中心服务端，进行统一的任务记录，奖励发放等逻辑。采用消息队列机制，各个业务方按照约定的消息格式向任务中心MQ发">
+<meta name="keywords" content="develop,work">
+<meta property="og:type" content="article">
+<meta property="og:title" content="任务中心系统设计">
+<meta property="og:url" content="http://yoursite.com/2017/10/31/任务中心/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="业务说明APP中不同业务模块的功能整合到任务中心的统一入口中，方便新用户完成各项任务并获得奖励。每个任务完成的同时会获得自身的奖励，同时，累计的任务完成数达到目标后，还可以获得开启宝箱的资格，通过开启宝箱，还可以获得更多的奖励。 架构体系概述任务中心是各个业务模块完成自身任务后，汇总给任务中心服务端，进行统一的任务记录，奖励发放等逻辑。采用消息队列机制，各个业务方按照约定的消息格式向任务中心MQ发">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/dannywj/dannywj.github.io/raw/raw/source/statics/task.png">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="任务中心系统设计">
+<meta name="twitter:description" content="业务说明APP中不同业务模块的功能整合到任务中心的统一入口中，方便新用户完成各项任务并获得奖励。每个任务完成的同时会获得自身的奖励，同时，累计的任务完成数达到目标后，还可以获得开启宝箱的资格，通过开启宝箱，还可以获得更多的奖励。 架构体系概述任务中心是各个业务模块完成自身任务后，汇总给任务中心服务端，进行统一的任务记录，奖励发放等逻辑。采用消息队列机制，各个业务方按照约定的消息格式向任务中心MQ发">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dannywj/dannywj.github.io/raw/raw/source/statics/task.png">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-任务中心" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/10/31/任务中心/" class="article-date">
+  	<time datetime="2017-10-31T08:52:15.000Z" itemprop="datePublished">2017-10-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      任务中心系统设计
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/work/">work</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="业务说明"><a href="#业务说明" class="headerlink" title="业务说明"></a>业务说明</h1><p>APP中不同业务模块的功能整合到任务中心的统一入口中，方便新用户完成各项任务并获得奖励。<br>每个任务完成的同时会获得自身的奖励，同时，累计的任务完成数达到目标后，还可以获得开启宝箱的资格，通过开启宝箱，还可以获得更多的奖励。</p>
+<h1 id="架构体系"><a href="#架构体系" class="headerlink" title="架构体系"></a>架构体系</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>任务中心是各个业务模块完成自身任务后，汇总给任务中心服务端，进行统一的任务记录，奖励发放等逻辑。<br>采用消息队列机制，各个业务方按照约定的消息格式向任务中心MQ发送消息，告知用户的任务完成情况。</p>
+<h2 id="架构示意图"><a href="#架构示意图" class="headerlink" title="架构示意图"></a>架构示意图</h2><p><img src="https://raw.githubusercontent.com/dannywj/dannywj.github.io/raw/raw/source/statics/task.png" alt=""></p>
+<h2 id="任务类型"><a href="#任务类型" class="headerlink" title="任务类型"></a>任务类型</h2><table>
+<thead>
+<tr>
+<th>任务id</th>
+<th>任务名称</th>
+<th>完成奖励</th>
+<th>业务方</th>
+<th>业务方处理奖励</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>完善宝宝信息</td>
+<td>+10蜜豆</td>
+<td>API</td>
+<td>N</td>
+</tr>
+<tr>
+<td>2</td>
+<td>完善地址信息</td>
+<td>+5蜜豆</td>
+<td>API</td>
+<td>N</td>
+</tr>
+<tr>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+<td>……</td>
+</tr>
+</tbody>
+</table>
+<h2 id="任务通知方式及参数定义"><a href="#任务通知方式及参数定义" class="headerlink" title="任务通知方式及参数定义"></a>任务通知方式及参数定义</h2><p>采用RabbitMQ消息队列进行数据交互。</p>
+<h3 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h3><p><strong>json</strong></p>
+<h3 id="数据项说明"><a href="#数据项说明" class="headerlink" title="数据项说明"></a>数据项说明</h3><table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>字段类型</th>
+<th>是否必传</th>
+<th>字段含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>int</td>
+<td>Y</td>
+<td>用户id</td>
+</tr>
+<tr>
+<td>task_id</td>
+<td>int</td>
+<td>Y</td>
+<td>任务id</td>
+</tr>
+<tr>
+<td>is_processed</td>
+<td>bool</td>
+<td>Y</td>
+<td>是否已处理奖励</td>
+</tr>
+<tr>
+<td>reward_name</td>
+<td>string</td>
+<td>N</td>
+<td>已发放奖励名称。is_processed 为true时必传</td>
+</tr>
+<tr>
+<td>finished_time</td>
+<td>string</td>
+<td>Y</td>
+<td>任务完成时间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="示例数据"><a href="#示例数据" class="headerlink" title="示例数据"></a>示例数据</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"user_id"</span>: <span class="number">10001</span>,</span><br><span class="line">  <span class="attr">"task_id"</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">"is_processed"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"reward_name"</span>: <span class="string">"10蜜豆/每贴"</span>,</span><br><span class="line">  <span class="attr">"finished_time"</span>: <span class="string">"2017-10-13 10:00:04"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="设计关键点"><a href="#设计关键点" class="headerlink" title="设计关键点"></a>设计关键点</h1><p>考虑到用户比较多，每天的任务完成后数据积累比较多，因此需要分散用户每天的数据，提高查询效率。</p>
+<p>目前可采用的方式有如下几个：</p>
+<ol>
+<li>数据查询走redis。 key-val形式，使用脚本定期落库（扫描并清理redis中的数据，写入表）</li>
+<li>按天分表，新建单独的数据库，每周/月定时建立下周/月的空表。将每天的数据分表保存。</li>
+<li>使用一张表，脚本跑之前的数据到历史表中，保证当前表的数据量控制在1天。</li>
+</ol>
+<p>综合考虑，目前使用方案2来实现。</p>
+<h1 id="相关表结构"><a href="#相关表结构" class="headerlink" title="相关表结构"></a>相关表结构</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`task`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`type`</span> <span class="built_in">int</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'1'</span> <span class="keyword">COMMENT</span> <span class="string">'任务类型 1-一次性任务 2-多次可完成任务'</span>,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'任务名称'</span>,</span><br><span class="line">  <span class="string">`icon`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'任务图标'</span>,</span><br><span class="line">  <span class="string">`group_type`</span> tinyint(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'1'</span> <span class="keyword">COMMENT</span> <span class="string">'任务分组 1-新人任务 2-日常任务 3-蜜芽圈任务'</span>,</span><br><span class="line">  <span class="string">`reward_name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'奖励名称'</span>,</span><br><span class="line">  <span class="string">`reward_value`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'奖励值'</span>,</span><br><span class="line">  <span class="string">`reward_type`</span> tinyint(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'1'</span> <span class="keyword">COMMENT</span> <span class="string">'任务奖励类型 1-蜜豆 2-优惠券 3-红包 4-其它'</span>,</span><br><span class="line">  <span class="string">`status`</span> tinyint(<span class="number">2</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'状态 1启用  0 未启用'</span>,</span><br><span class="line">  <span class="string">`start_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">COMMENT</span> <span class="string">'开始时间'</span>,</span><br><span class="line">  <span class="string">`end_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">COMMENT</span> <span class="string">'结束时间'</span>,</span><br><span class="line">  <span class="string">`task_url`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'未完成跳转链接'</span>,</span><br><span class="line">  <span class="string">`finished_url`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'已完成跳转链接'</span>,</span><br><span class="line">  <span class="string">`task_button_txt`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'任务未完成文案'</span>,</span><br><span class="line">  <span class="string">`finished_button_txt`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'已完成文案'</span>,</span><br><span class="line">  <span class="string">`sort`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'排序(越大越靠前)'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  <span class="string">`update_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">COMMENT</span> <span class="string">'更新时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`idx_start_time`</span> (<span class="string">`start_time`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`idx_end_time`</span> (<span class="string">`end_time`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">19</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COMMENT</span>=<span class="string">'任务配置表'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`task_final_log`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`user_id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'完成任务用户id'</span>,</span><br><span class="line">  <span class="string">`task_id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'任务id'</span>,</span><br><span class="line">  <span class="string">`processed_reward_name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'已获取的奖励名称（个性化的奖励名称）'</span>,</span><br><span class="line">  <span class="string">`finished_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">COMMENT</span> <span class="string">'任务完成时间'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`idx_user_id`</span> (<span class="string">`user_id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`idx_finished_time`</span> (<span class="string">`finished_time`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">2901927</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COMMENT</span>=<span class="string">'一次性任务用户完成日志'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`task_log`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`user_id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'完成任务用户id'</span>,</span><br><span class="line">  <span class="string">`task_id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'任务id'</span>,</span><br><span class="line">  <span class="string">`processed_reward_name`</span> <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'已获取的奖励名称（个性化的奖励名称）'</span>,</span><br><span class="line">  <span class="string">`finished_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">COMMENT</span> <span class="string">'任务完成时间'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`idx_user_id`</span> (<span class="string">`user_id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`idx_finished_time`</span> (<span class="string">`finished_time`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">66</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COMMENT</span>=<span class="string">'用户日常任务完成日志'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`task_reward_log`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'自增id'</span>,</span><br><span class="line">  <span class="string">`user_id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'用户id'</span>,</span><br><span class="line">  <span class="string">`reward_id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0'</span> <span class="keyword">COMMENT</span> <span class="string">'奖励宝箱id'</span>,</span><br><span class="line">  <span class="string">`open_date`</span> <span class="built_in">date</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00'</span> <span class="keyword">COMMENT</span> <span class="string">'开宝箱日期'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> datetime <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'0000-00-00 00:00:00'</span> <span class="keyword">COMMENT</span> <span class="string">'创建时间'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`index_user_id`</span> (<span class="string">`user_id`</span>),</span><br><span class="line">  <span class="keyword">KEY</span> <span class="string">`index_user_id_date`</span> (<span class="string">`open_date`</span>,<span class="string">`user_id`</span>) <span class="keyword">USING</span> BTREE</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">27</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8 <span class="keyword">COMMENT</span>=<span class="string">'任务奖励日志表'</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="消息队列配置注意事项"><a href="#消息队列配置注意事项" class="headerlink" title="消息队列配置注意事项"></a>消息队列配置注意事项</h1><p>任务中心消耗,由于服务器有多台机器消耗，因此配置的时候分组进行<br>rabbitMQ 管理后台（15672）需使用VMServer登录，查看，连接配置使用vip进行配置（HA架构）</p>
+<p>消耗脚本入口增加参数：nohup sh /opt/webroot/api/current/bin/fork_push.sh /amqp_task_center_process/consume/${j} 1 &gt;/dev/null 2&gt;&amp;1 &amp;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$amqp[&apos;task_center_consume&apos;] = [</span><br><span class="line">    [</span><br><span class="line">        &apos;host&apos;     =&gt; &quot;10.1.52.192&quot;,</span><br><span class="line">        &apos;port&apos;     =&gt; &quot;5672&quot;,</span><br><span class="line">        &apos;login&apos;    =&gt; &quot;miya_amqp_admin&quot;,</span><br><span class="line">        &apos;password&apos; =&gt; &quot;miya_admin_pwd&quot;,</span><br><span class="line">        &apos;vhost&apos;    =&gt; &quot;/&quot;</span><br><span class="line">    ] ,</span><br><span class="line">    [</span><br><span class="line">        &apos;host&apos;     =&gt; &quot;10.1.52.193&quot;,</span><br><span class="line">        &apos;port&apos;     =&gt; &quot;5672&quot;,</span><br><span class="line">        &apos;login&apos;    =&gt; &quot;miya_amqp_admin&quot;,</span><br><span class="line">        &apos;password&apos; =&gt; &quot;miya_admin_pwd&quot;,</span><br><span class="line">        &apos;vhost&apos;    =&gt; &quot;/&quot;</span><br><span class="line">    ] ,</span><br><span class="line">    [</span><br><span class="line">        &apos;host&apos;     =&gt; &quot;10.1.52.194&quot;,</span><br><span class="line">        &apos;port&apos;     =&gt; &quot;5672&quot;,</span><br><span class="line">        &apos;login&apos;    =&gt; &quot;miya_amqp_admin&quot;,</span><br><span class="line">        &apos;password&apos; =&gt; &quot;miya_admin_pwd&quot;,</span><br><span class="line">        &apos;vhost&apos;    =&gt; &quot;/&quot;</span><br><span class="line">    ] ,</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h1 id="上线及部署"><a href="#上线及部署" class="headerlink" title="上线及部署"></a>上线及部署</h1><h2 id="上线命令汇总"><a href="#上线命令汇总" class="headerlink" title="上线命令汇总"></a>上线命令汇总</h2><h3 id="crontab配置"><a href="#crontab配置" class="headerlink" title="crontab配置"></a>crontab配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 任务中心跑用户地址数据（指定日期夜间执行，11月9日2点1分执行）</span><br><span class="line">1 2 9 11 * /opt/php/bin/php /opt/webroot/api/current/bin/sh.php /crontab/member_task_init/initAddressInfoTask &gt;/dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line"># 任务中心日志表-每月25号1点执行创建下个月的任务日志表</span><br><span class="line">0 1 25 * * /opt/php/bin/php /opt/webroot/api/current/bin/sh.php /crontab/member_task_init/initTaskTableNextMonth</span><br></pre></td></tr></table></figure>
+<h3 id="手工执行脚本"><a href="#手工执行脚本" class="headerlink" title="手工执行脚本"></a>手工执行脚本</h3><p>前台方式（脚本执行时间长的不建议）：<br>/opt/php/bin/php /opt/webroot/api/current/bin/sh.php /crontab/member_task_init/initBabyInfoTask</p>
+<p>后台方式：<br>nohup /opt/php/bin/php /opt/webroot/api/current/bin/sh.php /crontab/member_task_init/initBabyInfoTask &gt;/dev/null 2&gt;&amp;1 &amp;</p>
+<p>nohup /opt/php/bin/php /opt/webroot/api/current/bin/sh.php /crontab/member_task_init/initAddressInfoTask &gt;/dev/null 2&gt;&amp;1 &amp;</p>
+<h3 id="服务器重启队列shell"><a href="#服务器重启队列shell" class="headerlink" title="服务器重启队列shell"></a>服务器重启队列shell</h3><p>P.S. 无密码登录模式，需要手工连接登录一次</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">_opt=$1</span><br><span class="line">main () &#123;</span><br><span class="line">        case "$&#123;_opt&#125;" in</span><br><span class="line">                start)</span><br><span class="line">                        start</span><br><span class="line">                        ;;</span><br><span class="line">                stop)</span><br><span class="line">                        stop</span><br><span class="line">                        ;;</span><br><span class="line">                restart)</span><br><span class="line">                       restart</span><br><span class="line">                       ;;</span><br><span class="line">                *)</span><br><span class="line">                        usage</span><br><span class="line">                        exit 1</span><br><span class="line">        esac</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">start() &#123;</span><br><span class="line">        printf "Starting Worker Queue...\n"</span><br><span class="line">        ARRAY_IP=(10.1.52.192 10.1.52.193 10.1.52.194)</span><br><span class="line">        # 机器数</span><br><span class="line">        j=0;</span><br><span class="line">        for ip in $&#123;ARRAY_IP[@]&#125;;do</span><br><span class="line">                ssh root@$ip "nohup sh /opt/webroot/api/current/bin/fork_push.sh /amqp_task_center_process/consume/$&#123;j&#125; 50 &gt;/dev/null 2&gt;&amp;1 &amp;"</span><br><span class="line">                # test</span><br><span class="line">                # nohup sh /opt/webroot/api/current/bin/fork_push.sh /amqp_task_center_process/consume/$&#123;j&#125; 1 &gt;/dev/null 2&gt;&amp;1 &amp;</span><br><span class="line">                ((j++));</span><br><span class="line">        done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop () &#123;</span><br><span class="line">    printf "Stoping Worker Queue...\n"</span><br><span class="line">    ARRAY_IP=(10.1.52.192 10.1.52.193 10.1.52.194)</span><br><span class="line">    for ip in $&#123;ARRAY_IP[@]&#125;;do</span><br><span class="line">        ssh root@$ip "ps aux|grep '/amqp_task_center_process/'|grep -v grep|awk '&#123;print \"kill -9 \"\$2&#125;'|sh"</span><br><span class="line">        # test</span><br><span class="line">        #  ps aux|grep '/amqp_task_center_process/'|grep -v grep|awk '&#123;print "kill -9 "$2&#125;'|sh</span><br><span class="line"></span><br><span class="line">    done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">restart() &#123;</span><br><span class="line">    printf "Restarting Worker QUEUE...\n"</span><br><span class="line">    stop</span><br><span class="line">    sleep 1</span><br><span class="line">    start</span><br><span class="line">&#125;</span><br><span class="line">usage() &#123;</span><br><span class="line">        echo "Usage: sh $0 &lt;start|stop|restart&gt;"</span><br><span class="line">        echo</span><br><span class="line">        exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main</span><br></pre></td></tr></table></figure>
+<h1 id="脚本执行注意事项"><a href="#脚本执行注意事项" class="headerlink" title="脚本执行注意事项"></a>脚本执行注意事项</h1><p>由于上线前需要执行一次老用户数据处理，需要将符合条件的老用户跑入新表，数据量为千万级，因此在设计上需要考虑以下几点：</p>
+<ol>
+<li>脚本初始化设置够大（内存占用，执行时间）</li>
+<li>数据库主从连接确认</li>
+<li>数据分页获取，变量unset,分页量参考评估时间调整</li>
+<li>数据获取排序规则明确（方便中断后排查执行的id）</li>
+<li>脚本重跑机制，防止意外断开后重新执行。可考虑在redis中报错上次处理的id，下次运行从此id继续</li>
+<li>数据库连接定时重连机制</li>
+<li>mysql可考虑批量insert</li>
+<li>DB操作不要太频繁，中途可适当sleep</li>
+<li>手工执行，使用后台执行方式，并监控log</li>
+<li>数据量大小评估，脚本执行时间评估，执行后数据确认</li>
+</ol>
+<h2 id="脚本代码"><a href="#脚本代码" class="headerlink" title="脚本代码"></a>脚本代码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">if</span> (!defined(<span class="string">'BASEPATH'</span>)) <span class="keyword">exit</span>(<span class="string">'No direct script access allowed'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 任务中心初始化老用户任务数据</span></span><br><span class="line"><span class="comment"> * Created by DannyWang</span></span><br><span class="line"><span class="comment"> * wangjue<span class="doctag">@mia</span>.com</span></span><br><span class="line"><span class="comment"> * 2017/10/24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Member_task_init</span> <span class="keyword">extends</span> <span class="title">CI_Controller</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">parent</span>::__construct();</span><br><span class="line">        <span class="comment">//设置该页面执行时间</span></span><br><span class="line">        set_time_limit(<span class="number">3600</span> * <span class="number">24</span>);</span><br><span class="line">        ini_set(<span class="string">'memory_limit'</span>, <span class="string">'3000M'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;load-&gt;library(<span class="string">'monolog_client'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;config-&gt;load(<span class="string">"redisconfig"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;db_read = <span class="keyword">$this</span>-&gt;load-&gt;database(<span class="string">'read'</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db_write = <span class="keyword">$this</span>-&gt;load-&gt;database(<span class="string">'task_center_write'</span>, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 完善宝宝信息任务</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> bool</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">initBabyInfoTask</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"====== begin initBabyInfoTask. ======"</span>);</span><br><span class="line">        $page_size = <span class="number">500</span>;</span><br><span class="line">        $page = <span class="number">1</span>;</span><br><span class="line">        $count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 连接redis 获取上次处理的id</span></span><br><span class="line">        $redisConf = <span class="keyword">$this</span>-&gt;config-&gt;item(<span class="string">"redis"</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;load-&gt;library(<span class="string">'redisclient'</span>, $redisConf[<span class="string">'task_center'</span>][<span class="number">0</span>], <span class="string">'taskRedisBaby'</span>);</span><br><span class="line">        $redis = <span class="keyword">$this</span>-&gt;taskRedisBaby-&gt;getInstance(<span class="string">'initBabyInfoTask'</span>);</span><br><span class="line">        <span class="keyword">if</span> (!$redis || !$redis-&gt;isConnected()) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"redis conn error"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $last_id_key = <span class="string">'task_init_baby_last_id'</span>;</span><br><span class="line">        $last_id = $redis-&gt;get($last_id_key);</span><br><span class="line">        $last_user_id = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">empty</span>($last_id)) &#123;</span><br><span class="line">            $last_user_id = $last_id;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 循环获取所有数据</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> ($count % <span class="number">10</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;db_write-&gt;reconnect();</span><br><span class="line">                <span class="keyword">$this</span>-&gt;db_read-&gt;reconnect();</span><br><span class="line">                <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"reconnect"</span>);</span><br><span class="line">                sleep(<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $sql = <span class="string">"select id from users where id&gt;&#123;$last_user_id&#125; and is_test=0 and user_type=1 and </span></span><br><span class="line"><span class="string">                (nickname is not null or child_nickname is not null</span></span><br><span class="line"><span class="string">                or  child_birth_day&lt;&gt;'0000-00-00' or child_sex&lt;&gt;0</span></span><br><span class="line"><span class="string">                or user_status&lt;&gt;0 ) limit &#123;$page_size&#125; offset "</span> . ($page - <span class="number">1</span>) * $page_size;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"get sql:&#123;$sql&#125;"</span>);</span><br><span class="line">            $res = <span class="keyword">$this</span>-&gt;db_read-&gt;query($sql)-&gt;result_array();</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">empty</span>($res)) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"get data empty"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">foreach</span> ($res <span class="keyword">as</span> $item) &#123;</span><br><span class="line">                $user_id = $item[<span class="string">'id'</span>];</span><br><span class="line">                $task_id = <span class="number">2</span>;</span><br><span class="line">                $processed_reward_name = <span class="string">'+10蜜豆'</span>;</span><br><span class="line">                $finished_time = date(<span class="string">'Y-m-d'</span>);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"begin insert task log.user_id:&#123;$user_id&#125;"</span>);</span><br><span class="line">                $result = <span class="keyword">$this</span>-&gt;insertFinalTaskLog($user_id, $task_id, $processed_reward_name, $finished_time);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"insertFinalTaskLog result:&#123;$result&#125;"</span>);</span><br><span class="line">                $redis-&gt;set($last_id_key, $user_id);</span><br><span class="line">            &#125;</span><br><span class="line">            $page++;</span><br><span class="line">            $count++;</span><br><span class="line">            <span class="keyword">unset</span>($res);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"====== finish initBabyInfoTask. ======"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 完善地址信息任务</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> bool</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">initAddressInfoTask</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"====== begin initAddressInfoTask. ======"</span>);</span><br><span class="line">        $page_size = <span class="number">500</span>;</span><br><span class="line">        $page = <span class="number">1</span>;</span><br><span class="line">        $count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 连接redis 获取上次处理的id</span></span><br><span class="line">        $redisConf = <span class="keyword">$this</span>-&gt;config-&gt;item(<span class="string">"redis"</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;load-&gt;library(<span class="string">'redisclient'</span>, $redisConf[<span class="string">'task_center'</span>][<span class="number">0</span>], <span class="string">'taskRedisAddress'</span>);</span><br><span class="line">        $redis = <span class="keyword">$this</span>-&gt;taskRedisAddress-&gt;getInstance(<span class="string">'initAddressInfoTask'</span>);</span><br><span class="line">        <span class="keyword">if</span> (!$redis || !$redis-&gt;isConnected()) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"redis conn error"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $last_id_key = <span class="string">'task_init_address_last_id'</span>;</span><br><span class="line">        $last_id = $redis-&gt;get($last_id_key);</span><br><span class="line">        $last_user_id = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">empty</span>($last_id)) &#123;</span><br><span class="line">            $last_user_id = $last_id;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> ($count % <span class="number">10</span> == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;db_write-&gt;reconnect();</span><br><span class="line">                <span class="keyword">$this</span>-&gt;db_read-&gt;reconnect();</span><br><span class="line">                <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"reconnect"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            $sql = <span class="string">"SELECT distinct user_id  from user_address </span></span><br><span class="line"><span class="string">                    where user_id &gt; &#123;$last_user_id&#125;</span></span><br><span class="line"><span class="string">                    ORDER BY user_id asc</span></span><br><span class="line"><span class="string">                    limit &#123;$page_size&#125; offset "</span> . ($page - <span class="number">1</span>) * $page_size;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"get sql:&#123;$sql&#125;"</span>);</span><br><span class="line">            $res = <span class="keyword">$this</span>-&gt;db_read-&gt;query($sql)-&gt;result_array();</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">empty</span>($res)) &#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"get data empty"</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">foreach</span> ($res <span class="keyword">as</span> $item) &#123;</span><br><span class="line">                $user_id = $item[<span class="string">'user_id'</span>];</span><br><span class="line">                $task_id = <span class="number">3</span>;</span><br><span class="line">                $processed_reward_name = <span class="string">'+10蜜豆'</span>;</span><br><span class="line">                $finished_time = date(<span class="string">'Y-m-d'</span>);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"begin insert task log.user_id:&#123;$user_id&#125;"</span>);</span><br><span class="line">                $result = <span class="keyword">$this</span>-&gt;insertFinalTaskLog($user_id, $task_id, $processed_reward_name, $finished_time);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"insertFinalTaskLog result:&#123;$result&#125;"</span>);</span><br><span class="line">                $redis-&gt;set($last_id_key, $user_id);</span><br><span class="line">            &#125;</span><br><span class="line">            $page++;</span><br><span class="line">            $count++;</span><br><span class="line">            <span class="keyword">unset</span>($res);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"====== finish initAddressInfoTask. ======"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 记录日志</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $info</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">logInfo</span><span class="params">($info)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (is_array($info)) &#123;</span><br><span class="line">            $info = json_encode($info);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;monolog_client-&gt;info($info, <span class="string">'task_init_data'</span>);</span><br><span class="line">        <span class="keyword">echo</span> $info . <span class="string">"\r\n&lt;br&gt;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入一次性任务日志表</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $user_id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $task_id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $processed_reward_name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $finished_time</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> bool</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">insertFinalTaskLog</span><span class="params">($user_id, $task_id, $processed_reward_name, $finished_time)</span> </span>&#123;</span><br><span class="line">        $set_insert_info = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'user_id'</span> =&gt; $user_id,</span><br><span class="line">            <span class="string">'task_id'</span> =&gt; $task_id,</span><br><span class="line">            <span class="string">'processed_reward_name'</span> =&gt; $processed_reward_name,</span><br><span class="line">            <span class="string">'finished_time'</span> =&gt; $finished_time,</span><br><span class="line">            <span class="string">'create_time'</span> =&gt; date(<span class="string">'Y-m-d H:i:s'</span>),</span><br><span class="line">        );</span><br><span class="line">        $insert_res = <span class="keyword">$this</span>-&gt;db_write-&gt;set($set_insert_info)-&gt;insert(<span class="string">'member_task_final_log'</span>);</span><br><span class="line">        <span class="keyword">if</span> ($insert_res) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建下个月的每日任务表</span></span><br><span class="line"><span class="comment">     * 每月25日执行一次</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">initTaskTableNextMonth</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"============begin initTaskTableNextMonth ============"</span>);</span><br><span class="line">        $month_day_count = date(<span class="string">'t'</span>, strtotime(<span class="string">'+1 month'</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"month_day_count:$month_day_count"</span>);</span><br><span class="line">        <span class="keyword">for</span> ($i = <span class="number">1</span>; $i &lt;= $month_day_count; $i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ($i &lt; <span class="number">10</span>) &#123;</span><br><span class="line">                $date_str = date(<span class="string">'Ym0'</span>, strtotime(<span class="string">'+1 month'</span>)) . $i;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                $date_str = date(<span class="string">'Ym'</span>, strtotime(<span class="string">'+1 month'</span>)) . $i;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"begin create table:&#123;$date_str&#125;"</span>);</span><br><span class="line">            $result = <span class="keyword">$this</span>-&gt;generateTableByDate($date_str);</span><br><span class="line">            <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"create result:&#123;$result&#125;"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"============finish initTaskTableNextMonth ============"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建每日任务表</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $date</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> bool</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">generateTableByDate</span><span class="params">($date)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">empty</span>($date)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $sql = <span class="string">"</span></span><br><span class="line"><span class="string">        CREATE TABLE `member_task_log_&#123;$date&#125;` (</span></span><br><span class="line"><span class="string">              `id` int(11) NOT NULL AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">              `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '完成任务用户id',</span></span><br><span class="line"><span class="string">              `task_id` int(11) NOT NULL DEFAULT '0' COMMENT '任务id',</span></span><br><span class="line"><span class="string">              `processed_reward_name` varchar(50) NOT NULL DEFAULT '' COMMENT '已获取的奖励名称（个性化的奖励名称）',</span></span><br><span class="line"><span class="string">              `finished_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '任务完成时间',</span></span><br><span class="line"><span class="string">              `create_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '创建时间',</span></span><br><span class="line"><span class="string">              PRIMARY KEY (`id`),</span></span><br><span class="line"><span class="string">              KEY `idx_user_id` (`user_id`),</span></span><br><span class="line"><span class="string">              KEY `idx_finished_time` (`finished_time`)</span></span><br><span class="line"><span class="string">            ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='用户日常任务完成日志';</span></span><br><span class="line"><span class="string">        "</span>;</span><br><span class="line">        $result = <span class="keyword">$this</span>-&gt;db_write-&gt;query($sql);</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/20/API设计最佳实践/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          API设计最佳实践
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/20/会员Plus开发笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">会员Plus开发笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

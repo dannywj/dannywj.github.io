@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>LNMP环境搭建实战 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前曾经使用过LNMP一键安装包，但是安装后的配置修改起来不是很方便。为了进一步熟悉LNMP架构的配置，今天重新一个组建一个组建的进行安装。P.S. 安装方式以apt-get方式进行 ubuntu环境准备首先安装好ubuntu环境，必要的软件，vim等工具安装完毕，接下来更新一下资源列表，保证我们后续的自动获取的是最新的。sudo apt-get -y update 更新源列表，保证源列表是最新的">
+<meta name="keywords" content="develop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LNMP环境搭建实战">
+<meta property="og:url" content="http://yoursite.com/2016/03/11/LNMP环境搭建实战/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="之前曾经使用过LNMP一键安装包，但是安装后的配置修改起来不是很方便。为了进一步熟悉LNMP架构的配置，今天重新一个组建一个组建的进行安装。P.S. 安装方式以apt-get方式进行 ubuntu环境准备首先安装好ubuntu环境，必要的软件，vim等工具安装完毕，接下来更新一下资源列表，保证我们后续的自动获取的是最新的。sudo apt-get -y update 更新源列表，保证源列表是最新的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LNMP环境搭建实战">
+<meta name="twitter:description" content="之前曾经使用过LNMP一键安装包，但是安装后的配置修改起来不是很方便。为了进一步熟悉LNMP架构的配置，今天重新一个组建一个组建的进行安装。P.S. 安装方式以apt-get方式进行 ubuntu环境准备首先安装好ubuntu环境，必要的软件，vim等工具安装完毕，接下来更新一下资源列表，保证我们后续的自动获取的是最新的。sudo apt-get -y update 更新源列表，保证源列表是最新的">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-LNMP环境搭建实战" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/11/LNMP环境搭建实战/" class="article-date">
+  	<time datetime="2016-03-11T02:48:46.000Z" itemprop="datePublished">2016-03-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LNMP环境搭建实战
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前曾经使用过LNMP一键安装包，但是安装后的配置修改起来不是很方便。为了进一步熟悉LNMP架构的配置，今天重新一个组建一个组建的进行安装。<br>P.S. 安装方式以<code>apt-get</code>方式进行</p>
+<h1 id="ubuntu环境准备"><a href="#ubuntu环境准备" class="headerlink" title="ubuntu环境准备"></a>ubuntu环境准备</h1><p>首先安装好ubuntu环境，必要的软件，vim等工具安装完毕，接下来更新一下资源列表，保证我们后续的自动获取的是最新的。<br><code>sudo apt-get -y update</code> 更新源列表，保证源列表是最新的。</p>
+<h1 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx -y</span><br></pre></td></tr></table></figure>
+<p>安装完毕后，Nginx的配置文件在/etc/nginx目录下。使用以下命令启动Nginx：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx start</span><br></pre></td></tr></table></figure></p>
+<p>以后修改过nginx的配置以后，需要验证是否有问题，可以使用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -t</span><br></pre></td></tr></table></figure></p>
+<p>来验证。正确会返回：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf test is successful</span><br></pre></td></tr></table></figure></p>
+<p><code>我们可以得到nginx的配置文件的路径</code></p>
+<h1 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server -y</span><br></pre></td></tr></table></figure>
+<p>我们可以使用以下命令登录MySQL：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure></p>
+<p>按提示输入root密码，就会进入MySQL的交互界面，说明已经安装成功。</p>
+<h1 id="安装PHP"><a href="#安装PHP" class="headerlink" title="安装PHP"></a>安装PHP</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y php5 php5-fpm php5-mysql</span><br></pre></td></tr></table></figure>
+<p>其中包含了php-fpm</p>
+<h1 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h1><h2 id="修改nginx配置文件"><a href="#修改nginx配置文件" class="headerlink" title="修改nginx配置文件"></a>修改nginx配置文件</h2><p><code>修改nginx默认配置文件：/etc/nginx/sites-available$ sudo vim default</code><br>主要配置server模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen 80 default_server;</span><br><span class="line">        listen [::]:80 default_server ipv6only=on;</span><br><span class="line"></span><br><span class="line">        root /usr/share/nginx/html;</span><br><span class="line">        index index.html index.htm;</span><br><span class="line"></span><br><span class="line">        # Make site accessible from http://localhost/</span><br><span class="line">        server_name localhost;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">                # First attempt to serve request as file, then</span><br><span class="line">                # as directory, then fall back to displaying a 404.</span><br><span class="line">                try_files $uri $uri/ =404;</span><br><span class="line">                # Uncomment to enable naxsi on this location</span><br><span class="line">                # include /etc/nginx/naxsi.rules</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">                fastcgi_pass unix:/var/run/php5-fpm.sock;  #此处需先检查php5-fpm的使用方式，否则报错502！！！！</span><br><span class="line">                fastcgi_index index.php;</span><br><span class="line">                fastcgi_param SCRIPT_FILENAME /var/www$fastcgi_script_name;</span><br><span class="line">                include /etc/nginx/fastcgi_params;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中的<code>fastcgi_pass</code>容易出错，这里主要就是看你的系统的php-fpm使用的是sock，还是9000端口。然后再nginx的配置里面吧解析php的方式改一下就好了。</p>
+<p>参考：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">之前使用ubuntu server 12.04.成功安装了LNMP，并且用得不错。</span><br><span class="line">然后我就在我得本机环境上安装了ubuntu 12.10 desktop版本。。</span><br><span class="line">按照我之前的一篇文章来安装LNMP。</span><br><span class="line">可是等我安装成功之后发现</span><br><span class="line">http://localhost能够正常出现 welcome to nginx 的画面，</span><br><span class="line">然后我就写了个php的探针文件，可是这下报错了。502.。。</span><br><span class="line">这下我就郁闷了。。。为什么呢？</span><br><span class="line">首先来让我们看看之前得配置。关于PHP一块的配置。</span><br><span class="line">location ~ \.php$ &#123; </span><br><span class="line">    try_files $uri =404; </span><br><span class="line">    fastcgi_pass 127.0.0.1:9000; </span><br><span class="line">    fastcgi_index index.php; </span><br><span class="line">    include fastcgi_params; </span><br><span class="line">&#125; </span><br><span class="line">问题其实出现在 fastcgi_pass得配置上面。</span><br><span class="line">在ubuntu 12.10安装了php5-fpm之后。我们可以去</span><br><span class="line">/etc/php5/fpm/pool.d/www.conf </span><br><span class="line">里面找到这样一条代码：</span><br><span class="line">listen = /var/run/php5-fpm.sock </span><br><span class="line">这个是使用unix得方式来使用php5-fpm得。</span><br><span class="line">这个时候。我们得php配置要改成</span><br><span class="line">location ~ \.php$ &#123; </span><br><span class="line">    fastcgi_pass unix:/var/run/php5-fpm.sock; </span><br><span class="line">    fastcgi_index index.php; </span><br><span class="line">    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; </span><br><span class="line">    include fastcgi_params; </span><br><span class="line">&#125; </span><br><span class="line">这里fastcgi_pass的地址要改成这个。。这样你的lnmp就正常了。</span><br><span class="line">总结：</span><br><span class="line">这里主要就是看你的系统的php-fpm使用的是sock，还是9000端口。然后再nginx的配置里面吧解析php的方式改一下就好了。</span><br></pre></td></tr></table></figure></p>
+<p>root字段的配置是代码存放的路径。</p>
+<h2 id="重启相关服务"><a href="#重启相关服务" class="headerlink" title="重启相关服务"></a>重启相关服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service php5-fpm restart </span><br><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
+<h2 id="调试代码"><a href="#调试代码" class="headerlink" title="调试代码"></a>调试代码</h2><p>mysql test:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line"><span class="comment">// 这里填写数据库的用户名和密码</span></span><br><span class="line">$username = <span class="string">"root"</span>;</span><br><span class="line">$password = <span class="string">"juewang"</span>;</span><br><span class="line"></span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"Connection failed: "</span> . $conn-&gt;connect_error);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Connected successfully"</span>;</span><br><span class="line"></span><br><span class="line">$sql=<span class="string">'select * from yule.userinfo'</span>;</span><br><span class="line">$re=$conn-&gt;query($sql);</span><br><span class="line">var_dump($re);</span><br></pre></td></tr></table></figure></p>
+<h1 id="memcache组建安装"><a href="#memcache组建安装" class="headerlink" title="memcache组建安装"></a>memcache组建安装</h1><h2 id="安装Memcache服务端"><a href="#安装Memcache服务端" class="headerlink" title="安装Memcache服务端"></a>安装Memcache服务端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install memcached</span><br></pre></td></tr></table></figure>
+<p>安装完Memcache服务端以后，我们需要启动该服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memcached -d -m 128 -p 11111 -u root</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装Memcache客户端（PHP5为示例）"><a href="#安装Memcache客户端（PHP5为示例）" class="headerlink" title="安装Memcache客户端（PHP5为示例）"></a>安装Memcache客户端（PHP5为示例）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install php5-memcache</span><br></pre></td></tr></table></figure>
+<p>安装完以后我们需要在php.ini里进行简单的配置,在末尾添加如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[Memcache]</span><br><span class="line">; 是否在遇到错误时透明地向其他服务器进行故障转移。</span><br><span class="line">memcache.allow_failover = On</span><br><span class="line">; 接受和发送数据时最多尝试多少个服务器，只在打开memcache.allow_failover时有效。memcache.max_failover_attempts = 20</span><br><span class="line">;数据将按照此值设定的块大小进行转移。此值越小所需的额外网络传输越多。</span><br><span class="line">; 如果发现无法解释的速度降低，可以尝试将此值增加到32768。</span><br><span class="line">memcache.chunk_size = 8192</span><br><span class="line">; 连接到memcached服务器时使用的默认TCP端口。</span><br><span class="line">memcache.default_port = 11111</span><br><span class="line">; 控制将key映射到server的策略。默认值”standard”表示使用先前版本的老hash策略。</span><br><span class="line">; 设为”consistent”可以允许在连接池中添加/删除服务器时不必重新计算key与server之间的映射关系。</span><br><span class="line">;memcache.hash_strategy = “standard”; 控制将key映射到server的散列函数。默认值”crc32″使用CRC32算法，而”fnv”则表示使用FNV-1a算法。</span><br><span class="line">; FNV-1a比CRC32速度稍低，但是散列效果更好。</span><br><span class="line">;memcache.hash_function = “crc32″</span><br></pre></td></tr></table></figure></p>
+<p>重启nginx</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(E_ALL);</span><br><span class="line">header(<span class="string">"Content-type: text/html; charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line">$mem = <span class="keyword">new</span> Memcache; <span class="comment">//创建Memcache对象</span></span><br><span class="line">$mem-&gt;connect(<span class="string">"127.0.0.1"</span>, <span class="number">11111</span>); <span class="comment">//连接Memcache服务器</span></span><br><span class="line"></span><br><span class="line">$val = <span class="string">'这是一个Memcache的测试.'</span>;</span><br><span class="line">$key = md5($val);</span><br><span class="line"></span><br><span class="line">$mem-&gt;set($key, $val, <span class="number">0</span>, <span class="number">120</span>); <span class="comment">//增加插入一条缓存，缓存时间为120s</span></span><br><span class="line"><span class="keyword">if</span>(($k = $mem-&gt;get($key)))&#123; <span class="comment">//判断是否获取到指定的key</span></span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'from cache:'</span>.$k;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'normal'</span>; <span class="comment">//这里我们在实际使用中就需要替换成查询数据库并创建缓存.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="MC客户端"><a href="#MC客户端" class="headerlink" title="MC客户端"></a>MC客户端</h2><p>Memcached有方便管理的客户端<br><code>http://www.junopen.com/memadmin/</code></p>
+<p>另外，平时自己也开发了一个简易的界面：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by PhpStorm.</span></span><br><span class="line"><span class="comment"> * User: YULORE-USER</span></span><br><span class="line"><span class="comment"> * Date: 14-8-25</span></span><br><span class="line"><span class="comment"> * Time: 下午12:34</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">$svckey=<span class="string">'SVCTrafficVioxFAegggkx0axss9OtmA'</span>;</span><br><span class="line">$svcname=<span class="string">'regulation'</span>;</span><br><span class="line">$svcsecret=<span class="string">'qGAaF5Wffhf1aigfWbHGcjnpXs7AviomQQm5wjB1qGuHqbNn24UWEilB0knNt1zjsCFfnr73zTmpuz2NVxJA6unxeRkxtk7c4f93ceb07699bb2508f9d4c37da1059a'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">require_once</span>(<span class="keyword">__DIR__</span> . <span class="string">"/../model/yulorepage.php"</span>);</span><br><span class="line">$yp = <span class="keyword">new</span> yulorepage($svckey, $svcname, $svcsecret);</span><br><span class="line">$result = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'clear_key'</span>]) &amp;&amp; $_POST[<span class="string">'clear_key'</span>] != <span class="keyword">null</span>) &#123;</span><br><span class="line">    $yp-&gt;memcache-&gt;delete($_POST[<span class="string">'clear_key'</span>]);</span><br><span class="line">    <span class="keyword">echo</span>(<span class="string">"&lt;script&gt;alert('clear success')&lt;/script&gt;"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'get_key'</span>]) &amp;&amp; $_POST[<span class="string">'get_key'</span>] != <span class="keyword">null</span>) &#123;</span><br><span class="line">    $result = $yp-&gt;memcache-&gt;get($_POST[<span class="string">'get_key'</span>]);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">empty</span>($result)) &#123;</span><br><span class="line">        $result = <span class="string">'&lt;span style="color:red"&gt;result is null&lt;/span&gt;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'clear_all_flag'</span>]) &amp;&amp; $_POST[<span class="string">'clear_all_flag'</span>] != <span class="keyword">null</span> &amp;&amp; $_POST[<span class="string">'clear_all_flag'</span>] == <span class="string">'true'</span>) &#123;</span><br><span class="line">    $yp-&gt;memcache-&gt;flush();</span><br><span class="line">    <span class="keyword">echo</span>(<span class="string">"&lt;script&gt;alert('clear all success')&lt;/script&gt;"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Memcached clear tool&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h2&gt;Memcached clear tool&lt;/h2&gt;</span><br><span class="line">&lt;form id=<span class="string">"memform"</span> action=<span class="string">"index.php"</span> method=<span class="string">"POST"</span>&gt;</span><br><span class="line">    &lt;p&gt;Clear mem by key&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">        key:&lt;input name=<span class="string">"clear_key"</span> type=<span class="string">"text"</span>/&gt; &lt;input type=<span class="string">"submit"</span> value=<span class="string">"clear"</span>&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">        &lt;span id=<span class="string">"clearresult"</span> style=<span class="string">"color:red"</span>&gt;&lt;/span&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;p&gt;Clear all memcached&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;&lt;input type=<span class="string">"button"</span> name=<span class="string">"clear_all"</span> value=<span class="string">"clear all"</span> onclick=<span class="string">"clearAll();"</span>&gt;</span><br><span class="line">        &lt;input type=<span class="string">"hidden"</span> name=<span class="string">"clear_all_flag"</span> id=<span class="string">"clear_all_flag"</span>&gt;</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;p&gt;Get mem by key&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;key:&lt;input type=<span class="string">"text"</span> name=<span class="string">"get_key"</span>/&gt; &lt;input type=<span class="string">"submit"</span> value=<span class="string">"show detail"</span>&gt;&lt;/p&gt;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">    &lt;div id=<span class="string">"info"</span> style=<span class="string">"font-size: 11px;"</span>&gt;</span><br><span class="line">        <span class="meta">&lt;?php</span> <span class="keyword">echo</span> $result; <span class="meta">?&gt;</span></span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">clearAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!confirm(<span class="string">'are you sure?'</span>)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        document.getElementById(<span class="string">'clear_all_flag'</span>).value = <span class="string">'true'</span>;</span><br><span class="line">        document.getElementById(<span class="string">'memform'</span>).submit();</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>各个模块需要通过配置文件关联起来，才能使nginx和php协同工作，需要多尝试。后续会补充redis的配置进来。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https://mos.meituan.com/library/24/how-to-install-lnmp-on-ubuntu/</span><br><span class="line">http://www.cnblogs.com/phppear/archive/2012/11/08/2760030.html</span><br><span class="line">http://leexiaobo.blog.51cto.com/2851883/1074685</span><br><span class="line"></span><br><span class="line">http://blog.csdn.net/scelong/article/details/7245343</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/23/WAMP工作环境配置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          WAMP工作环境配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/27/节前也疯狂/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">节前也疯狂</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

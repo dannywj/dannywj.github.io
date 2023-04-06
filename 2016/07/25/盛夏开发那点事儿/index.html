@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>盛夏开发那点事儿 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="心静也不凉话说今年北京的天气真是罕见的热，闷热+暴雨交织着，让原本浮躁的心更加的躁动，但是总结依旧要坚持，只有这样，才能让点滴的积累拥有质变。 最近接手了个性化清单的需求，十分复杂，开发完成之际，回顾一下，也有些滋味。 需求方面需求的把控说不通的逻辑（复杂逻辑）一定是不合理的。清洗的逻辑一定简单明了，需要进行逻辑的梳理和简化。 这部分不仅需要产品经理来简化，更需要开发人员进行一定的思考和总结，提供">
+<meta name="keywords" content="develop,work">
+<meta property="og:type" content="article">
+<meta property="og:title" content="盛夏开发那点事儿">
+<meta property="og:url" content="http://yoursite.com/2016/07/25/盛夏开发那点事儿/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="心静也不凉话说今年北京的天气真是罕见的热，闷热+暴雨交织着，让原本浮躁的心更加的躁动，但是总结依旧要坚持，只有这样，才能让点滴的积累拥有质变。 最近接手了个性化清单的需求，十分复杂，开发完成之际，回顾一下，也有些滋味。 需求方面需求的把控说不通的逻辑（复杂逻辑）一定是不合理的。清洗的逻辑一定简单明了，需要进行逻辑的梳理和简化。 这部分不仅需要产品经理来简化，更需要开发人员进行一定的思考和总结，提供">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/dannywj/dannywj.github.io/raw/raw/source/statics/special.jpg">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="盛夏开发那点事儿">
+<meta name="twitter:description" content="心静也不凉话说今年北京的天气真是罕见的热，闷热+暴雨交织着，让原本浮躁的心更加的躁动，但是总结依旧要坚持，只有这样，才能让点滴的积累拥有质变。 最近接手了个性化清单的需求，十分复杂，开发完成之际，回顾一下，也有些滋味。 需求方面需求的把控说不通的逻辑（复杂逻辑）一定是不合理的。清洗的逻辑一定简单明了，需要进行逻辑的梳理和简化。 这部分不仅需要产品经理来简化，更需要开发人员进行一定的思考和总结，提供">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dannywj/dannywj.github.io/raw/raw/source/statics/special.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-盛夏开发那点事儿" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/25/盛夏开发那点事儿/" class="article-date">
+  	<time datetime="2016-07-25T03:28:30.000Z" itemprop="datePublished">2016-07-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      盛夏开发那点事儿
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/work/">work</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="心静也不凉"><a href="#心静也不凉" class="headerlink" title="心静也不凉"></a>心静也不凉</h1><p>话说今年北京的天气真是罕见的热，闷热+暴雨交织着，让原本浮躁的心更加的躁动，但是总结依旧要坚持，只有这样，才能让点滴的积累拥有质变。</p>
+<p>最近接手了个性化清单的需求，十分复杂，开发完成之际，回顾一下，也有些滋味。</p>
+<h1 id="需求方面"><a href="#需求方面" class="headerlink" title="需求方面"></a>需求方面</h1><h2 id="需求的把控"><a href="#需求的把控" class="headerlink" title="需求的把控"></a>需求的把控</h2><p>说不通的逻辑（复杂逻辑）一定是不合理的。清洗的逻辑一定简单明了，需要进行逻辑的梳理和简化。</p>
+<p>这部分不仅需要产品经理来简化，更需要开发人员进行一定的思考和总结，提供给产品经理一系列的意见和建议。</p>
+<p>A.产品形态上的（如别家的做法是xx的）<br>B.技术层面的（某种功能如果实现会严重影响性能，会无法实现分页等）</p>
+<h2 id="产品分析的时候要考虑是否对性能有影响"><a href="#产品分析的时候要考虑是否对性能有影响" class="headerlink" title="产品分析的时候要考虑是否对性能有影响"></a>产品分析的时候要考虑是否对性能有影响</h2><ol>
+<li>考虑分页加载的事宜（实现和难易度）</li>
+<li>考虑加载性能问题（尤其是首页）</li>
+<li>对于开发资源未给出会影响开发进度的情况，要提出，由项目经理跟进，催促，不要因此影响开发进度。</li>
+</ol>
+<h1 id="开发的构思和设计"><a href="#开发的构思和设计" class="headerlink" title="开发的构思和设计"></a>开发的构思和设计</h1><h2 id="基本设计理念"><a href="#基本设计理念" class="headerlink" title="基本设计理念"></a>基本设计理念</h2><ol>
+<li>大的接口逻辑可以考虑进行拆分，否则逻辑过于复杂，难以维护。</li>
+<li>DB设计 重复的子主题可以考虑使用关联列的形式实现。（增加int型关联字段，主表和明细表用此字段进行关联）</li>
+<li>后台与前台的设计要统一，否则容易出问题（周，月的划分）</li>
+<li>历史记录的清除机制需要考虑，否则随着时间增长会越来越多，一定要有清除的机制和触发点。</li>
+<li>循环操作要警惕！里面有curl等耗时操作一定要禁止，想其他办法提前获取到资源。</li>
+<li>资源信息获取前置，如图片宽高信息。</li>
+<li>老数据是做数据清洗还是逻辑控制？数据清洗有成本，脚本+旧入口关闭。程序中转换控制相对成本较小，且易于操作。</li>
+</ol>
+<h2 id="关于面向对象"><a href="#关于面向对象" class="headerlink" title="关于面向对象"></a>关于面向对象</h2><ul>
+<li>[ ] 尝试使用面向对象方式+设计模式进行功能的设计，尤其是大的功能模块，有利于扩展和维护。自定义类参考：<a href="http://codeigniter.org.cn/user_guide/general/creating_libraries.html" target="_blank" rel="noopener">CI文档——创建类库</a></li>
+<li><p>[ ] 私有成员如包含CI框架，var_dump类成员的时候会打印出来好多CI的属性，可以尝试在内部实例化。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 设置主题详情 read from DB</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setContentInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       $CI = &amp;get_instance();</span><br><span class="line">       $CI-&gt;load-&gt;model(<span class="string">'listing_model'</span>, <span class="string">'mListing'</span>);</span><br><span class="line">       $result = $CI-&gt;mListing-&gt;getThemeContent(<span class="keyword">$this</span>-&gt;_relate_flag);</span><br><span class="line">       $CI-&gt;load-&gt;library(<span class="string">'special/themecontent'</span>);</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (is_array($result)) &#123;</span><br><span class="line">           $count = <span class="number">0</span>;</span><br><span class="line">           <span class="keyword">foreach</span> ($result <span class="keyword">as</span> $item) &#123;</span><br><span class="line">               <span class="keyword">if</span> ($count &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               $content = <span class="keyword">new</span> ThemeContent();</span><br><span class="line">               $content-&gt;setId($item[<span class="string">'id'</span>]);</span><br><span class="line">               $content-&gt;setContentTitle($item[<span class="string">'content_title'</span>]);</span><br><span class="line">               $content-&gt;setCoverPic($item[<span class="string">'cover_pic'</span>], $item[<span class="string">'pic_w'</span>], $item[<span class="string">'pic_h'</span>]);</span><br><span class="line">               $content-&gt;setTargetUrl($item[<span class="string">'target_url'</span>]);</span><br><span class="line">               $content-&gt;setSource($item[<span class="string">'source'</span>]);</span><br><span class="line">               <span class="keyword">$this</span>-&gt;_content_info[] = $content;</span><br><span class="line">               $count++;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>[ ] 上述情景如果类对象内需要多处使用CI内置对象，可以采用<strong>变通</strong>的方式来进行。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象类内部定义私有属性CI，并在构造函数中初始化</span></span><br><span class="line"><span class="keyword">private</span> $_CI;</span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">$this</span>-&gt;_CI=&amp;get_instance();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加一个公共方法，移除CI对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">unsetCI</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   <span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;_CI);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////////</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用方自定义打印函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">var_dump_obj</span><span class="params">($obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (method_exists($obj, <span class="string">'unsetCI'</span>)) &#123;</span><br><span class="line">        $obj-&gt;unsetCI();</span><br><span class="line">    &#125;</span><br><span class="line">    var_dump($obj);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line">$a = <span class="keyword">array</span>(<span class="string">'key'</span> =&gt; <span class="string">'test'</span>);</span><br><span class="line"><span class="keyword">$this</span>-&gt;var_dump_obj($a);</span><br><span class="line"><span class="keyword">$this</span>-&gt;var_dump_obj($theme);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>[ ] 没有完全的面向对象<br>在进行类的划分过程中，由于涉及文件较多，本次没有完全将各个主体进行单独类的定义，还是出现了部分if else的情况（swich case），继承的实现没有更好的理解。<br>本次仅仅是尝试着在CI框架中引入自定义类来进行的。</p>
+</li>
+</ul>
+<h1 id="代码实现说明"><a href="#代码实现说明" class="headerlink" title="代码实现说明"></a>代码实现说明</h1><h2 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h2><h3 id="controller"><a href="#controller" class="headerlink" title="controller"></a>controller</h3><p>入口，参数验证，业务逻辑处理，类方法调用，结果汇总，输出</p>
+<h3 id="class"><a href="#class" class="headerlink" title="class"></a>class</h3><p>模型定义，自身方法实现</p>
+<h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><p>DB数据获取</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 场景主题类</span></span><br><span class="line"><span class="comment"> * Created by DannyWang</span></span><br><span class="line"><span class="comment"> * wangjue<span class="doctag">@mia</span>.com</span></span><br><span class="line"><span class="comment"> * 2016/7/14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Theme</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_id;</span><br><span class="line">    <span class="keyword">private</span> $_title;</span><br><span class="line">    <span class="keyword">private</span> $_subtitle;</span><br><span class="line">    <span class="keyword">private</span> $_icon;</span><br><span class="line">    <span class="keyword">private</span> $_type;</span><br><span class="line">    <span class="keyword">private</span> $_relate_flag;</span><br><span class="line">    <span class="keyword">private</span> $_match_age;</span><br><span class="line">    <span class="keyword">private</span> $_age_start;</span><br><span class="line">    <span class="keyword">private</span> $_age_end;</span><br><span class="line">    <span class="keyword">private</span> $_content_info = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> SCENE_TYPE_BIRTHDAY = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> SCENE_TYPE_SPECIAL = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">const</span> SCENE_TYPE_NORMAL = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">const</span> SCENE_TYPE_BORN = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setId</span><span class="params">($id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_id = $id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $title</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setTitle</span><span class="params">($title)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_title = $title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSubtitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_subtitle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $subtitle</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSubtitle</span><span class="params">($subtitle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_subtitle = $subtitle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getIcon</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_icon;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $icon</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setIcon</span><span class="params">($icon)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_icon = IMAGE_URL . $icon;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $type</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setType</span><span class="params">($type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_type = $type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getMatchAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_match_age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $match_age</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setMatchAge</span><span class="params">($match_age)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_match_age = $match_age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAgeStart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_age_start;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $age_start</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAgeStart</span><span class="params">($age_start)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_age_start = $age_start;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getAgeEnd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_age_end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $age_end</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setAgeEnd</span><span class="params">($age_end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_age_end = $age_end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置主题详情 read from DB</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setContentInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $CI = &amp;get_instance();</span><br><span class="line">        $CI-&gt;load-&gt;model(<span class="string">'listing_model'</span>, <span class="string">'mListing'</span>);</span><br><span class="line">        $result = $CI-&gt;mListing-&gt;getThemeContent(<span class="keyword">$this</span>-&gt;_relate_flag);</span><br><span class="line">        $CI-&gt;load-&gt;library(<span class="string">'special/themecontent'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (is_array($result)) &#123;</span><br><span class="line">            $count = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">foreach</span> ($result <span class="keyword">as</span> $item) &#123;</span><br><span class="line">                <span class="keyword">if</span> ($count &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                $content = <span class="keyword">new</span> ThemeContent();</span><br><span class="line">                $content-&gt;setId($item[<span class="string">'id'</span>]);</span><br><span class="line">                $content-&gt;setContentTitle($item[<span class="string">'content_title'</span>]);</span><br><span class="line">                $content-&gt;setCoverPic($item[<span class="string">'cover_pic'</span>], $item[<span class="string">'pic_w'</span>], $item[<span class="string">'pic_h'</span>]);</span><br><span class="line">                $content-&gt;setTargetUrl($item[<span class="string">'target_url'</span>]);</span><br><span class="line">                $content-&gt;setSource($item[<span class="string">'source'</span>]);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;_content_info[] = $content;</span><br><span class="line">                $count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加主题内容项</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $content_obj</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addContentItem</span><span class="params">($content_obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_content_info[] = $content_obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getRelateFlag</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_relate_flag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $relate_flag</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setRelateFlag</span><span class="params">($relate_flag)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_relate_flag = $relate_flag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回格式化数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">toArray</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        $content_info_arr = <span class="keyword">array</span>();</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;_content_info) &#123;</span><br><span class="line">            <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;_content_info <span class="keyword">as</span> $item) &#123;</span><br><span class="line">                $content_info_arr[] = $item-&gt;toArray();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'id'</span> =&gt; <span class="keyword">$this</span>-&gt;_id,</span><br><span class="line">            <span class="string">'title'</span> =&gt; <span class="keyword">$this</span>-&gt;_title,</span><br><span class="line">            <span class="string">'subtitle'</span> =&gt; <span class="keyword">$this</span>-&gt;_subtitle,</span><br><span class="line">            <span class="string">'icon'</span> =&gt; <span class="keyword">$this</span>-&gt;_icon,</span><br><span class="line">            <span class="string">'type'</span> =&gt; <span class="keyword">$this</span>-&gt;_type,</span><br><span class="line">            <span class="string">'detail_info'</span> =&gt; $content_info_arr,</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 场景主题内容类</span></span><br><span class="line"><span class="comment"> * Created by DannyWang</span></span><br><span class="line"><span class="comment"> * wangjue<span class="doctag">@mia</span>.com</span></span><br><span class="line"><span class="comment"> * 2016/7/14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThemeContent</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_id;</span><br><span class="line">    <span class="keyword">private</span> $_content_title;</span><br><span class="line">    <span class="keyword">private</span> $_cover_pic;</span><br><span class="line">    <span class="keyword">private</span> $_target_url;</span><br><span class="line">    <span class="keyword">private</span> $_source;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setId</span><span class="params">($id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_id = $id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getContentTitle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_content_title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $content_title</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setContentTitle</span><span class="params">($content_title)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_content_title = $content_title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getCoverPic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_cover_pic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $cover_pic</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setCoverPic</span><span class="params">($cover_pic, $pic_w, $pic_h)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_cover_pic = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'url'</span> =&gt; IMAGE_URL . $cover_pic,</span><br><span class="line">            <span class="string">'width'</span> =&gt; $pic_w,</span><br><span class="line">            <span class="string">'height'</span> =&gt; $pic_h,</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTargetUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_target_url;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $target_url</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setTargetUrl</span><span class="params">($target_url)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_target_url = $target_url;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed $source</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSource</span><span class="params">($source)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_source = $source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回格式化数组</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">toArray</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'id'</span> =&gt; <span class="keyword">$this</span>-&gt;_id,</span><br><span class="line">            <span class="string">'content_title'</span> =&gt; <span class="keyword">$this</span>-&gt;_content_title,</span><br><span class="line">            <span class="string">'cover_pic'</span> =&gt; <span class="keyword">$this</span>-&gt;_cover_pic,</span><br><span class="line">            <span class="string">'target_url'</span> =&gt; <span class="keyword">$this</span>-&gt;_target_url,</span><br><span class="line">            <span class="string">'source'</span> =&gt; <span class="keyword">$this</span>-&gt;_source,</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 简单场景主题类</span></span><br><span class="line"><span class="comment"> * Created by DannyWang</span></span><br><span class="line"><span class="comment"> * wangjue<span class="doctag">@mia</span>.com</span></span><br><span class="line"><span class="comment"> * 2016/7/14</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleTheme</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_status_info;</span><br><span class="line">    <span class="keyword">private</span> $_pic_info;</span><br><span class="line">    <span class="keyword">private</span> $_target_url;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * SimpleTheme constructor.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getStatusInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_status_info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getPicInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_pic_info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getTargetUrl</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_target_url;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据类型设置简单场景信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $type</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> bool</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setSimpleThemeByStatus</span><span class="params">($listing_status)</span> </span>&#123;</span><br><span class="line">        $CI = &amp;get_instance();</span><br><span class="line">        $CI-&gt;config-&gt;load(<span class="string">"listing_config"</span>);</span><br><span class="line">        $result = $CI-&gt;config-&gt;item(<span class="string">'simple_theme'</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>($result[$listing_status])) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_status_info = $result[$listing_status][<span class="string">'rec_title'</span>];</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_pic_info = IMAGE_URL . $result[$listing_status][<span class="string">'rec_pic'</span>];</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_target_url = $result[$listing_status][<span class="string">'target_url'</span>];</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="业务流程"><a href="#业务流程" class="headerlink" title="业务流程"></a>业务流程</h1><p> <img src="https://raw.githubusercontent.com/dannywj/dannywj.github.io/raw/raw/source/statics/special.jpg" alt="业务流程图"></p>
+<h1 id="好的需求文档"><a href="#好的需求文档" class="headerlink" title="好的需求文档"></a>好的需求文档</h1><ol>
+<li>一定有背景说明，否则需求熟悉和理解阶段很难进入。</li>
+<li>更新后增加修改历史或修改的文字高亮。</li>
+<li>每次开会后将修改的信息及时反映在文档中，开会时需文字记录。</li>
+</ol>
+<h1 id="需要注意的点"><a href="#需要注意的点" class="headerlink" title="需要注意的点"></a>需要注意的点</h1><ol>
+<li>数据获取时间临界值的判断，最好加上=（&lt;=） date判断</li>
+<li>visio流程图工具输出打印尺寸（导出JPG时）</li>
+</ol>
+<h1 id="需要改进"><a href="#需要改进" class="headerlink" title="需要改进"></a>需要改进</h1><h2 id="组内沟通"><a href="#组内沟通" class="headerlink" title="组内沟通"></a>组内沟通</h2><ol>
+<li>公共方法的实现（如涉及同一个模块）</li>
+<li>命名的统一，DB/API/文档的命名要一致，英文名称要斟酌。</li>
+</ol>
+<h2 id="技术实现"><a href="#技术实现" class="headerlink" title="技术实现"></a>技术实现</h2><ol>
+<li>对于面向对象继承的理解不够深入，不同的主题应该是继承基类并分别实现自己不同的方法才是更理想的设计方式。</li>
+<li>controller和model的比重问题值得商榷，但是理想的方式的均比较轻量级，具体实现放入类中。可以考虑在library中<strong>增加一个业务逻辑类BusinessClass</strong>，controller中只做参数验证和BusinessClass类的调用及结果输出。model中主要做DB的CURD操作。<strong>BusinessClass中包含业务逻辑及对model中方法的调用</strong>。</li>
+<li>自定义类中对属性有多个set()方法，可以考虑使用<strong>链式调用</strong>方式优雅的实现。具体参考《PHP对象方法链式调用》一文。</li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/29/设计模式那点事儿——建造者模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式那点事儿——建造者模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/02/python学起来/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python学起来</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

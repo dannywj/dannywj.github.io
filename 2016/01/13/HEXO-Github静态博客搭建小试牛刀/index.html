@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>HEXO+Github静态博客搭建小试牛刀 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="缘起最近无意间看到了nodejs的火爆已经成为前后端通吃的一个技术了，之前也小研究过一些，今天想从另一个方面使用一下它的“功能”，玩一玩这个神奇的技术。 查了一些资料，github支持了用户发布一些静态资源在上面，用于自己的博客啊或者个人主页之类的。参考了一些前人的作品，发现了基于nodejs的一个框架 HEXO 于是开始了一些尝试，准备用此框架来生成一个自己的技术博客。 准备工作本着简单实用，所">
+<meta name="keywords" content="develop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HEXO+Github静态博客搭建小试牛刀">
+<meta property="og:url" content="http://yoursite.com/2016/01/13/HEXO-Github静态博客搭建小试牛刀/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="缘起最近无意间看到了nodejs的火爆已经成为前后端通吃的一个技术了，之前也小研究过一些，今天想从另一个方面使用一下它的“功能”，玩一玩这个神奇的技术。 查了一些资料，github支持了用户发布一些静态资源在上面，用于自己的博客啊或者个人主页之类的。参考了一些前人的作品，发现了基于nodejs的一个框架 HEXO 于是开始了一些尝试，准备用此框架来生成一个自己的技术博客。 准备工作本着简单实用，所">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HEXO+Github静态博客搭建小试牛刀">
+<meta name="twitter:description" content="缘起最近无意间看到了nodejs的火爆已经成为前后端通吃的一个技术了，之前也小研究过一些，今天想从另一个方面使用一下它的“功能”，玩一玩这个神奇的技术。 查了一些资料，github支持了用户发布一些静态资源在上面，用于自己的博客啊或者个人主页之类的。参考了一些前人的作品，发现了基于nodejs的一个框架 HEXO 于是开始了一些尝试，准备用此框架来生成一个自己的技术博客。 准备工作本着简单实用，所">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-HEXO-Github静态博客搭建小试牛刀" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/13/HEXO-Github静态博客搭建小试牛刀/" class="article-date">
+  	<time datetime="2016-01-13T08:44:22.000Z" itemprop="datePublished">2016-01-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      HEXO+Github静态博客搭建小试牛刀
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>最近无意间看到了nodejs的火爆已经成为前后端通吃的一个技术了，之前也小研究过一些，今天想从另一个方面使用一下它的“功能”，玩一玩这个神奇的技术。</p>
+<p>查了一些资料，github支持了用户发布一些静态资源在上面，用于自己的博客啊或者个人主页之类的。参考了一些前人的作品，发现了基于nodejs的一个框架 <strong>HEXO</strong> 于是开始了一些尝试，准备用此框架来生成一个自己的技术博客。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>本着简单实用，所有的操作都是在windows平台上来完成的。</p>
+<h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><p><em>一句话带过</em>：官网下载exe安装包直接安装即可（可能需要配置环境变量）</p>
+<h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><p><em>一句话带过</em>：下载git包安装，有gitbash 即可（不是小乌龟客户端）</p>
+<h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><p>npm是nodejs的第三方包管理器，只需要配置好json文件，就可以下载制定版本的nodejs第三方库，非常方便。下面的HEXO就是通过npm的方式得到的。</p>
+<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><p><em>一句话带过</em>：官网：<a href="http://hexo.io/" target="_blank" rel="noopener">https://hexo.io/</a>有安装和配置简介。</p>
+<h2 id="hexo插件"><a href="#hexo插件" class="headerlink" title="hexo插件"></a>hexo插件</h2><p><em>一句话带过</em>：由于hexo需要使用部署，项目生成，服务器模拟等功能，需要安装一些插件来辅助操作。插件安装在了项目目录的：node_modules文件夹下。</p>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>选择hexo的一个重要的原因上github上有很多基于此的主题，使自己的网站看起来与众不同又可以自由定制。</p>
+<h2 id="github-pages"><a href="#github-pages" class="headerlink" title="github pages"></a>github pages</h2><p>github账号就不用说了，肯定得有。但是在github上托管的项目不是每一个都能成为博客的。必须要建立一个特定名字的项目<br><strong>github用户名.github.io</strong> 这样的格式，在项目配置标签页里有博客设置的界面。<br>其中，官方也提供了一些内置的模板供选择。</p>
+<h1 id="环境配置-amp-调试"><a href="#环境配置-amp-调试" class="headerlink" title="环境配置&amp;调试"></a>环境配置&amp;调试</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br><span class="line">$ hexo init blog</span><br><span class="line">$ cd blog</span><br><span class="line">$ npm install</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>首先就是使用默认的模板+hello world默认博文来演示。遇到的一个坑爹的困难就是hexo初始化及生成完毕以后，在本地无法运行。<br>后来查到的原因是hexo server默认使用4000端口，而自己电脑的4000端口被福昕阅读器的一个进程给占用了。。！而且结束不掉！<br>索性，根据文档，换个端口呗</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s -p 5000 #指定使用5000端口来演示</span><br></pre></td></tr></table></figure>
+<p><a href="http://localhost:5000" target="_blank" rel="noopener">http://localhost:5000</a> Success!<br>非常激动，调试成功。</p>
+<p>网站基本的配置都在根目录下：_config.yml 文件里<br>yml的文件格式冒号后面得空一个格。。好吧。</p>
+<h1 id="主题配置-amp-修改"><a href="#主题配置-amp-修改" class="headerlink" title="主题配置&amp;修改"></a>主题配置&amp;修改</h1><p>主题的配置只需要将喜欢的主题clone到根目录下面的theme文件夹下，然后修改一下配置文件的theme属性，指定成clone的文件夹名称，重新生成，server一下即可。</p>
+<p>关于这个主题，主题内的配置需要在主题文件夹里面的_config.yml文件中修改。如修改头像，分类，个人描述，分享链接等等。</p>
+<p>另外，如果主题包里有多个语言，需要在网站的总配置文件里配置语言，即language目录的文件名字 如：zh-CN</p>
+<h1 id="HEXO常用命令"><a href="#HEXO常用命令" class="headerlink" title="HEXO常用命令"></a>HEXO常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new &quot;新建文章&quot; #新建文章</span><br><span class="line">$ hexo g #生成</span><br><span class="line">$ hexo s -p xxxx #本地部署</span><br><span class="line">$ hexo d #发布到github</span><br></pre></td></tr></table></figure>
+<h1 id="github部署"><a href="#github部署" class="headerlink" title="github部署"></a>github部署</h1><p>部署这块也踩了不少坑，首先是配置，网上的教程可能过时了，还是得以官网的说明为准：<br>有以下几个配置项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &lt;git path&gt;</span><br><span class="line">  #branch: master 可选</span><br><span class="line">  message: add blog #提交注释</span><br></pre></td></tr></table></figure></p>
+<p>其中的repo的格式弄了半天 应该是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://&lt;username&gt;:&lt;password&gt;@github.com/&lt;username&gt;/&lt;repository-name&gt;</span><br></pre></td></tr></table></figure>
+<p>这样的<br>哎~</p>
+<h1 id="小插曲——instagram影集集成"><a href="#小插曲——instagram影集集成" class="headerlink" title="小插曲——instagram影集集成"></a>小插曲——instagram影集集成</h1><p>主题里集成了一个引用instagram的模块，自己也有照片在instagram上，折腾了一下。<br>遇到几个问题：<br>1.漏引了jquery，后来自己加上了。<br>2.需要申请instagram的开发者资格，注册应用，获取clientid<br>3.sandbox应用默认有协议不允许访问资源，需要手工取消。<br>4.由于没有正式申请应用，可能没有永久使用照片接口的权限。因此手工生成了access token，将地址写死在了js文件里。。<br>5.需要翻墙</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">OAUTH授权信息：</span><br><span class="line">Successfully registered &apos;DannyBlog&apos;</span><br><span class="line">DannyBlog</span><br><span class="line">Client Info</span><br><span class="line">Client ID 	4f5494bc5c614f188fa657427ae78b48</span><br><span class="line">Client Secret 	f0957e6831f04bb6a7dxxxxxxx</span><br><span class="line">Website URL 	http://dannywj.github.io/</span><br><span class="line">Redirect URI 	http://dannywj.github.io/</span><br><span class="line">Support Email 	dannywjwj@gmail.com</span><br><span class="line"></span><br><span class="line">手动换取token：</span><br><span class="line">https://instagram.com/oauth/authorize/?client_id=4f5494bc5c614f188fa657427ae78b48&amp;redirect_uri=http://dannywj.github.io/&amp;response_type=token</span><br><span class="line"></span><br><span class="line">access_token=2003826149.4f5494b.06fd5c9c7844444da321f185d52xxxx</span><br><span class="line"></span><br><span class="line">获取照片数据：</span><br><span class="line">写死在主题包的js文件里</span><br><span class="line">https://api.instagram.com/v1/users/2003826149/media/recent/?access_token=2003826149.4f5494b.06fd5c9c7844444da321f185d52xxxx</span><br></pre></td></tr></table></figure>
+<h1 id="说点别的"><a href="#说点别的" class="headerlink" title="说点别的"></a>说点别的</h1><p>经过一系列的折腾，终于成功部署上去了。虽然真正没有写几行代码，但是这个过程还是收获了很多的，熟悉了一些命令，进行了一些测试，在解决问题的时候需要进行一些思考，也许这个问题不仅仅是这个项目遇到的，可能是另外的问题，无疑锻炼了自己解决问题，搜索答案的能力。</p>
+<p>而且，这个系统用来写博客，可以方便的跟踪每个版本的变化。</p>
+<h1 id="日常发布-amp-环境重现"><a href="#日常发布-amp-环境重现" class="headerlink" title="日常发布&amp;环境重现"></a>日常发布&amp;环境重现</h1><ol>
+<li>git clone项目</li>
+<li>切换分支到raw</li>
+<li>在raw中执行hexo -g</li>
+<li>根据报错内容，安装缺失的hexo组件</li>
+<li>raw为发布分支，master为显示分支</li>
+</ol>
+<p>npm install hexo –save （可能导致报错）</p>
+<p>安装Hexo缺失插件（批量复制粘贴）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-deployer-heroku --save</span><br><span class="line">npm install hexo-deployer-rsync --save</span><br><span class="line">npm install hexo-deployer-openshift --save</span><br><span class="line"></span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-renderer-stylus@0.2 --save</span><br><span class="line">npm install hexo-generator-feed@1 --save</span><br><span class="line">npm install hexo-generator-sitemap@1 --save</span><br><span class="line">npm install hexo-renderer-marked@0.2 --save</span><br><span class="line">http://www.chinaz.com/web/2015/1016/458004.shtml</span><br></pre></td></tr></table></figure></p>
+<p>如果显示的是正常网页，则说明没有错误，但是如果是这样的：</p>
+<p>&lt;%- partial(‘_partial/head’) %&gt;<br>&lt;%- partial(‘_partial/header’) %&gt;<br>&lt;%- body %&gt;<br>&lt;% if (theme.sidebar &amp;&amp; theme.sidebar !== ‘bottom’){ %&gt; &lt;%- partial(‘_partial/sidebar’) %&gt; &lt;% } %&gt;<br>&lt;%- partial(‘_partial/footer’) %&gt;<br>&lt;%- partial(‘_partial/mobile-nav’) %&gt; &lt;%- partial(‘_partial/after-footer’) %&gt;</p>
+<p>这说明服务器解析错误，解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-ejs --save</span><br><span class="line">npm install hexo-renderer-stylus --save</span><br><span class="line">npm install hexo-renderer-marked --save</span><br></pre></td></tr></table></figure></p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="http://ijiaober.github.io/categories/hexo/" target="_blank" rel="noopener">http://ijiaober.github.io/categories/hexo/</a><br><a href="http://www.zhihu.com/question/24422335" target="_blank" rel="noopener">http://www.zhihu.com/question/24422335</a><br><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia</a><br><a href="http://stackoverflow.com/questions/20871549/error-when-push-commits-with-github-fatal-could-not-read-username" target="_blank" rel="noopener">http://stackoverflow.com/questions/20871549/error-when-push-commits-with-github-fatal-could-not-read-username</a><br><a href="http://www.chinaz.com/web/2015/1016/458004.shtml" target="_blank" rel="noopener">http://www.chinaz.com/web/2015/1016/458004.shtml</a><br><a href="https://blog.csdn.net/u012366161/article/details/42059813" target="_blank" rel="noopener">https://blog.csdn.net/u012366161/article/details/42059813</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/27/左连接数据结果增多是怎么回事/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          左连接数据结果增多是怎么回事
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/13/PHP代码规范/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">PHP代码规范</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

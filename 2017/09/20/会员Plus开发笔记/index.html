@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>会员Plus开发笔记 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Plus业务简介经过一个多月的封闭开发，会员Plus项目终于上线了。回顾整个开发过程，虽然艰辛，但还是收获了不少东西。 Plus是在电商项目基础上引入的身份特权，拥有plus身份的用户可以享受自用省钱，分享赚钱等利益，同时推荐新用户可以升级经理或合伙人。 为开发Plus项目，API重新部署了一套服务端接口（PlusAPI）做为原API的一个服务化接口，供API/Wap端进行内网调用。 服务端调用模">
+<meta name="keywords" content="develop,work">
+<meta property="og:type" content="article">
+<meta property="og:title" content="会员Plus开发笔记">
+<meta property="og:url" content="http://yoursite.com/2017/09/20/会员Plus开发笔记/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="Plus业务简介经过一个多月的封闭开发，会员Plus项目终于上线了。回顾整个开发过程，虽然艰辛，但还是收获了不少东西。 Plus是在电商项目基础上引入的身份特权，拥有plus身份的用户可以享受自用省钱，分享赚钱等利益，同时推荐新用户可以升级经理或合伙人。 为开发Plus项目，API重新部署了一套服务端接口（PlusAPI）做为原API的一个服务化接口，供API/Wap端进行内网调用。 服务端调用模">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.513Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="会员Plus开发笔记">
+<meta name="twitter:description" content="Plus业务简介经过一个多月的封闭开发，会员Plus项目终于上线了。回顾整个开发过程，虽然艰辛，但还是收获了不少东西。 Plus是在电商项目基础上引入的身份特权，拥有plus身份的用户可以享受自用省钱，分享赚钱等利益，同时推荐新用户可以升级经理或合伙人。 为开发Plus项目，API重新部署了一套服务端接口（PlusAPI）做为原API的一个服务化接口，供API/Wap端进行内网调用。 服务端调用模">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-会员Plus开发笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/09/20/会员Plus开发笔记/" class="article-date">
+  	<time datetime="2017-09-20T03:08:14.000Z" itemprop="datePublished">2017-09-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      会员Plus开发笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/work/">work</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Plus业务简介"><a href="#Plus业务简介" class="headerlink" title="Plus业务简介"></a>Plus业务简介</h1><p>经过一个多月的封闭开发，会员Plus项目终于上线了。回顾整个开发过程，虽然艰辛，但还是收获了不少东西。</p>
+<p>Plus是在电商项目基础上引入的身份特权，拥有plus身份的用户可以享受自用省钱，分享赚钱等利益，同时推荐新用户可以升级经理或合伙人。</p>
+<p>为开发Plus项目，API重新部署了一套服务端接口（PlusAPI）做为原API的一个服务化接口，供API/Wap端进行内网调用。</p>
+<p>服务端调用模式采用客户端（Android/IOS）调用原API，API作为代理调用PlusAPI进行业务逻辑处理。IOS</p>
+<h1 id="底层架构"><a href="#底层架构" class="headerlink" title="底层架构"></a>底层架构</h1><h2 id="数据拆分"><a href="#数据拆分" class="headerlink" title="数据拆分"></a>数据拆分</h2><p><strong>表结构拆分</strong></p>
+<p><em>创建10个日志记录表</em><br>plus_commission_log（总表）<br>plus_commission_log_0（分表）<br>plus_commission_log_1<br>plus_commission_log_2<br>……</p>
+<p>考虑到高层级的用户拥有的分粉丝众多，粉丝购买商品产生的佣金记录也会很多，因此佣金记录表按用户id维度进行了水平拆分。将用户佣金记录表拆分成10个子表，按照哈希的方式进行对应。</p>
+<p>具体拆分及获取方式：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Plus_tool</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_tableCommLogPrefix = <span class="string">'plus_commission_log'</span>;</span><br><span class="line">    <span class="keyword">private</span> $_commLogTableNum = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 按用户ID获取佣金日志表名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $userId</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getCommLogTable</span><span class="params">($userId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(defined(<span class="string">'COMM_LOG_TABLE_NUM'</span>)) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;_commLogTableNum = COMM_LOG_TABLE_NUM;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;_commLogTableNum == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_tableCommLogPrefix;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 取余</span></span><br><span class="line">        $seq = fmod(intval($userId) ,<span class="keyword">$this</span>-&gt;_commLogTableNum);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_tableCommLogPrefix.<span class="string">"_&#123;$seq&#125;"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>高并发数据插入</strong></p>
+<p>表进行拆分后，数据的录入需要考虑高并发的情况，还需要考虑各个子表的id不能重复。<br>这里采用<strong>redis的incr方式</strong>生成自增的唯一id。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$commLogIdKey = <span class="string">'plus_comm_log_id'</span>;</span><br><span class="line"></span><br><span class="line">$tempLogRow[<span class="string">'id'</span>] = $redis-&gt;incr(<span class="keyword">$this</span>-&gt;commLogIdKey);<span class="comment">//如果键不存在,则在执行操作之前将其设置为0</span></span><br><span class="line">$tempLogRow[<span class="string">'user_id'</span>] = $logRow[<span class="string">'user_id'</span>];</span><br><span class="line">$plusDb-&gt;insert(<span class="keyword">$this</span>-&gt;plus_tool-&gt;getCommLogTable($logRow[<span class="string">'user_id'</span>]) ,$tempLogRow);</span><br><span class="line"><span class="keyword">if</span>($plusDb-&gt;affected_rows() == <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>子表数据汇总</strong></p>
+<p>数据水平拆分后，为方便查询，还需要汇总到一张总表中。实现思路是异步写入，实现方案可以是定时脚本或者消息队列。<br>个人更倾向于写入佣金时入MQ，由MQ统一写入汇总表。实际项目中用定时脚本来实现数据同步。</p>
+<h2 id="数据表同步"><a href="#数据表同步" class="headerlink" title="数据表同步"></a>数据表同步</h2><p>考虑到Plus业务是单独的数据库，且会存在与API主库存在关联查询的情况，因此使用定时脚本方式实现了由plus库向mia库同步数据的功能。（同步用户扩展数据及佣金日志数据）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 同步用户扩展表</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">syncUserExtension</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="keyword">$this</span>-&gt;initLog(<span class="keyword">self</span>::LOG_FILE_NAME_USER_EXTENSION);</span><br><span class="line">     $check_update_time = date(<span class="string">'Y-m-d H:i:s'</span>, time() - <span class="keyword">self</span>::USER_EXTENSION_CHECK_TIME_INTERVAL);</span><br><span class="line">     $sql = <span class="string">"select * from &#123;$this-&gt;tableUserExtension&#125; where update_time&gt;'&#123;$check_update_time&#125;' "</span>;</span><br><span class="line">     $plusDb = <span class="keyword">$this</span>-&gt;load-&gt;database(<span class="string">'plus_write'</span>, <span class="keyword">true</span>);</span><br><span class="line">     $query = $plusDb-&gt;query($sql);</span><br><span class="line">     <span class="keyword">while</span> ($row = $query-&gt;unbuffered_row(<span class="string">'array'</span>)) &#123;<span class="comment">// 不缓存结果</span></span><br><span class="line">         $update_id = $row[<span class="string">'id'</span>];</span><br><span class="line">         <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"--begin sync id:&#123;$update_id&#125;"</span>);</span><br><span class="line">         <span class="keyword">$this</span>-&gt;InsertOrUpdateUserExtension($update_id, $row);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"end sync table"</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 插入或更新用户扩展信息</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> $id plus库id</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param</span> $data_row plus库信息</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">InsertOrUpdateUserExtension</span><span class="params">($id, $data_row)</span> </span>&#123;</span><br><span class="line">     $apiDb = <span class="keyword">$this</span>-&gt;load-&gt;database(<span class="string">'api_write'</span>, <span class="keyword">true</span>);</span><br><span class="line">     $where = <span class="keyword">array</span>(</span><br><span class="line">         <span class="string">'id'</span> =&gt; $id,</span><br><span class="line">     );</span><br><span class="line">     <span class="comment">// check exists</span></span><br><span class="line">     $select_result = $apiDb-&gt;select(<span class="string">'*'</span>)-&gt;from(<span class="keyword">$this</span>-&gt;tableUserExtension)</span><br><span class="line">         -&gt;where($where)-&gt;get()-&gt;result_array();</span><br><span class="line">     <span class="comment">//empty insert</span></span><br><span class="line">     <span class="keyword">if</span> (<span class="keyword">empty</span>($select_result)) &#123;</span><br><span class="line">         $apiDb-&gt;set($data_row)-&gt;insert(<span class="keyword">$this</span>-&gt;tableUserExtension);</span><br><span class="line">         <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"*id:&#123;$id&#125; insert new success"</span>);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="comment">//exists update</span></span><br><span class="line">         $apiDb-&gt;set($data_row)-&gt;where($where)-&gt;update(<span class="keyword">$this</span>-&gt;tableUserExtension);</span><br><span class="line">         <span class="keyword">if</span> ($apiDb-&gt;affected_rows() === <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="keyword">$this</span>-&gt;logInfo(<span class="string">'same data.'</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">             <span class="keyword">$this</span>-&gt;logInfo(<span class="string">"*id:&#123;$id&#125; update success"</span>);</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p><em>tips：</em><br><em>mysql_unbuffered_query的好处：第一是节省内存，第二是它不用等数据获取完全以后操作，直接可以获取一条数据以后就可以操作。</em></p>
+<h2 id="信息处理机制"><a href="#信息处理机制" class="headerlink" title="信息处理机制"></a>信息处理机制</h2><p>佣金日志的表数据变更涉及多个业务模块，如数据统计，发券，短信，站内信。<br>理想的实现方式是使用MQ的fanout模式对每条佣金日志的变更分别进行处理，实现方式简单，但是需要考虑队列数据丢失后的数据修复问题。</p>
+<p>而使用脚本增量统计的方式，需要严格依赖运行时间（每次运行不能够重复处理数据，也不能有漏掉的时间间隔）</p>
+<h1 id="数据库相关"><a href="#数据库相关" class="headerlink" title="数据库相关"></a>数据库相关</h1><h2 id="复杂业务场景使用事务"><a href="#复杂业务场景使用事务" class="headerlink" title="复杂业务场景使用事务"></a>复杂业务场景使用事务</h2><p>提现场景涉及多个表的读写，多个表的更新必须同时处理正确才不影响后续流程。因此，把提现业务的所有sql操作汇总到一个事务中去统一提交。</p>
+<p>事务的处理：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">createCommCash</span><span class="params">($uid ,$newExtractList,$commList,$open_id)</span></span>&#123;</span><br><span class="line">    <span class="comment">//验证用户ID、佣金计税集合、$commList是否为空</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($uid) || <span class="keyword">empty</span>($newExtractList) || <span class="keyword">empty</span>($commList)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//加载plus数据库句柄</span></span><br><span class="line">    $plusWrite = <span class="keyword">$this</span>-&gt;load-&gt;database(<span class="string">'plus_write'</span> ,<span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">//加载日志插件</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;load-&gt;library(<span class="string">'monolog_client'</span>);</span><br><span class="line">    <span class="keyword">$this</span>-&gt;load-&gt;library(<span class="string">'plus_tool'</span>);</span><br><span class="line">    <span class="comment">//获取当前时间</span></span><br><span class="line">    $nowTime = date(<span class="string">"Y-m-d H:i:s"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//开启事物</span></span><br><span class="line">    $plusWrite-&gt;trans_begin();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*------------------------插入提现单  开始-------------------------------*/</span></span><br><span class="line">    <span class="comment">//组装插入提现数据</span></span><br><span class="line">    $cash_code = <span class="keyword">$this</span>-&gt;plus_tool-&gt;createCashCode();</span><br><span class="line">    $insertCashData = <span class="keyword">array</span>(</span><br><span class="line">        <span class="string">'cash_code'</span>=&gt; $cash_code,  <span class="comment">//提现单号</span></span><br><span class="line">        <span class="string">'cash_amount'</span>=&gt;$newExtractList[<span class="string">'comm_amount'</span>],           <span class="comment">//提现金额</span></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行插入操作</span></span><br><span class="line">    $plusWrite-&gt;insert(<span class="keyword">$this</span>-&gt;tableCommCash, $insertCashData);</span><br><span class="line">    <span class="keyword">$this</span>-&gt;monolog_client-&gt;info(<span class="string">"插入提现申请数据sql:"</span>.$plusWrite-&gt;last_query(), <span class="string">'plus_commission_cash'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//验证是否操作成功</span></span><br><span class="line">    <span class="keyword">if</span> ($plusWrite-&gt;affected_rows() &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">//回滚</span></span><br><span class="line">        $plusWrite-&gt;trans_rollback();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*------------------------插入提现单   结束-------------------------------*/</span></span><br><span class="line">    <span class="comment">/*------------------------business-------------------------------*/</span></span><br><span class="line">    <span class="comment">// 事务提交</span></span><br><span class="line">    <span class="keyword">if</span>($plusWrite-&gt;trans_status() === <span class="keyword">FALSE</span>) &#123;</span><br><span class="line">        <span class="comment">//回滚</span></span><br><span class="line">        $plusWrite-&gt;trans_rollback();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//提交</span></span><br><span class="line">        $plusWrite-&gt;trans_commit();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;monolog_client-&gt;info(<span class="string">"更新提现数据完成，事务提交success"</span>, <span class="string">'plus_commission_cash'</span>);</span><br><span class="line">        <span class="comment">//组装返回数据</span></span><br><span class="line">        $result = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'arrival_price'</span> =&gt; floatval($newExtractList[<span class="string">'comm_amount'</span>]) - floatval($newExtractList[<span class="string">'comm_taxation'</span>]),  <span class="comment">//到账金额</span></span><br><span class="line">            <span class="string">'taxation_price'</span> =&gt; floatval($newExtractList[<span class="string">'comm_taxation'</span>]),    <span class="comment">//税费金额</span></span><br><span class="line">            <span class="string">'extract_code'</span> =&gt; $cash_code,                                         <span class="comment">//税费单号</span></span><br><span class="line">            <span class="string">'extract_id'</span> =&gt; $insertId,</span><br><span class="line">            <span class="string">'extract_time'</span> =&gt; $insertCashData[<span class="string">'apply_time'</span>],                    <span class="comment">//提现时间</span></span><br><span class="line">            <span class="string">'extract_status'</span> =&gt; <span class="number">2</span>,                                               <span class="comment">//提现状态</span></span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> $result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="SQL性能评估"><a href="#SQL性能评估" class="headerlink" title="SQL性能评估"></a>SQL性能评估</h2><p>查询类接口中包含复杂的查询sql，优化时要进行explain慢查询评估，观察索引的使用情况，做合理优化。</p>
+<h2 id="主从连接"><a href="#主从连接" class="headerlink" title="主从连接"></a>主从连接</h2><ul>
+<li>model的构造方法中不要提前连接数据库句柄，虽然方便，会增加一次写库的连接开销。</li>
+<li>脚本相关的数据库连接尽量使用主库连接，防止出现数据不同步的问题难以排查。</li>
+</ul>
+<h1 id="脚本相关"><a href="#脚本相关" class="headerlink" title="脚本相关"></a>脚本相关</h1><p>增量统计脚本的运行时间和脚本处理的数据时间段应该配置好。由于增量统计脚本不能重复跑数据，可以考虑每小时的第10分钟运行一次，扫描上一个整小时的待处理数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">每小时第20分钟执行1次</span><br><span class="line">20 * * * * php /crontab/DailyStatistics/syncUserIncome &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure></p>
+<p>增量统计脚本在凌晨可以考虑增加<strong>全量计算</strong>脚本，不影响用户数据。</p>
+<p><strong>脚本及队列需要考虑异常情况的数据修复</strong></p>
+<ol>
+<li>记录错误日志，并用另外的脚本执行修复</li>
+<li>队列重新插入，按正常流程处理</li>
+<li>记录上次的操作id，后续重复执行</li>
+</ol>
+<p><strong>错误日志处理</strong><br>考虑支持从log中检查错误信息，并将错误数据处理并修复，并有重试机制。（如重复2次依然无法修复，进行错误报警）</p>
+<p><strong>脚本防断评估</strong><br>脚本需要考虑执行中断的情况，如何后续运行后修补断开时间内的数据。可以使用记录上次完成时间的方式来处理</p>
+<p><em>处理示例：</em><br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 同步用户收益金额</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">syncUserIncome</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;initLog(<span class="keyword">self</span>::LOG_FILE_NAME_INCOME);</span><br><span class="line">    <span class="comment">// 计算当前时间前整5min的数据</span></span><br><span class="line">    $begin_time = date(<span class="string">'Y-m-d H:i:00'</span>, strtotime(<span class="string">'-5 minute'</span>));</span><br><span class="line">    $end_time = date(<span class="string">'Y-m-d H:i:00'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始化redis</span></span><br><span class="line">    $redis = <span class="keyword">$this</span>-&gt;plus_tool-&gt;initCronRedis(<span class="string">'syncUserIncome'</span>);</span><br><span class="line">    <span class="keyword">if</span> ($redis) &#123;</span><br><span class="line">        $last_end_time = $redis-&gt;get(<span class="keyword">$this</span>-&gt;syncUserIncomeKey);</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">empty</span>($last_end_time)) &#123;</span><br><span class="line">            $begin_time = $last_end_time;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// business</span></span><br><span class="line"></span><br><span class="line">    $redis-&gt;set(<span class="keyword">$this</span>-&gt;syncUserIncomeKey ,$end_time);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如此处理，即使脚本执行频率增大或减小，都不会重复处理数据和遗漏处理数据！</p>
+<p><strong>脚本执行时间配置</strong><br>脚本操作同一个表频繁，容易锁表,可适当延迟交错脚本执行时间。<br>crontab 可以用sleep来进行秒级间隔运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">*/2 * * * * sleep 6;  php /crontab/SyncData/syncCommissionLog/1 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">*/2 * * * * sleep 12; php /crontab/SyncData/syncCommissionLog/2 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">*/2 * * * * sleep 18; php /crontab/SyncData/syncCommissionLog/3 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">*/2 * * * * sleep 24; php /crontab/SyncData/syncCommissionLog/4 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">*/2 * * * * sleep 30; php /crontab/SyncData/syncCommissionLog/5 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">*/2 * * * * sleep 36; php /crontab/SyncData/syncCommissionLog/6 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">*/2 * * * * sleep 42; php /crontab/SyncData/syncCommissionLog/7 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">*/2 * * * * sleep 48; php /crontab/SyncData/syncCommissionLog/8 &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">*/2 * * * * sleep 54; php /crontab/SyncData/syncCommissionLog/9 &gt; /dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p><strong>脚本其他注意事项</strong></p>
+<ol>
+<li>增量脚本不靠谱，外部原因，数据同步原因，等等因素均会影响最终结果。一旦结果有问题，难以修复。需要增加全量修复脚本备用。</li>
+<li>单个脚本尽量不依赖其他脚本的数据结果（如佣金日志总表数据，是由分表脚本同步而来），同步有延迟，会影响当前脚本的数据结果。且会在整分钟时刻漏掉部分数据。</li>
+<li>脚本初始化增加必要的配置。如运行时间，内存分配等。</li>
+<li>日志记录尽量单独区分，同一脚本的多个任务不要混用一个日志文件，不便于排查问题。</li>
+<li>长时间运行的脚本，数据库连接有可能中断，要定期重新连接一下。</li>
+<li>同一脚本的多个DB操作，可共享一个DB连接，防止DB连接数过多而导致服务器报错。</li>
+<li>$query-&gt;unbuffered_row(‘array’)方式的内存占用问题有待考察，可考虑用分页的方式处理。</li>
+</ol>
+<p>参考代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 脚本配置</span></span><br><span class="line">set_time_limit(<span class="number">3600</span> * <span class="number">24</span>);</span><br><span class="line">ini_set(<span class="string">'memory_limit'</span>,<span class="string">'3000M'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定时重新连接DB</span></span><br><span class="line"><span class="keyword">$this</span>-&gt;plusDb = <span class="keyword">$this</span>-&gt;load-&gt;database(<span class="string">'plus_write'</span>, <span class="keyword">true</span>);</span><br><span class="line"><span class="keyword">if</span> ($count % <span class="number">100</span> == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;plusDb-&gt;reconnect();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 共享DB连接</span></span><br><span class="line">$result = <span class="keyword">$this</span>-&gt;plusDb-&gt;query($sql)-&gt;row_array();</span><br></pre></td></tr></table></figure></p>
+<h1 id="接口相关"><a href="#接口相关" class="headerlink" title="接口相关"></a>接口相关</h1><h2 id="身份验证相关"><a href="#身份验证相关" class="headerlink" title="身份验证相关"></a>身份验证相关</h2><ul>
+<li>外网访问的接口，需要严格进行身份验证，接口签名等安全验证机制。如API，wap页等。</li>
+<li>内网调用的接口（如服务化接口，电视大屏接口，Thrift接口）由于不暴露在外网环境，不需验证用户身份，直接调用即可。</li>
+</ul>
+<ul>
+<li><p>account/detail用户详细信息接口之前缓存了整个接口数据， 新增的用户类型信息不适合缓存，因此把总缓存改为业务缓存，根据具体的模块信息单独进行缓存。</p>
+</li>
+<li><p>接口配置中，增加业务总开关，整体控制某个业务的开关。</p>
+</li>
+<li><p>详情页针对某个业务的特殊功能，在用户详情信息中增加字段会需要查寻上级信息，代价大，考虑走单独接口，不要使用基础接口。</p>
+</li>
+<li><p>提现接口防重机制<br>对于重点接口，应该防止短时间内重复调用。可使用redis记录key 成功后删除，10s内操作中防止重复调用。</p>
+</li>
+</ul>
+<h1 id="第三方对接"><a href="#第三方对接" class="headerlink" title="第三方对接"></a>第三方对接</h1><p>提现调试中签名错误有可能是用的key不对。</p>
+<p><strong>支付异常的处理</strong><br>第三方支付失败的情况需要考虑全，涉及如下几种情况：</p>
+<ol>
+<li>第三方直接明确返回支付失败</li>
+<li>第三方返回成功，实际却支付失败了</li>
+<li>第三方返回失败，实际却成功了</li>
+<li>调用接口超时，无法接收到成功失败的信息</li>
+</ol>
+<p>需要根据不同情况分别处理。一般支付平台都会提供异步通知或支付结果查询的接口，方便进行二次校验。</p>
+<p><em>处理原则：</em></p>
+<ol>
+<li>不应该相信同步接口返回的结果，要以异步通知或异步查询结果为准。</li>
+<li>支付失败要有数据回退方案。</li>
+<li>接口超时可视为操作成功，后续用异步接口进行验证后，如果失败，执行回退方案。</li>
+</ol>
+<h2 id="支付场景与事务处理"><a href="#支付场景与事务处理" class="headerlink" title="支付场景与事务处理"></a>支付场景与事务处理</h2><p>由于支付与写流水表间存在相互依赖关系，但支付又是调用第三方的操作，因此在事务处理中，应该排除进行第三方支付接口的调用逻辑。<br>将第三方支付的动作放在事务外，如果失败，改写支付结果数据。</p>
+<p><strong>tips：第三方支付时，有可能会出现支付成功后，curl断开的情况。如果放在事务中，会导致回滚而重复付款的情况。</strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/31/任务中心/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          任务中心系统设计
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/31/关于秒杀那点事/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于秒杀那点事</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

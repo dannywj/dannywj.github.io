@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>设计模式那点事儿——依赖注入的思考 | DannyWang&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="核心思想容器的思想：将继承于同一抽象类（实现同一接口）的对象分别置于容器中，使用时，直接拿容器的某个属性进行操作，而不用关心容器中的这个属性在初始化的时候赋予的是哪个对象。 依赖注入思想：将这个可变的容器，以构造函数参数的形式注入到不变的对象中，从而在对象里调用容器中的已经约定好的方法，而不必关心这个传入的容器实例到底是哪个对象实例化的结果。 使用场景 多个对象具有共同的特征及操作，使用时因业务逻">
+<meta name="keywords" content="develop,设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式那点事儿——依赖注入的思考">
+<meta property="og:url" content="http://yoursite.com/2016/08/04/设计模式那点事儿——依赖注入的思考/index.html">
+<meta property="og:site_name" content="DannyWang&#39;s blog">
+<meta property="og:description" content="核心思想容器的思想：将继承于同一抽象类（实现同一接口）的对象分别置于容器中，使用时，直接拿容器的某个属性进行操作，而不用关心容器中的这个属性在初始化的时候赋予的是哪个对象。 依赖注入思想：将这个可变的容器，以构造函数参数的形式注入到不变的对象中，从而在对象里调用容器中的已经约定好的方法，而不必关心这个传入的容器实例到底是哪个对象实例化的结果。 使用场景 多个对象具有共同的特征及操作，使用时因业务逻">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-04-06T02:14:10.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式那点事儿——依赖注入的思考">
+<meta name="twitter:description" content="核心思想容器的思想：将继承于同一抽象类（实现同一接口）的对象分别置于容器中，使用时，直接拿容器的某个属性进行操作，而不用关心容器中的这个属性在初始化的时候赋予的是哪个对象。 依赖注入思想：将这个可变的容器，以构造函数参数的形式注入到不变的对象中，从而在对象里调用容器中的已经约定好的方法，而不必关心这个传入的容器实例到底是哪个对象实例化的结果。 使用场景 多个对象具有共同的特征及操作，使用时因业务逻">
+  
+    <link rel="alternative" href="/atom.xml" title="DannyWang&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Danny Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我的小窝</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/DHB/" style="font-size: 15px;">DHB</a> <a href="/tags/MQ/" style="font-size: 10px;">MQ</a> <a href="/tags/MySQL/" style="font-size: 12.5px;">MySQL</a> <a href="/tags/architecture-design/" style="font-size: 12.5px;">architecture&design</a> <a href="/tags/develop/" style="font-size: 20px;">develop</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/tools/" style="font-size: 10px;">tools</a> <a href="/tags/work/" style="font-size: 17.5px;">work</a> <a href="/tags/设计模式/" style="font-size: 15px;">设计模式</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.sina.com.cn/dannywj1371">旋转木马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.cnblogs.com/dannywang/">我的博客园</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">人生就是一场旅行，不在乎目的地，在乎的应该是沿途的风景以及看风景的心情。      摄影就是一种形式，不在乎照片的华丽，在乎的是按下快门时对灵魂的触动以及美好过往的留恋</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Danny Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://raw.githubusercontent.com/dannywj/DannyWebSite/master/DannyWebSite/images/face.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Danny Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我的小窝</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dannywj" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wudixiaojue" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-设计模式那点事儿——依赖注入的思考" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/04/设计模式那点事儿——依赖注入的思考/" class="article-date">
+  	<time datetime="2016-08-04T07:42:47.000Z" itemprop="datePublished">2016-08-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式那点事儿——依赖注入的思考
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/develop/">develop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p><strong>容器的思想</strong>：将继承于同一抽象类（实现同一接口）的对象分别置于容器中，使用时，直接拿容器的某个属性进行操作，而不用关心容器中的这个属性在初始化的时候赋予的是哪个对象。</p>
+<p><strong>依赖注入思想</strong>：将这个可变的容器，以构造函数参数的形式注入到不变的对象中，从而在对象里调用容器中的已经约定好的方法，而不必关心这个传入的容器实例到底是哪个对象实例化的结果。</p>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><ol>
+<li>多个对象具有共同的特征及操作，使用时因业务逻辑不同而需要进行切换的。</li>
+<li>固定对象内需要引用相同类型的不同对象，而操作他们共同的方法，需要进行依赖注入。</li>
+</ol>
+<h1 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h1><h2 id="实例情景说明"><a href="#实例情景说明" class="headerlink" title="实例情景说明"></a>实例情景说明</h2><p>支付宝和微信支付是两个具体的支付方式，共同继承于抽象的支付类。使用时可以进行任意的切换。<br>用户类中具有用户支付的行为，行为本身可以使用两种支付方式的任意一种，在构造时决定。</p>
+<h2 id="容器类"><a href="#容器类" class="headerlink" title="容器类"></a>容器类</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**容器类</span></span><br><span class="line"><span class="comment"> * Created by DannyWang</span></span><br><span class="line"><span class="comment"> * wangjue<span class="doctag">@mia</span>.com</span></span><br><span class="line"><span class="comment"> * 2016/8/4</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DI</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $obj_list_arr = <span class="keyword">array</span>();<span class="comment">// 容器存放数组</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">static</span> $instince = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getInstince</span><span class="params">()</span> </span>&#123;<span class="comment">// 单例模式</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">self</span>::$instince == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">self</span>::$instince = <span class="keyword">new</span> DI();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>::$instince;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span> </span>&#123;<span class="comment">// 魔术方法，用于匿名赋值和调用</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;obj_list_arr[$name];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__set</span><span class="params">($name, $value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;obj_list_arr[$name] = $value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="支付抽象类"><a href="#支付抽象类" class="headerlink" title="支付抽象类"></a>支付抽象类</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PayMethod</span> </span>&#123;</span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">function</span> <span class="title">pay</span><span class="params">($amount)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="支付具体类A"><a href="#支付具体类A" class="headerlink" title="支付具体类A"></a>支付具体类A</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AliPay</span> <span class="keyword">extends</span> <span class="title">PayMethod</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pay</span><span class="params">($amount)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> (<span class="string">'alipay paid:'</span> . $amount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="支付具体类B"><a href="#支付具体类B" class="headerlink" title="支付具体类B"></a>支付具体类B</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WechatPay</span> <span class="keyword">extends</span> <span class="title">PayMethod</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">pay</span><span class="params">($amount)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">'wechatpay paid:'</span> . $amount);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="用户类"><a href="#用户类" class="headerlink" title="用户类"></a>用户类</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_di;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($di)</span> </span>&#123;<span class="comment">// 构造函数接收传入的容器对象</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;_di = $di;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">userPay</span><span class="params">($user_name, $amount)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> $user_name . <span class="string">'-'</span> . <span class="keyword">$this</span>-&gt;_di-&gt;uPay-&gt;pay($amount);<span class="comment">// 根据约定，调用容器对象内的方法，在更换容器内容后也不必修改代码！</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="调用客户端"><a href="#调用客户端" class="headerlink" title="调用客户端"></a>调用客户端</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 容器</span></span><br><span class="line">$di = DI::getInstince();</span><br><span class="line">$di-&gt;onePay = <span class="keyword">new</span> AliPay();<span class="comment">// 填充容器</span></span><br><span class="line"><span class="keyword">echo</span> $di-&gt;onePay-&gt;pay(<span class="number">100</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;br&gt;'</span>;</span><br><span class="line"></span><br><span class="line">$di-&gt;onePay = <span class="keyword">new</span> WechatPay();<span class="comment">// 填充容器 （更换了对象，但是都继承自同一个抽象类）</span></span><br><span class="line"><span class="keyword">echo</span> $di-&gt;onePay-&gt;pay(<span class="number">200</span>);<span class="comment">// 可以调用相同的方法</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;br&gt;=========================&lt;br&gt;'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 依赖注入实例</span></span><br><span class="line">$di = DI::getInstince();</span><br><span class="line">$di-&gt;uPay = <span class="keyword">new</span> AliPay(); <span class="comment">// 可变的容器内容</span></span><br><span class="line">$user = <span class="keyword">new</span> User($di); <span class="comment">// 将可变的内容传入构造函数中，作为一个对象属性</span></span><br><span class="line">$user-&gt;userPay(<span class="string">'danny'</span>, <span class="number">50</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;br&gt;'</span>;</span><br><span class="line"></span><br><span class="line">$di-&gt;uPay = <span class="keyword">new</span> WechatPay(); <span class="comment">// 可变的容器内容(更换内容)</span></span><br><span class="line">$user2 = <span class="keyword">new</span> User($di); <span class="comment">// 将可变的内容传入构造函数中，作为一个对象属性</span></span><br><span class="line">$user2-&gt;userPay(<span class="string">'danny'</span>, <span class="number">60</span>);<span class="comment">//调用相同方法，输出不同的值</span></span><br></pre></td></tr></table></figure>
+<h2 id="返回结果"><a href="#返回结果" class="headerlink" title="返回结果"></a>返回结果</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">alipay paid:100</span><br><span class="line">wechatpay paid:200</span><br><span class="line">=========================</span><br><span class="line">danny-alipay paid:50</span><br><span class="line">danny-wechatpay paid:60</span><br></pre></td></tr></table></figure>
+<h1 id="进一步思考"><a href="#进一步思考" class="headerlink" title="进一步思考"></a>进一步思考</h1><p>依赖注入是提前“准备好”要依赖的类，但是这个准备的过程是否需要进行真正的实例化呢？<br>答案是：<em>可由我们自己控制</em>。</p>
+<p>上面的例子是在准备的过程中便进行了实例化，如果需要在真正对象<strong>使用的时候</strong>才进行实例化，就需要用<strong>匿名函数（或回调函数）</strong>来实现了，看代码：</p>
+<p>User类的改进：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_di;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($di)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_di = $di;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">userPay</span><span class="params">($user_name, $amount)</span> </span>&#123;</span><br><span class="line">        $obj=<span class="keyword">$this</span>-&gt;_di-&gt;uPay;</span><br><span class="line">        <span class="keyword">echo</span> $user_name . <span class="string">'-'</span> . $obj()-&gt;pay($amount); <span class="comment">// 实例化并执行对象方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>调用：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$di = DI::getInstince();</span><br><span class="line"></span><br><span class="line">$di-&gt;uPay = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123; <span class="comment">//注入容器的是一个匿名函数（回调函数），只有在真正执行的时候才会实例化！</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AliPay(); <span class="comment">//返回一个对象</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var_dump(<span class="string">'begin use object'</span>);</span><br><span class="line">$user = <span class="keyword">new</span> User($di); <span class="comment">// 将可变的内容传入构造函数中，作为一个对象属性</span></span><br><span class="line">$user-&gt;userPay(<span class="string">'danny'</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">E:\DannyCode\study\DI\client.php:42:string &apos;begin use object&apos; (length=16)</span><br><span class="line">E:\DannyCode\study\DI\AliPay.php:14:string &apos;call alipay construct&apos; (length=21)</span><br><span class="line">danny-alipay paid:50</span><br></pre></td></tr></table></figure></p>
+<h1 id="一句话总结"><a href="#一句话总结" class="headerlink" title="一句话总结"></a>一句话总结</h1><p><strong>依赖注入</strong>是指将当前类所依赖的其他类以参数形式（构造函数中）“注入”到当前类中的思想。</p>
+<p><strong>控制反转</strong>（IoC）是指提供一个“容器”将所依赖的类放入其中（可直接放入，可以回调方式放入），然后将这个容器注入到类中（或容器提供一个make对象的方法）的思想。</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="http://www.phalapi.net/wikis/%5B2.11%5D-%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%EF%BC%9ADI%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5-%E8%AE%A9%E8%B5%84%E6%BA%90%E6%9B%B4%E5%8F%AF%E6%8E%A7.html" target="_blank" rel="noopener">核心思想：DI依赖注入-让资源更可控</a></p>
+<p><a href="https://www.insp.top/article/learn-laravel-container" target="_blank" rel="noopener">laravel 学习笔记 —— 神奇的服务容器</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/04/PHP对象方法链式调用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          PHP对象方法链式调用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/01/设计模式那点事儿——桥接模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">设计模式那点事儿——桥接模式</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2023 Danny Wang
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
