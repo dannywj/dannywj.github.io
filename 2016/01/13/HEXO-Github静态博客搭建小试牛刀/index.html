@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="DannyWang&#39;s blog">
 <meta property="og:description" content="缘起最近无意间看到了nodejs的火爆已经成为前后端通吃的一个技术了，之前也小研究过一些，今天想从另一个方面使用一下它的“功能”，玩一玩这个神奇的技术。 查了一些资料，github支持了用户发布一些静态资源在上面，用于自己的博客啊或者个人主页之类的。参考了一些前人的作品，发现了基于nodejs的一个框架 HEXO 于是开始了一些尝试，准备用此框架来生成一个自己的技术博客。 准备工作本着简单实用，所">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2023-04-06T02:14:10.509Z">
+<meta property="og:updated_time" content="2023-04-06T03:24:36.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HEXO+Github静态博客搭建小试牛刀">
 <meta name="twitter:description" content="缘起最近无意间看到了nodejs的火爆已经成为前后端通吃的一个技术了，之前也小研究过一些，今天想从另一个方面使用一下它的“功能”，玩一玩这个神奇的技术。 查了一些资料，github支持了用户发布一些静态资源在上面，用于自己的博客啊或者个人主页之类的。参考了一些前人的作品，发现了基于nodejs的一个框架 HEXO 于是开始了一些尝试，准备用此框架来生成一个自己的技术博客。 准备工作本着简单实用，所">
@@ -263,6 +263,11 @@
 <p>如果显示的是正常网页，则说明没有错误，但是如果是这样的：</p>
 <p>&lt;%- partial(‘_partial/head’) %&gt;<br>&lt;%- partial(‘_partial/header’) %&gt;<br>&lt;%- body %&gt;<br>&lt;% if (theme.sidebar &amp;&amp; theme.sidebar !== ‘bottom’){ %&gt; &lt;%- partial(‘_partial/sidebar’) %&gt; &lt;% } %&gt;<br>&lt;%- partial(‘_partial/footer’) %&gt;<br>&lt;%- partial(‘_partial/mobile-nav’) %&gt; &lt;%- partial(‘_partial/after-footer’) %&gt;</p>
 <p>这说明服务器解析错误，解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-ejs --save</span><br><span class="line">npm install hexo-renderer-stylus --save</span><br><span class="line">npm install hexo-renderer-marked --save</span><br></pre></td></tr></table></figure></p>
+<p>2023重新发布tips：</p>
+<p>先安装npm，hexo等配置</p>
+<p>发布的时候，身份认证从之前的密码认证需要改为token认证（先在github里生成token）</p>
+<p>hexo生成，发布后，index等页面为空，排查后发现是npm和hexo版本落差太大，生成不了，解决方案是：降低npm版本，生成成功</p>
+<p>参考：<a href="https://zhuanlan.zhihu.com/p/491881992" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/491881992</a></p>
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a href="http://ijiaober.github.io/categories/hexo/" target="_blank" rel="noopener">http://ijiaober.github.io/categories/hexo/</a><br><a href="http://www.zhihu.com/question/24422335" target="_blank" rel="noopener">http://www.zhihu.com/question/24422335</a><br><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia</a><br><a href="http://stackoverflow.com/questions/20871549/error-when-push-commits-with-github-fatal-could-not-read-username" target="_blank" rel="noopener">http://stackoverflow.com/questions/20871549/error-when-push-commits-with-github-fatal-could-not-read-username</a><br><a href="http://www.chinaz.com/web/2015/1016/458004.shtml" target="_blank" rel="noopener">http://www.chinaz.com/web/2015/1016/458004.shtml</a><br><a href="https://blog.csdn.net/u012366161/article/details/42059813" target="_blank" rel="noopener">https://blog.csdn.net/u012366161/article/details/42059813</a></p>
 
       
