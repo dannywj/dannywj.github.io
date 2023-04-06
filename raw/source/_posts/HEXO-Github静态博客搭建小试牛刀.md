@@ -169,7 +169,22 @@ npm install hexo-renderer-stylus --save
 npm install hexo-renderer-marked --save
 ```
 
+
+
+2023重新发布tips：
+
+先安装npm，hexo等配置
+
+发布的时候，身份认证从之前的密码认证需要改为token认证（先在github里生成token）
+
+hexo生成，发布后，index等页面为空，排查后发现是npm和hexo版本落差太大，生成不了，解决方案是：降低npm版本，生成成功
+
+参考：https://zhuanlan.zhihu.com/p/491881992
+
+
+
 # 参考链接
+
 [http://ijiaober.github.io/categories/hexo/](http://ijiaober.github.io/categories/hexo/)
 [http://www.zhihu.com/question/24422335](http://www.zhihu.com/question/24422335)
 [https://github.com/litten/hexo-theme-yilia](https://github.com/litten/hexo-theme-yilia)

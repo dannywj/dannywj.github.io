@@ -70,7 +70,8 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  #repo: https://dannywj:juewang!#7@github.com/dannywj/dannywj.github.io.git
-  repo: https://github.com/dannywj/dannywj.github.io.git
-  #branch: master
-  message: add new article
+  repo: https://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@github.com/dannywj/dannywj.github.io.git
+  #repo: https://github.com/dannywj/dannywj.github.io.git
+  # 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 new
+  branch: master
+  message: add new article 2023
